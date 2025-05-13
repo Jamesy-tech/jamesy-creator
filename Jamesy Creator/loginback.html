@@ -112,64 +112,68 @@ font-family:verdana;
     <br><br><br><br><br><br><br>
   </center>
 
-  <script>
+ <script>
+  document.getElementById("username").textContent = `${localStorage.getItem('username') || 'Guest'}`;
+  document.getElementById("password").focus();
 
-    document.getElementById("username").textContent = `${localStorage.getItem('username') || 'Guest'}`;
-document.getElementById("password").focus();
-    function checkPassword() {
-      const inputPassword = document.getElementById("password").value;
-      const savedPassword = localStorage.getItem("userPassword");
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectURL = urlParams.get('redirect') || "index.html";
 
-      if (inputPassword === savedPassword) {
-         localStorage.setItem('locked', 'false');
-        document.getElementById("password").style.borderColor = "lime";
-        document.getElementById("password").value = "";
-        document.getElementById("password").placeholder = "Loading...";
-          document.getElementById("password").disabled = true
-        setTimeout(success, 500)
-        
-      } else {
-        document.getElementById("password").style.borderColor = "red";
-        document.getElementById("password").value = "";
-        setTimeout(failReset, 500)
-
-      }
-    }
-
-  
  
-    
-  /*function displayProfilePicture() {
-    var imageData = localStorage.getItem("profilePicture");
-    if (imageData) {
-         document.getElementById("profile").src = imageData;
+
+
+  function checkPassword() {
+    const inputPassword = document.getElementById("password").value;
+    const savedPassword = localStorage.getItem("userPassword");
+
+    if (inputPassword === savedPassword) {
+      localStorage.setItem('locked', 'false');
+      document.getElementById("password").style.borderColor = "lime";
+      document.getElementById("password").value = "";
+      document.getElementById("password").placeholder = "Loading...";
+      document.getElementById("password").disabled = true;
+      setTimeout(success, 500);
+    } else {
+      document.getElementById("password").style.borderColor = "red";
+      document.getElementById("password").value = "";
+      setTimeout(failReset, 500);
     }
   }
- */
 
+  function failReset() {
+    document.getElementById("password").style.borderColor = "black";
+  }
 
-function failReset() {
-  document.getElementById("password").style.borderColor = "black";
-}
+  function success() {
+    window.location.href = redirectURL;
+  }
 
-function success() {
-  window.location.href = "index.html"; 
-}
-displayProfilePicture();
-document.getElementById("password").focus();
-
-
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('path') === 'lock') {
-  localStorage.setItem('locked', 'true');
-}
-
-document.addEventListener('keydown', function(event) {
-    if (event.ctrlKey && event.key === 'q') {
-        window.location.href = 'loginback.html?path=lock';
+ /* function displayProfilePicture() {
+    const imageData = localStorage.getItem("profilePicture");
+    if (imageData) {
+      document.getElementById("profile").src = imageData;
     }
-});
+  } */
 
-  </script>
+  if (urlParams.get('path') === 'lock') {
+    localStorage.setItem('locked', 'true');
+  }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.key === 'q') {
+      window.location.href = 'loginback.html?path=lock';
+    }
+  });
+
+ // displayProfilePicture();
+
+
+  if (urlParams.has('redirect')) {
+     document.getElementById("username").textContent = "Confirm access";
+}
+
+
+</script>
+
 </body>
 </html>
