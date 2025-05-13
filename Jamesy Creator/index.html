@@ -69,7 +69,7 @@
     cursor: default;
     display:block;
     margin:10px;
-    width:450px;
+    width:400px;
   }
 
   .section {
@@ -161,7 +161,7 @@ padding:0px;
         <br>
         <span class="title fade">Welcome back, <span class="username"></span>!</span>
         <br>
-        <span class="description fade">Let's create something. Start by opening an app by clicking the "Open" button.</span>
+        <span class="description fade" id="description">Let's create something. Start by opening an app by clicking the "Open" button.</span>
         <div class="spacer"></div>
 
         <div class="sections-container">
@@ -218,6 +218,19 @@ padding:0px;
 
 <script>
 
+const descriptions = [
+  "Let's get designing! Find your apps in the 'Open' menu and dive in."
+ 
+];
+
+function setRandomDescription() {
+  const randomIndex = Math.floor(Math.random() * descriptions.length);
+  const selectedDescription = descriptions[randomIndex];
+  document.getElementById("description").textContent = selectedDescription;
+}
+
+setRandomDescription();
+
     window.onload = function() {
       document.querySelectorAll('.fade').forEach(element => {
         element.classList.add('loaded');
@@ -242,11 +255,13 @@ function closeFileExplorer() {
 const username = localStorage.getItem("username");
 document.querySelectorAll('.username').forEach(el => el.textContent = username);
 
+
 const user = localStorage.getItem("username");
 
 if (!user || user.toLowerCase() === "guest") {
   window.location.href = "login.html";
 }
+
             document.addEventListener('keydown', function(event) {
     if (event.ctrlKey && event.key === 'q') {
         window.location.href = 'loginback.html?path=lock';
@@ -257,10 +272,10 @@ if (localStorage.getItem('locked') === 'true') {
   window.location.href = 'loginback.html?path=lock';
 }
 
-    if (!localStorage.getItem("userPassword")) {
+if (!localStorage.getItem("userPassword")) {
     window.location.href = "login.html";
   }
-    
+
 </script>
 </body>
 </html>
