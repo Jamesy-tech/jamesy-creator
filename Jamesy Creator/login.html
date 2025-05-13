@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="core-images/icon.png">
+    <title>Sign In - Jamesy Creator</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: white;
+            padding-left:50px;
+            padding-right:50px;
+            margin-right:25px;
+            margin-left:25px;
+            background-size: cover;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        * {
+            font-family: verdana;
+        }
+
+        .signinWindow {
+            width: 95vw;
+            border: solid aquamarine 2px;
+            outline: solid black 1px;
+            height: 80vh;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .signininput {
+            width: 100%;
+            margin:0;
+            height: 30px;
+            font-size: 16px;
+            margin-top: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+            font-family: verdana;
+            border: solid black 1px;
+            outline:solid white 1px;
+            margin-bottom: 10px;
+        }
+
+        .signininput:focus {
+            font-size: 16px;
+            outline: solid dodgerblue 1px;
+            border:solid dodgerblue 1px;
+            background-size: cover;
+        }
+
+        .signinbtn {
+            border-radius: 5px;
+            width: 111px;
+            height: 35px;
+            cursor: pointer;
+            border: solid black 1px;
+            margin: 3px;
+            margin-left: 6px;
+            background: aquamarine;
+        }
+
+        .signinbtn:hover {
+            background: palegreen;
+            box-shadow: 2px 2px lightgray;
+        }
+
+        .signinbtn2 {
+            background: transparent;
+            transition: 0.3s;
+            border: solid black 1px;
+        }
+
+        .signinbtn2:hover {
+            background: yellow;
+            outline: solid aquamarine 3px;
+        }
+
+        #usernameError {
+            margin-top: 0px;
+            margin-bottom: 9px;
+        }
+
+        gray {
+            font-size: 28px;
+            color: gray;
+            display: inline-block;
+        }
+
+        big {
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        #usernameLoading {
+            display: block;
+        }
+
+        #usernameLoading img {
+            width: 80px;
+        }
+
+        .back {
+            background: transparent;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .back:hover {
+            color: darkblue;
+        }
+
+        .login-container {
+            width: 600px;
+            border: solid black 1px;
+        }
+
+        .usernametext {
+            margin-bottom: 0px;
+            padding-bottom: 4px;
+        }
+
+        .undersearch-buttons {
+              text-decoration: none;
+      color: white;
+      display: block;
+      padding: 5px;
+      margin-left:5px;
+      border-radius: 5px;
+       background:#335fff;
+      height: 40px;
+    margin-top:10px;
+      text-align: center;
+            outline:none;
+      cursor: pointer;
+      width: 100%;
+            
+            border:none;
+      
+      transition:0.3s;
+        }
+
+        .undersearch-buttons:hover {
+             background:#577bff;
+        }
+
+        .loading {
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .login-block {
+            width: 500px;
+            height: 600px;
+            border-radius: 10px;
+            background: white;
+            padding:20px;
+            padding-top:40px;
+          
+        }
+
+        #usernamesave {
+            display: none;
+            cursor: default;
+        }
+        
+        #typewriter3 {
+          display:block;
+        }
+      #username {
+        display:block;
+      }
+      
+      #loading {
+        display:block;
+      }
+      #login {
+        display:none;
+          width:90%
+      }
+      
+#usernamediv {
+
+}
+      .loadinggif {
+        width:28%;
+        margin-top:20px;
+      }
+
+        .image-block {
+          height:700px;
+            width:1100px;
+            display: flex;
+        justify-content: center;
+        align-items: center;
+             border-radius:50px;
+            background:aliceblue;
+            margin-right:20px;
+            }
+
+        .smallicon {
+width:100px;
+            }
+                
+
+            @media (max-width:1100px) {
+                .image-block {
+                    display:none;
+                }
+            }
+      
+    </style>
+</head>
+<body>
+<div class="image-block">
+    <center>
+<img src="blocks.png">
+    </center>
+    </div>
+<center>
+
+<div class="login-block">
+  
+    <center>
+        <div id="loading">
+          <img src="loading.gif" class="loadinggif">
+          </div>
+          
+      <div id="login">
+          <br><br>
+        <img src="icon.png" class="smallicon">
+        <h1 class="title" id="welcome">Let's get started</h1>
+     <div id="usernamediv">
+        <span class="usernametext" id="undertext"></span>
+        <input id="username" autocomplete="off" class="signininput" onkeydown="if(event.keyCode==13) { document.getElementById('password').focus() }" placeholder="Name">
+       <span class="usernametext" id="passwordtext"></span>
+ <input id="password" autocomplete="off" class="signininput" type="password" onkeydown="if(event.keyCode==13) saveUsername()" placeholder="Choose a password">
+       </div>
+        <k id="usernameError" style="color: red; display: none;">Please enter a valid username</k>
+          <k id="passwordError" style="color: red; display: none;">Please enter a valid password</k>
+      
+     <button class="undersearch-buttons" onclick="saveUsername()" id="typewriter3">Let's go!</button>
+        <br><br>
+        <span id="usernamesave">Applying username, please wait...</span>
+    </center>
+
+</div>
+
+</div>
+</center>
+
+<script>
+    function saveUsername() {
+        document.getElementById("loading").style.display = "block";
+        document.getElementById("login").style.display = "none";
+        var username = document.getElementById('username').value.trim();
+        var password = document.getElementById('password').value.trim();
+ var password = document.getElementById('password').value.trim();
+        if (username === '') {
+            document.getElementById('usernameError').style.display = 'block';
+            document.getElementById("username").style.border = "solid red 1px";
+            document.getElementById("username").focus();
+
+             
+          setTimeout(() => {
+             document.getElementById("loading").style.display = "none";
+            document.getElementById("login").style.display = "block";
+               document.getElementById("username").focus();
+        }, 500);
+            
+            return;
+        } else if (password === '') {
+               
+            
+             document.getElementById('passwordError').style.display = 'block';
+
+            
+           setTimeout(() => {
+             document.getElementById("loading").style.display = "none";
+            document.getElementById("login").style.display = "block";
+               document.getElementById("password").focus();
+        }, 500);
+            
+
+                
+           document.getElementById("password").style.border = "solid red 1px";
+            document.getElementById("password").focus();
+            return;
+        } else {
+            document.getElementById('usernameError').style.display = 'none';
+            document.getElementById("loading").style.display = "block";
+            document.getElementById("login").style.display = "none";
+            
+        }
+        
+        localStorage.setItem('username', username);
+ localStorage.setItem('userPassword', password);
+        showSignIn2();
+    }
+
+    function showSignIn2() {
+        setTimeout(() => {
+           window.location.href = "../index.html";
+        }, 1500);
+    }
+ function showDiv() {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("login").style.display = "inline-block";
+     document.getElementById("username").focus();
+     }
+setTimeout(showDiv, 1000)
+
+
+   function checkLockStatus() {
+    const isLocked = localStorage.getItem("locked");
+    if (isLocked === "true") {
+
+        window.location.href = "Jamesy Creator/loginback.html";
+    }
+}
+
+
+checkLockStatus();
+
+
+setInterval(checkLockStatus, 6000);
+
+
+
+</script>
+
+</body>
+</html>

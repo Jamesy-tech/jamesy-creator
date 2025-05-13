@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>File Explorer</title>
+  <link rel="icon" href="shapes.png">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    #sidebar {
+      width: 200px;
+      background: #f1f1f1;
+      border-right: 1px solid #ccc;
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    .folder {
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .folder-children {
+      margin-left: 15px;
+      display: none;
+    }
+
+    .folder.open > .folder-children {
+      display: block;
+    }
+
+    #main {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      background-color: #fff;
+    }
+
+    .main-item {
+      width: 100%;
+      padding: 12px;
+      margin: 5px 0;
+      background: #e9e9e9;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .main-item:hover {
+      background: #d8eaff;
+    }
+
+    .main-item .icon {
+      margin-right: 10px;
+    }
+
+    .active {
+      background: #cce5ff !important;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="sidebar"></div>
+  <div id="main"><em>Select a folder from the left</em></div>
+
+  <script>
+
+  const structure = {
+    "Apps": {
+        folders: {
+  "Workspace": {
+    files: {
+      "Jamesy Creator Docs": { link: "https://jamesy-tech.github.io/jamesy-creator-docs/", icon: "docs.png" },
+      "Jamesy Creator Drawings": { link: "https://jamesy-tech.github.io/jamesy-creator-drawings/", icon: "drawings.png" }
+    },
+
+  },
+  "Developer": {
+    files: {
+      "Jamesy Creator Code": { link: "https://jamesy-tech.github.io/text-editor/", icon: "code_padding.png" }
+    },
+    folders: {}
+  }
+
+}
+
+},
+
+"Configuration": {
+    files: {
+        "Account": { link: "account.html", icon: "shapes.png" },
+        "Theme": { link: "setwallpaper.html", icon: "shapes.png" },
+        "Local Storage": { link: "localstorage.html", icon: "shapes.png" }
+    }
+},
+
+/* "Other": {
+    files: {
+        // "Account": { link: "account.html", icon: "shapes.png" },
+       
+    }
+} */
+
+};
+
+
+function expandSidebarTo(path) {
+  const parts = path.split("/");
+  let currentPath = "";
+
+  parts.forEach((part, index) => {
+    currentPath = currentPath ? currentPath + "/" + part : part;
+    const folder = sidebar.querySelector(`.folder[data-path="${currentPath}"]`);
+    if (folder) {
+      folder.classList.add("open");
+    }
+  });
+}
+
+
+    const sidebar = document.getElementById("sidebar");
+    const main = document.getElementById("main");
+
+    function createFolder(name, data, parentPath = "") {
+      const fullPath = parentPath ? parentPath + "/" + name : name;
+      const folderDiv = document.createElement("div");
+      folderDiv.className = "folder";
+      folderDiv.dataset.path = fullPath;
+
+      const title = document.createElement("div");
+      title.textContent = "📁 " + name;
+
+      const children = document.createElement("div");
+      children.className = "folder-children";
+
+      if (data && data.folders) {
+        for (let subfolder in data.folders) {
+          children.appendChild(createFolder(subfolder, data.folders[subfolder], fullPath));
+        }
+      }
+
+      folderDiv.appendChild(title);
+      folderDiv.appendChild(children);
+
+      title.addEventListener("click", () => {
+        folderDiv.classList.toggle("open");
+        if (data) {
+          renderMain(fullPath, data);
+        }
+        updateURL(fullPath);
+      });
+
+      return folderDiv;
+    }
+
+    function renderSidebar(struct) {
+
+      const homeDiv = document.createElement("div");
+      homeDiv.className = "folder";
+      homeDiv.dataset.path = "Home";
+
+      const title = document.createElement("div");
+      title.textContent = "🏠 Home";
+      homeDiv.appendChild(title);
+
+      title.addEventListener("click", () => {
+        main.innerHTML = "";
+        renderMain("Home", getRootContent(structure));
+        updateURL("Home");
+      });
+
+      sidebar.appendChild(homeDiv);
+
+
+      for (let key in struct) {
+        if (typeof struct[key] === "object" && struct[key] !== null) {
+          sidebar.appendChild(createFolder(key, struct[key]));
+        }
+      }
+    }
+
+  function renderMain(path, data) {
+  main.innerHTML = "";
+  const fileParam = decodeURIComponent(new URLSearchParams(location.search).get("file") || "");
+
+  if (!data || (!data.folders && !data.files && !Array.isArray(data))) {
+    main.innerHTML = "<em>No items in this folder.</em>";
+    return;
+  }
+
+  const folders = data.folders || {};
+  const files = data.files || {};
+
+  // Render folders
+  for (let folderName in folders) {
+    const item = document.createElement("div");
+    item.className = "main-item";
+    item.innerHTML = `<div class="icon">📁</div> ${folderName}`;
+    item.addEventListener("click", () => {
+      const newPath = path === "Home" ? folderName : path + "/" + folderName;
+      renderMain(newPath, folders[folderName]);
+      expandSidebarTo(newPath);
+      updateURL(newPath);
+    });
+    main.appendChild(item);
+  }
+
+  // Render files with links
+  for (let fileName in files) {
+   const fileData = files[fileName];
+const fileLink = fileData.link;
+const fileIcon = fileData.icon || "shapes.png";
+const fullPath = path === "Home" ? fileName : path + "/" + fileName;
+const item = document.createElement("a");
+item.className = "main-item";
+item.href = fileLink;
+
+item.addEventListener("click", (event) => {
+  event.preventDefault(); 
+  window.top.location.href = fileLink; 
+});
+item.innerHTML = `<div class="icon">📄</div> ${fileName}`;
+
+    if (fileParam === fullPath) {
+      item.classList.add("active");
+    }
+    main.appendChild(item);
+  }
+
+
+  if (path === "Home" && data.extraFiles) {
+  for (let fileName in data.extraFiles) {
+    const fileData = data.extraFiles[fileName];
+    const fileLink = fileData.link;
+    const fileIcon = fileData.icon || "shapes.png";
+    const item = document.createElement("a");
+    item.className = "main-item";
+    item.href = fileLink;
+    // Target the top window to open the link on the whole page
+    item.addEventListener("click", (event) => {
+      event.preventDefault(); // Prevent the default link behavior
+      window.top.location.href = fileLink; // Navigate the top-level window
+    });
+    item.innerHTML = `<div class="icon"><img src="${fileIcon}" alt="file icon" width="20" height="20"></div> ${fileName}`;
+    if (fileParam === fileName) {
+      item.classList.add("active");
+    }
+    main.appendChild(item);
+  }
+}
+
+}
+
+
+   function getRootContent(struct) {
+  const rootFolders = {};
+  const rootFiles = {};
+
+  for (let key in struct) {
+    if (typeof struct[key] === "object" && (struct[key].folders || struct[key].files)) {
+      rootFolders[key] = struct[key];
+    } else {
+      rootFiles[key] = struct[key];
+    }
+  }
+
+  return { folders: rootFolders, files: {}, extraFiles: rootFiles };
+}
+
+
+
+    function openToPath(filePath) {
+      if (filePath === "Home") {
+        renderMain("Home", getRootContent(structure));
+        return;
+      }
+
+      const parts = filePath.split("/");
+      let folderData = structure;
+      let currentPath = "";
+
+      for (let i = 0; i < parts.length - 1; i++) {
+        folderData = folderData[parts[i]];
+        currentPath = currentPath ? currentPath + "/" + parts[i] : parts[i];
+        if (!folderData || !folderData.folders) return;
+        folderData = folderData.folders;
+      }
+
+      const lastFolder = parts[parts.length - 1];
+      const node = (folderData && folderData[lastFolder]) || null;
+      if (node && node.files && node.folders) {
+        renderMain(filePath, node);
+      } else {
+        // Treat as file inside folder
+        renderMain(parts.slice(0, -1).join("/"), folderData[lastFolder]);
+      }
+
+      expandSidebarTo(filePath);
+    }
+
+    function updateURL(path) {
+      const newURL = window.location.pathname + "?file=" + encodeURIComponent(path);
+      history.replaceState(null, "", newURL);
+    }
+
+    // Start
+    renderSidebar(structure);
+
+    const fileParam = new URLSearchParams(location.search).get("file");
+    if (fileParam) {
+      openToPath(decodeURIComponent(fileParam));
+    }
+  </script>
+
+</body>
+</html>

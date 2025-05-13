@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="jamesycreator.jpeg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="images/icon.png">
+  <title>Settings | Jamesy Creator</title>
+  <style>
+    body {
+      margin: 0;
+      padding:0px;
+        
+      background-color: #fff;
+      color: #333;
+ 
+    }
+    * {
+    font-family: "Rubik", sans-serif;
+    
+    }
+    
+    .a {
+            
+    }
+a {
+      
+}
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+   
+
+    .sidebar-right {
+     
+      width:300px;
+      background-color:seagreen;
+      padding: 10px;
+    }
+    
+    .sidebar-left {
+  width: 250px;
+  background:white;
+  background-size:cover;
+  padding: 14px;
+  overflow:scroll;
+  height:100vh;
+  border-right:solid lightgray 1px;
+}
+
+
+.nav-link {
+  display: block;
+  color:black;
+  text-decoration: none;
+  padding: 13px;
+  border-radius: 7px;
+  margin-left:0px;
+  transition:0.3s;
+  margin-top:2px;
+  margin-bottom:2px;
+  font-size:17px;
+}
+
+.nav-link:focus {
+  display: block;
+  color:black;
+  text-decoration: none;
+  padding: 13px;
+  border-radius: 7px;
+  margin-left:0px;
+  transition:0.3s;
+  margin-top:2px;
+  margin-bottom:2px;
+  font-size:17px;
+   background:#a1ffb0;
+}
+
+.nav-link:hover {
+  background-color:#c9fff2;
+}
+.nav-link:focus {
+  background-color:lightgreen;
+}
+
+.nav-link-active {
+  display: block;
+  color:black;
+  text-decoration: none;
+  padding: 13px;
+  border-radius: 7px;
+  margin-left:0px;
+  transition:0.3s;
+  margin-top:2px;
+  margin-bottom:2px;
+  font-size:17px;
+
+}
+
+
+
+.homelink {
+  padding: 25px;
+  cursor:pointer;
+  border: solid black 1px;
+  border-radius: 10px;
+  font-size: 25px;
+  font: "Rubik", sans-serif;
+  background: url("buttontexture.png");
+  background-size: cover;
+  outline: solid transparent 5px;
+  transition: 0.3s;
+  color: black;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+.homelink:focus {
+  outline: solid aquamarine 5px;
+  font-weight: bold;
+  color: darkblue;
+   background:#a1ffb0;
+}
+
+.homelink:hover {
+  outline: solid aquamarine 5px;
+  font-weight: bold;
+  color: darkblue;
+}
+
+
+    .topnav {
+      background-color:dodgerblue;
+      overflow: hidden;
+    }
+
+    .topnav a {
+      float: left;
+      color: #fff;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+
+    }
+
+    .topnav a:hover {
+      background-color:steelblue;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      height:90vh;
+      overflow:scroll;
+    }
+
+   
+    
+    h1 {
+      color: #333;
+    }
+    
+    .title {
+    margin-right:0px;
+    background:seagreen;
+    }
+     .title:hover {
+    background:transparent;
+    }
+      #profileContainer {
+        display: flex;
+        align-items: center;
+    }
+    #profilePicture {
+        width: 50px;
+height:50px;
+        border-radius: 50%;
+        border: 4px solid #007bff;
+        margin-right: 20px;
+    }
+    #username {
+        font-size: 20px;
+        
+    }
+    n {
+  
+    
+    }
+    .anicard {
+  width:270px;
+  border:solid black 3px;
+padding:8px;
+  height:160px;
+  margin:4px;
+  color:black;
+  display:inline-block;
+}
+.anicard:hover {
+ 
+  border:solid black 1px;
+padding:8px;
+
+   background:yellow;
+       
+          border:solid aquamarine 3px;
+  color:darkblue;
+  
+}
+.text {
+  width:296px;
+}
+
+h11 {
+  font-size:70px;
+  
+}
+
+  #profilePicture {
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        border: 5px solid #ccc;
+        display:inline-block;
+        margin: 0;
+        margin-top: 20px;
+        
+    }
+    input[type="file"] {
+        display: block;
+        margin: 0;
+        margin-top: 20px;
+     
+ 
+    }
+    .button3 {
+        display: block;
+        margin:0;
+        margin-top: 10px;
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .profile-pik {
+      width:200px;
+    
+    }
+    input[type="text"] {
+      height:20px;
+      width:100px;
+      font-size:8px;
+    }
+    .changeusername {
+      display:none;
+    }
+    .active {
+  background:mediumblue;
+}
+
+.edit {
+  cursor:pointer;
+  
+}
+.edit:hover {
+  text-decoration:underline;
+}
+
+.button9 {
+  margin:6px;
+  background:#335fff;
+  border-radius:8px;
+  padding:10px;
+  border:solid white 1px;
+  outline:solid black 1px;
+  cursor:pointer;
+  color:white;
+  transition:0.3s;
+}
+.button9:hover {
+  background:#4f75ff;
+  border-radius:8px;
+  padding:10px;
+  border:solid lime 1px;
+  
+}
+.background {
+  width:100px;
+  border:solid gray 2px;
+  cursor:pointer;
+  display:inline-block;
+  height:70px;
+  transition:0.3s;
+}
+.background:focus {
+  border:solid lime 2px;
+}
+.background:hover {
+  border:solid cyan 2px;
+}
+  .roundbtn {
+  border-radius:50%;
+  border:solid black 4px;
+  height:40px;
+  width:40px;
+  outline:solid transparent 2px;
+  cursor:pointer;
+  background:whitesmoke;
+  margin-left:2px;
+  margin-right:2px;
+  transition:0.3s;
+ 
+}
+.roundbtn:hover {
+  outline:solid cyan 2px;
+
+
+}
+
+.roundbtn img {
+  width:90%;
+}
+.roundbtn:focus {
+  outline:solid lime 2px;
+}
+.nav {
+  margin:0;
+  padding:10px;
+  width:100%;
+  background:url("navbg.png");
+  background-size:cover;
+}
+.main {
+  padding:15px;
+}
+
+    .toggle-switch {
+            display: flex;
+            align-items: center;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+  </style>
+</head>
+<body>
+
+
+
+    <script>
+
+       getLocalStorage()
+     
+       
+        function getLocalStorage() {
+                   const backgroundImage = localStorage.getItem('background2');
+            if (backgroundImage) {
+                document.body.style.backgroundImage = `url(${backgroundImage})`;
+                document.body.style.backgroundSize = 'cover';
+                document.body.style.backgroundPosition = 'center';
+                document.body.style.backgroundRepeat = 'no-repeat';
+            }
+
+        }
+      
+ 
+           setTimeout(() => {
+        document.getElementById('colors').style.backgroundImage = "url('images/colors.png')";
+    }, 3500);
+    
+     
+     </script>
+
+ 
+  <div class="colors" id="colors" style="width:100%;height:18px;background-size:cover;background:url('images/loadingbar.gif');"> </div>
+
+<div class="container">
+    <div class="sidebar-left">
+      <nav>
+         <a onclick="window.history.back();" style="cursor:pointer;" class="nav-link">< Back</a>  
+        
+
+
+    
+ 
+      </nav>
+    </div>
+<div class="main">
+
+
+<hr>
+ <span id="username" style="font-size:25px;">Username</span><br>
+           <k>Current username: <span id="usernameDisplay" style="padding:5px;color:darkgreen;">Guest</span><span class="edit" onclick="changeUsername()">[Edit]</span></k><br>
+           
+           <span style="font-size:25px">
+             Password
+           </span>
+           <span><span class="edit" onclick="changePassword()">[Edit]</span></k><br></span>
+           
+           <div class="changeusername" id="usernamechanger">
+            <input style="outline:solid black 0px;border-radius:0px;font-size:16px;" placeholder="Username" class="login" type="text" id="username">
+            <button class="button9" onclick="saveUsername()">Save</button>
+           </div>
+           
+
+           <hr>
+        
+         
+                    <span id="profile" style="font-size:25px;">Profile Picture</span>
+   <div class="profile-pik">
+    
+<img id="profilePicture" src="defualtavatar.png" alt="Profile Picture"> <input type="file" id="profileImage" name="profileImage"> <button class="button9"  onclick="saveProfile()" class="button9">Apply</button>
+
+</div>
+<hr>
+
+ <div class="toggle-switch" id="auto-save">
+    <label class="switch">
+        <input type="checkbox" id="autoSaveToggle">
+        <span class="slider"></span>
+    </label>
+    &nbsp;&nbsp;&nbsp;<span id="toggleLabel">Auto Save is Off</span>
+</div>
+
+<hr><br>
+         <span id="background" style="font-size:25px;">Wallpaper / Background</span>
+         
+  <div class="bakpik">
+    <!--
+    <input type="file" id="profileImage2" name="profileImage2"> <button class="button9" id="btn1" onclick="saveProfile2()">Apply</button>
+ <br>-->
+ <br>
+  <button class="button9" id="btn4" onclick="window.open('setwallpaper.html')">Change wallpaper</button>
+
+  <!--
+  <br>
+  <img class="background" src="maincontent2.png" onclick="setDefault()">   <img class="background" src="maincontent.png" onclick="set2()">    <img class="background" src="navgif.gif" onclick="set3()">   <img class="background" src="bg5.png" onclick="set5()">
+  
+    <img class="background" src="maincontent3.jpg" onclick="set6()">
+    
+      <img class="background" src="greenblue.gif" onclick="set7()">
+      
+        <img class="background" src="maincontent4.png" onclick="set8()">
+        
+         <img class="background" src="rainbow.jpg" onclick="set9()">
+         
+                  <img class="background" src="linedgreenblue.jpg" onclick="set10()">
+                      <img class="background" src="singlecoloryellowgreen.png" onclick="set11()">
+                  
+                  <img class="background" src="BlockyMix.png" onclick="set12()">
+                  
+                  <img class="background" src="background13.png" onclick="set13()">
+                      <img class="background" src="greenblockygif.gif" onclick="set14()">
+       <img class="background" src="images/background1.png" onclick="set15()">
+      <img class="background" src="images/background2.png" onclick="set16()">
+                  
+                              
+<hr>
+    <k>Need more images? Go to the <a href="images.html">Image Library!</a></k>
+  -->
+  </div>
+ </div>
+
+<script>
+
+// Initialize the toggle state based on localStorage value
+const toggle = document.getElementById("autoSaveToggle");
+const label = document.getElementById("toggleLabel");
+
+// Check localStorage for "autoSave"; set default to true if not present
+if (localStorage.getItem("autoSave") === null) {
+    localStorage.setItem("autoSave", "true"); // Set to true by default
+}
+
+toggle.checked = localStorage.getItem("autoSave") === "true";
+label.textContent = toggle.checked ? "Auto Save is On" : "Auto Save is Off";
+
+// Event listener for toggle change
+toggle.addEventListener('change', function() {
+    const isChecked = toggle.checked;
+    localStorage.setItem("autoSave", isChecked);
+    label.textContent = isChecked ? "Auto Save is On" : "Auto Save is Off";
+});
+
+    
+function saveProfile() {
+    var fileInput = document.getElementById("profileImage");
+    var file = fileInput.files[0];
+    var reader = new FileReader();
+    
+    reader.onload = function(e) {
+        var imageData = e.target.result;
+        localStorage.setItem("profilePicture", imageData);
+    
+        displayProfilePicture();
+    };
+    
+    reader.readAsDataURL(file);
+}
+
+function displayProfilePicture() {
+    var imageData = localStorage.getItem("profilePicture");
+    if (imageData) {
+        document.getElementById("profilePicture").src = imageData;
+    }
+}
+
+// Display profile picture if it exists in storage
+displayProfilePicture();
+
+function saveUsername() {
+        var username = document.getElementById('username').value;
+        localStorage.setItem('username', username);
+        
+        
+    }
+
+    // Function to retrieve username from local storage
+    function getUsername() {
+        var username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('usernameDisplay').textContent = username;
+        }
+    }
+ 
+
+
+    getUsername();
+
+    
+  
+
+// Function to check if the user is signed in and activate a function
+function checkSignInStatus() {
+    var storedUsername = localStorage.getItem('username');
+    if (storedUsername && storedUsername.toLowerCase() !== 'guest') {
+        // If user is signed in (and not 'guest'), activate your function here
+        activateSignedInFunction();
+    }
+}
+
+// Example function to be activated if the user is signed in
+function activateSignedInFunction() {
+    // Add your code here to execute when the user is signed in
+document.getElementById("realbody").style.display = "block";
+}
+
+// Call the function to check user status when the page loads
+checkSignInStatus();
+
+
+function goBack() {
+  window.history.back();
+}
+function changeUsername() {
+  window.location.href = "edit.html?type=username";
+}
+
+function changePassword() {
+  window.location.href = "edit.html?type=password";
+}
+
+window.onload = getUsername()
+
+
+function saveProfile2() {
+    var fileInput = document.getElementById("profileImage2");
+    var file = fileInput.files[0];
+    var reader = new FileReader();
+    
+    reader.onload = function(e) {
+        var imageData = e.target.result;
+        localStorage.setItem("background2", imageData);
+    
+        displayProfilePicture();
+    };
+    
+    reader.readAsDataURL(file);
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+
+saveProfile2()
+
+  
+  function setDefault() {
+
+        localStorage.setItem("background2", "images/maincontent2.png");
+ 
+    
+    document.getElementById("btn4").textContent = "Applied!";
+}
+
+  function set2() {
+
+        localStorage.setItem("background2", "images/maincontent.png");
+ 
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+
+  function set3() {
+
+        localStorage.setItem("background2", "images/navgif.gif");
+ 
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+
+
+  function set4() {
+
+        localStorage.setItem("background2", "images/bg4.png");
+ 
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+
+  function set5() {
+
+        localStorage.setItem("background2", "images/bg5.png");
+ 
+    
+    document.getElementById("btn1").textContent = "images/Applied!";
+}
+
+  function set6() {
+
+        localStorage.setItem("background2", "images/maincontent3.jpg");
+ 
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+
+  function set7() {
+
+        localStorage.setItem("background2", "images/greenblue.gif");
+ 
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+
+  function set8() {
+
+        localStorage.setItem("background2", "images/maincontent4.png");
+ 
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+
+  function set9() {
+
+        localStorage.setItem("background2", "images/rainbow.jpg");
+ 
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+
+  function set10() {
+
+        localStorage.setItem("background2", "images/linedgreenblue.jpg");
+ 
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+
+  function set11() {
+
+        localStorage.setItem("background2", "images/singlecoloryellowgreen.png");
+ 
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+  function set12() {
+
+        localStorage.setItem("background2", "images/BlockyMix.png");
+ 
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+  function set13() {
+
+        localStorage.setItem("background2", "images/background13.png");
+ 
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+
+
+ function set14() {
+
+        localStorage.setItem("background2", "images/greenblockygif.gif");
+ 
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+
+     function set15() {
+
+        localStorage.setItem("background2", "images/background1.png");
+ 
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+
+
+       function set16() {
+
+        localStorage.setItem("background2", "images/background2.png");
+ 
+    
+    document.getElementById("btn1").textContent = "Applied!";
+}
+
+
+
+
+</script>
+</body>
+</html>
