@@ -228,8 +228,10 @@ item.href = fileLink;
 
 item.addEventListener("click", (event) => {
   event.preventDefault(); 
+  window.top.location.href = "index.html";
   window.top.location.href = fileLink; 
 });
+
 item.innerHTML = `<div class="icon">📄</div> ${fileName}`;
 
     if (fileParam === fullPath) {
@@ -321,6 +323,8 @@ item.innerHTML = `<div class="icon">📄</div> ${fileName}`;
     if (fileParam) {
       openToPath(decodeURIComponent(fileParam));
     }
+
+    
   </script>
 
 </body>
