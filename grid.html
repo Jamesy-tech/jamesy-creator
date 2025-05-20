@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <title>Jamesy Creator</title>
+<link rel="icon" href="shapes.png">
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+padding-top:52px;
+      font-family: "Lato";
+   /*   background-color: #f9f9f9; */
+background:white;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: white;
+      padding: 0;
+      cursor:pointer;
+outline:solid whitesmoke 2px;
+      border-radius: 12px;
+    /*  box-shadow: 0 4px 10px rgba(0,0,0,0.1); */
+      overflow: hidden;
+    }
+
+    .card .color-block {
+      height: 80px;
+      background-color:  #00b894;;
+    }
+
+.card:hover {
+outline:solid dodgerblue 2px;
+}
+
+    .card .content {
+      padding: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grid">
+    <div class="card" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-docs/');">
+      <div class="color-block"></div>
+      <div class="content">Docs</div>
+    </div>
+    <div class="card" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-drawings/');">
+      <div class="color-block" style="background-color: #ffb347;"></div>
+      <div class="content">Drawings</div>
+    </div>
+    <div class="card" onclick="goTo('https://jamesy-tech.github.io/text-editor/');">
+      <div class="color-block" style="background-color:  #1a1a1a
+;"></div>
+      <div class="content">Code</div>
+    </div>
+    <div class="card" onclick="goTo('account.html');">
+      <div class="color-block" style="background-color:#f67280; "></div>
+      <div class="content">Account & Settings</div>
+    </div>
+    <div class="card" onclick="goTo('loginback.html?redirect=localstorage.html');">
+      <div class="color-block" style="background-color: #0984e3;"></div>
+      <div class="content">Local Storage & Files</div>
+    </div>
+    <div class="card" onclick="goTo('setwallpaper.html');">
+      <div class="color-block" style="background-color: #fd79a8;"></div>
+      <div class="content">Themes (Legacy)</div>
+    </div>
+  </div>
+
+<script>
+  function goTo(link) {
+     window.top.location.href = link;
+}
+</script>
+</body>
+</html>
