@@ -237,10 +237,25 @@ setRandomDescription();
       });
     };
 
-    function openFileExplorer(file) {
+  /*  function openFileExplorer(file) {
   const popup = document.getElementById('filePopup');
   const iframe = document.getElementById('fileIframe');
   iframe.src = `files.html?file=${encodeURIComponent(file)}`;
+  popup.style.display = 'flex';
+}
+
+function closeFileExplorer() {
+  const popup = document.getElementById('filePopup');
+  const iframe = document.getElementById('fileIframe');
+  iframe.src = '';
+  popup.style.display = 'none';
+} */
+
+
+ function openFileExplorer(file) {
+  const popup = document.getElementById('filePopup');
+  const iframe = document.getElementById('fileIframe');
+  iframe.src = `grid.html?file=${encodeURIComponent(file)}`;
   popup.style.display = 'flex';
 }
 
