@@ -1,348 +1,78 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-<title>Jamesy Creator</title>
- <link rel="icon" href="shapes_padding.png">
+
+<!-- profile.html -->
+
 <style>
 
     body {
-        font-family:"Mulish";
-        background:#ebf2ff;
-        height:140vh
+        font-family:verdana;
+        padding:50px;
     }
 
-    .fade {
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
+    .avatars img {
+        border-radius:10px;
+        background:white;
+        cursor:pointer;
+        transition:0.3s;
+        padding:10px;
     }
 
-    .fade.loaded {
-      opacity: 1;
+    .avatars img:hover {
+        background:whitesmoke;
+        transform: scale(1.075);
+    }   
+
+
+    .section-title {
+        display:inline-block;
+        margin-left:20px;
     }
-
-  .container {
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-
-  .centered-div {
-    text-align: center;
-  }
-
-  .logo {
-    width:200px;
-  }
-
-  .title {
-    font-size:34px;
-    cursor:default;
-  }
-
-  .button {
-      background:#3177bd;
-      padding:10px;
-      height:40px;
-      font-family: "Mulish";
-      width:125px;
-      cursor:pointer;
-      border-radius:25px;
-      color:white;
-      border:none;
-      outline:none;
-  }
-
-  .button:hover {
-    filter:brightness(110%);
-  }
-
-  .open {
-    margin:10px;
-  }
-
-  .description {
-    font-size:18px;
-    cursor: default;
-    display:block;
-    margin:10px;
-    width:400px;
-  }
-
-  .section {
-   background:white;
-   border-radius:25px;
-   display:inline-block;
-   margin:10px;
-   text-align: left;
-   width:315px;
-   height:200px;
-   padding:25px;
-  }
-
-  .section img {
-    width:150px;
-  }
-
-  .section-title {
-     padding:0px;
-   margin:0px;
-   font-size: 24px;
-   padding-top:0px;
-   margin-top:0px;
-   display:block;
-  }
-
-  .section-desc {
-display:block;
-padding:0px;
-  }
-
-.spacer {
-    height:20px;
-}
-
-@media (max-width:1000px) {
-    .section {
-        width:85%;
-    }
-}
-
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.popup-content {
-  background: white;
-  width: 90%;
-  height: 90%;
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.popup-content iframe {
-  width: 100%;
-  height: 100%;
-}
-
-.close-btn {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 28px;
-  color: #333;
-  cursor: pointer;
-  z-index: 10000;
-}
-
-
 
 </style>
-</head>
-<body>
-<button class="button open fade" onclick="openFileExplorer('Home');">Open</button>
-  <!-- <div class="container">
-     <div class="centered-div"> -->
-        <center>
-        <img src="shapes.png" class="logo fade">
-        <br>
-        <span class="title fade">Welcome back, <span class="username"></span>!</span>
-        <br>
-        <span class="description fade" id="description">Let's create something. Start by opening an app by clicking the "Open" button.</span>
-        <div class="spacer"></div>
 
-        <div class="sections-container">
+<body> 
+<h1>Profile</h1>
+<h3>Personalise your experience on Jamesy Creator.</h3>
 
-        
-        <div class="section fade">
-            <center>
-            <!-- <img src="shapes.png"> -->
-            </center>
-            <br>
-            <span class="section-title">Documents</span>
-            <br>
-            <span class="section-desc">A creative place to write, plan, build, and share.</span> 
-            <br>
-            <button class="button" onclick="openFileExplorer('Apps/Workspace');">Show in apps</button>
-        </div>
+<hr>
 
+ <h2 class="section-title">Owned avatars</h2>
 
-
-          <div class="section fade">
-            <center>
-            <!-- <img src="shapes.png"> -->
-            </center>
-            <br>
-            <span class="section-title">Drawings</span>
-            <br>
-         <span class="section-desc">A canvas built for all — no drawing skills needed.</span> 
-            <br>
-            <button class="button" onclick="openFileExplorer('Apps/Workspace');">Show in apps</button>
-        </div>
-
-
-      
-
-     </div>
-
-
-
-
-    </div>
-    </center>
- <!-- </div> -->
-
-
-
-<div id="filePopup" class="popup-overlay" style="display: none;">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closeFileExplorer()">&times;</span>
-    <iframe id="fileIframe" src="" frameborder="0"></iframe>
-  </div>
+<div class="avatars">
+<img src="avatars/guest.png" alt="Guest" width="100" style="cursor:pointer; margin:5px;" onclick="chooseAvatar(this.src)" />
+<img src="shapes.png" alt="Shapes" width="100" style="cursor:pointer; margin:5px;" onclick="chooseAvatar(this.src)" />
+<img src="code.png" alt="Blocks" width="100" style="cursor:pointer; margin:5px;" onclick="chooseAvatar(this.src)" />
 </div>
 
+<br>
 
-<div style="
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  background: #fff;
-  border-top: 2px solid whitesmoke;
-  display: flex;
-  align-items: center;
-  padding: 16px 24px;
-  gap: 16px;
-  margin: 0;
-" id="banner">
-  <img 
-    src="avatars/guest.png" 
-    alt="Profile" 
-    id="avatar"
-    style="
-      height: 48px;
-      width: 48px;
-      border-radius: 50%;
-      object-fit: cover;
-    "
-  />
-  <div style="display: flex; flex-direction: column; line-height: 1.2;">
-    <span 
-      id="usernameDisplay" 
-      style="
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: #333;
-      "
-    >
-      Guest
-    </span>
-    <span style="font-size: 0.875rem; color: #666;">
-      0 points
-    </span>
-  </div>
-</div>
+<hr>
+
+<h2 class="section-title">Unowned avatars</h2>
+<br>
+<span>Looks like you've got everything!</span>
+
+<br><br>
+<hr>
+
+  <img src="back.png" style="position: fixed; bottom: 20px; left: 20px; width: 30px; height: 30px; cursor: pointer;" onclick="quit()">
+
+
+  <script>
+
+      function quit() {
+    window.close()
+    setTimeout(() => {
+       window.location.href = "https://jamesy-tech.github.io/jamesy-creator/";
+    }, 100);
+  }
+
+  </script>
 
 <script>
-
- const avatarImg = document.getElementById('avatar');
-  const savedAvatar = localStorage.getItem('avatar');
-  if (savedAvatar) {
-    avatarImg.src = savedAvatar;
-  } else {
-    avatarImg.alt = "No avatar selected";
+  function chooseAvatar(path) {
+    localStorage.setItem('avatar', path);
+    alert('Avatar saved!');
   }
-
-   document.getElementById('usernameDisplay').textContent = localStorage.getItem('username') || 'Guest';
-
-const descriptions = [
-  "Let's get designing! Find your apps in the 'Open' menu and dive in."
- 
-];
-
-function setRandomDescription() {
-  const randomIndex = Math.floor(Math.random() * descriptions.length);
-  const selectedDescription = descriptions[randomIndex];
-  document.getElementById("description").textContent = selectedDescription;
-}
-
-setRandomDescription();
-
-    window.onload = function() {
-      document.querySelectorAll('.fade').forEach(element => {
-        element.classList.add('loaded');
-      });
-    };
-
-  /*  function openFileExplorer(file) {
-  const popup = document.getElementById('filePopup');
-  const iframe = document.getElementById('fileIframe');
-  iframe.src = `files.html?file=${encodeURIComponent(file)}`;
-  popup.style.display = 'flex';
-}
-
-function closeFileExplorer() {
-  const popup = document.getElementById('filePopup');
-  const iframe = document.getElementById('fileIframe');
-  iframe.src = '';
-  popup.style.display = 'none';
-} */
-
-
- function openFileExplorer(file) {
-  const popup = document.getElementById('filePopup');
-  const iframe = document.getElementById('fileIframe');
-  iframe.src = `grid.html?file=${encodeURIComponent(file)}`;
-  popup.style.display = 'flex';
-}
-
-function closeFileExplorer() {
-  const popup = document.getElementById('filePopup');
-  const iframe = document.getElementById('fileIframe');
-  iframe.src = '';
-  popup.style.display = 'none';
-}
-
-    
-const username = localStorage.getItem("username");
-document.querySelectorAll('.username').forEach(el => el.textContent = username);
-
-
-const user = localStorage.getItem("username");
-
-if (!user || user.toLowerCase() === "guest") {
-  window.location.href = "login.html";
-}
-
-            document.addEventListener('keydown', function(event) {
-    if (event.ctrlKey && event.key === 'q') {
-        window.location.href = 'loginback.html?path=lock';
-    }
-});
-
-if (localStorage.getItem('locked') === 'true') {
-  window.location.href = 'loginback.html?path=lock';
-}
-
-if (!localStorage.getItem("userPassword")) {
-    window.location.href = "login.html";
-  }
-
 </script>
+
 </body>
-</html></body>
-</html>
