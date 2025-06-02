@@ -1,0 +1,22 @@
+<!-- avatar.html -->
+<style>
+    body {
+        font-family:verdana;
+    }
+</style>
+
+<body> 
+<h3>Choose your avatar:</h3>
+
+<img src="avatars/guest.png" alt="Guest" width="100" style="cursor:pointer; margin:5px;" onclick="chooseAvatar(this.src)" />
+<img src="shapes.png" alt="Shapes" width="100" style="cursor:pointer; margin:5px;" onclick="chooseAvatar(this.src)" />
+<img src="blocks.png" alt="Blocks" width="100" style="cursor:pointer; margin:5px;" onclick="chooseAvatar(this.src)" />
+
+<script>
+  function chooseAvatar(path) {
+    localStorage.setItem('avatar', path);
+    alert('Avatar saved!');
+  }
+</script>
+
+</body>
