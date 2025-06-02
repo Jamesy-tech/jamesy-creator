@@ -1,16 +1,55 @@
-<!-- avatar.html -->
+<!-- profile.html -->
 <style>
     body {
         font-family:verdana;
+        padding:50px;
     }
+
+    .avatars img {
+        border-radius:10px;
+        background:white;
+        cursor:pointer;
+        transition:0.3s;
+        padding:10px;
+    }
+
+    .avatars img:hover {
+        background:whitesmoke;
+        transform: scale(1.075);
+    }   
+
+
+    .section-title {
+        display:inline-block;
+        margin-left:20px;
+    }
+
 </style>
 
 <body> 
-<h3>Choose your avatar:</h3>
+<h1>Profile</h1>
+<h3>Personalise your experience on Jamesy Creator.</h3>
 
+<hr>
+
+ <h2 class="section-title">Owned avatars</h2>
+
+<div class="avatars">
 <img src="avatars/guest.png" alt="Guest" width="100" style="cursor:pointer; margin:5px;" onclick="chooseAvatar(this.src)" />
 <img src="shapes.png" alt="Shapes" width="100" style="cursor:pointer; margin:5px;" onclick="chooseAvatar(this.src)" />
 <img src="blocks.png" alt="Blocks" width="100" style="cursor:pointer; margin:5px;" onclick="chooseAvatar(this.src)" />
+</div>
+
+<br>
+
+<hr>
+
+<h2 class="section-title">Unowned avatars</h2>
+<br>
+<span>Looks like you've got everything!</span>
+
+<br><br>
+<hr>
 
 <script>
   function chooseAvatar(path) {
