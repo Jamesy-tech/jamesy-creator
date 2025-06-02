@@ -1,5 +1,8 @@
+
 <!-- profile.html -->
+
 <style>
+
     body {
         font-family:verdana;
         padding:50px;
@@ -50,6 +53,20 @@
 
 <br><br>
 <hr>
+
+  <img src="back.png" style="position: fixed; bottom: 20px; left: 20px; width: 30px; height: 30px; cursor: pointer;" onclick="quit()">
+
+
+  <script>
+
+      function quit() {
+    window.close()
+    setTimeout(() => {
+       window.location.href = "https://jamesy-tech.github.io/jamesy-creator/";
+    }, 100);
+  }
+
+  </script>
 
 <script>
   function chooseAvatar(path) {
