@@ -41,6 +41,11 @@ outline:solid whitesmoke 2px;
 outline:solid dodgerblue 2px;
 }
 
+.nav_banner {
+  background-size:cover;
+  background-image:url("nav_banner.png");
+}
+
     .card .content {
       padding: 1.5rem;
     }
@@ -49,10 +54,17 @@ outline:solid dodgerblue 2px;
 <body>
 
   <div class="grid">
+
+     <div class="card" onclick="goTo('open_file.html');">
+      <div class="color-block nav_banner"></div>
+      <div class="content">Open from computer</div>
+    </div>
+
     <div class="card" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-docs/');">
       <div class="color-block"></div>
       <div class="content">Docs</div>
     </div>
+
     <div class="card" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-drawings/');">
       <div class="color-block" style="background-color: #ffb347;"></div>
       <div class="content">Drawings</div>
