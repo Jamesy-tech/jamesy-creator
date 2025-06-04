@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+ <link rel="icon" href="shapes.png">
+<title>Gallery</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Mulish"
+    }
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+    #topbar {
+      padding: 10px;
+      background: white;
+      display:flex;
+      border-bottom: 1px solid #ccc;
+    }
+
+    #topbar button, .topbar_btn {
+      font-family:"Mulish";
+       padding:10px;
+       font-size:16px;
+        height:50px;
+        cursor:pointer;
+        border-radius:5px;
+        background:white;
+        border:solid whitesmoke 2px;
+        outline:none;
+    }
+
+        #topbar .title {
+      margin-left:16px;
+     margin-top:13px;
+      display:inline-block;
+       font-size:16px;
+        cursor:default;
+        background:white;
+        border:none;
+        outline:none;
+    }
+
+ 
+    #topbar button:hover, .topbar_btn:hover {
+        background:whitesmoke;
+    }
+
+    #previewContainer {
+      display: flex;
+      margin-bottom:100px;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 42px);
+      position: relative;
+      height:100vh;
+      flex-direction: column;
+    }
+
+    #dropZone {
+      padding: 80px;
+      padding-top:100px;
+      padding-bottom:100px;
+      border: 2px dashed #747474;
+      color: #4d4d4d;
+      font-size: 18px;
+      cursor: pointer;
+      text-align: center;
+      border-radius: 12px;
+      max-width:500px;
+      background: #f9f9f9;
+      width:40%;
+      margin-bottom:100px;
+      transition:0.2s;
+    }
+
+    #dropZone:hover {
+
+    }
+
+    #preview {
+      max-width: 50%;
+      max-height: 100%;
+      display: none;
+      z-index: 1;
+    }
+
+    #pdfFrame {
+      width: 100%;
+      height: calc(100vh - 42px);
+      border: none;
+      display: none;
+    }
+
+    #fileInput {
+      display: none;
+    }
+
+    .icon {
+        width:90%;
+    }
+
+
+     .logo {
+        width:100%;
+    }
+
+ 
+
+    .right {
+        margin-left:auto;
+    }
+
+    .icon_container {
+        width:50px;
+        
+    }
+
+    .open_btn {
+        margin-right:7px;
+    }
+  
+  .margin {
+    margin-left:5px;
+  }
+
+  .logo2 {
+     padding:5px !important;
+     border:none;
+  }
+  </style>
+</head>
+<body>
+
+  <div id="topbar">
+     <button class="icon_container" onclick="quit()"><img class="icon" src="back.png"></button>
+      <button class="icon_container margin logo2" onclick="home()"><img class="logo" src="shapes.png"></button>
+
+     <span class="title">Open from computer</span>
+
+     <button id="uploadBtn" class="right open_btn">Open file</button> 
+    <button id="zoomBtn" class="icon_container" style="display: none;"><img class="icon" src="open_in_new.png"></button>
+    <input type="file" id="fileInput" accept="image/*,.pdf,.jcdoc" />
+  </div>
+
+  <div id="previewContainer">
+    <div id="dropZone">
+      Drop a file here<br>or<br><strong>click here to browse your files</strong>
+    </div>
+    <img id="preview" />
+  </div>
+
+  <iframe id="pdfFrame"></iframe>
+
+<!-- <button class="open_btn topbar_btn right" id="nav_btn" onclick="toggleNav()" style="position:fixed; top:85px; right:15px; font-size:2px;">
+  <span id="nav_up" class="material-symbols-outlined">arrow_drop_up</span>
+  <span id="nav_down" class="material-symbols-outlined" style="display:none;">arrow_drop_down</span
+</button> -->
+
+
+  <script>
+
+function toggleNav() {
+  const nav = document.getElementById('topbar');
+  const navBtn = document.getElementById('nav_btn');
+  const isHidden = nav.style.display === 'none' || getComputedStyle(nav).display === 'none';
+
+  nav.style.display = isHidden ? 'flex' : 'none';
+  document.getElementById('nav_up').style.display = isHidden ? 'inline' : 'none';
+  document.getElementById('nav_down').style.display = isHidden ? 'none' : 'inline';
+
+  navBtn.style.top = isHidden ? '85px' : '10px';
+}
+
+
+
+function home() {
+   window.top.location.href = "https://jamesy-tech.github.io/jamesy-creator/"
+}
+
+      function quit() {
+    window.close()
+    setTimeout(() => {
+       window.location.href = "https://jamesy-tech.github.io/jamesy-creator/";
+    }, 100);
+  }
+    
+
+    const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('preview');
+    const pdfFrame = document.getElementById('pdfFrame');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const zoomBtn = document.getElementById('zoomBtn');
+    const previewContainer = document.getElementById('previewContainer');
+    const dropZone = document.getElementById('dropZone');
+
+    let currentImageURL = null;
+
+    uploadBtn.addEventListener('click', () => fileInput.click());
+    zoomBtn.addEventListener('click', () => {
+      if (currentImageURL) {
+        window.open(currentImageURL, '_blank');
+      }
+    });
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('hover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('hover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('hover');
+      const file = e.dataTransfer.files[0];
+      if (file) handleFile(file);
+    });
+
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      if (file) handleFile(file);
+    });
+
+    function handleFile(file) {
+      const name = file.name.toLowerCase();
+      
+      preview.style.display = 'none';
+      pdfFrame.style.display = 'none';
+      zoomBtn.style.display = 'none';
+      previewContainer.style.display = 'flex';
+      dropZone.style.display = 'none';
+
+      if (name.endsWith('.jcdoc')) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          sessionStorage.setItem('jcdoc_content', evt.target.result);
+          window.location.href = 'https://jamesy-tech.github.io/jamesy-creator-docs/JC%20Docs/docs.html';
+        };
+        reader.readAsText(file);
+      } else if (file.type.startsWith('image/')) {
+        const url = URL.createObjectURL(file);
+        preview.src = url;
+        preview.style.display = 'block';
+        zoomBtn.style.display = 'inline-block';
+        currentImageURL = url;
+        document.title = url;
+      } else if (file.type === 'application/pdf') {
+        const url = URL.createObjectURL(file);
+        pdfFrame.src = url;
+        document.title = url;
+        pdfFrame.style.display = 'block';
+        previewContainer.style.display = 'none';
+      } else {
+        alert('Unsupported file type. Please upload a .jcdoc, image, or PDF.');
+        dropZone.style.display = 'flex';
+      }
+
+     
+
+    }
+  </script>
+</body>
+</html>
