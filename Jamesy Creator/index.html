@@ -106,11 +106,6 @@ padding:0px;
     height:20px;
 }
 
-@media (max-width:1000px) {
-    .section {
-        width:85%;
-    }
-}
 
 .popup-overlay {
   position: fixed;
@@ -150,6 +145,65 @@ padding:0px;
 }
 
 
+  .rainbow-border {
+      position: relative;
+      border-radius: 12px;
+      padding: 2px;
+      width:60%;
+      margin-top:30px;
+      background: linear-gradient(270deg,
+        red, orange, yellow, lime, cyan, blue, violet, red);
+      background-size: 800% 800%;
+      animation: borderAnimation 10s linear infinite;
+      box-sizing: border-box;
+    }
+
+    .rainbow-border::before {
+      content: "";
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 16px;
+      background: inherit;
+      filter: blur(8px);
+      z-index: -1;
+    }
+
+    textarea {
+      width: 100%;
+      height: 125px;
+      border: none;
+      outline: none;
+      resize: none;
+      font-size: 18px;
+      border-radius: 10px;
+      padding: 12px;
+      font-family:"Mulish";
+      background: white;
+      color: black;
+      box-sizing: border-box;
+    }
+
+    @keyframes borderAnimation {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+
+    @media (max-width:1000px) {
+    .section {
+        width:85%;
+    }
+    .rainbow-border {
+      width:90%;
+    }
+}
+
+hide {
+  display:none;
+}
 
 </style>
 </head>
@@ -162,15 +216,14 @@ padding:0px;
         <br>
         <span class="title fade">Welcome back, <span class="username"></span>!</span>
         <br>
-        <span class="description fade" id="description">Let's create something. Start by opening an app by clicking the "Open" button.</span>
+    <hide>    <span class="description fade" id="description">Let's create something. Start by opening an app by clicking the "Open" button.</span></hide>
         <div class="spacer"></div>
 
         <div class="sections-container">
-
         
-        <div class="section fade">
+     <!--   <div class="section fade">
             <center>
-            <!-- <img src="shapes.png"> -->
+       
             </center>
             <br>
             <span class="section-title">Documents</span>
@@ -184,7 +237,6 @@ padding:0px;
 
           <div class="section fade">
             <center>
-            <!-- <img src="shapes.png"> -->
             </center>
             <br>
             <span class="section-title">Drawings</span>
@@ -193,20 +245,17 @@ padding:0px;
             <br>
             <button class="button" onclick="openFileExplorer('Apps/Workspace');">Show in apps</button>
         </div>
+      -->
 
-
-      
+       <div class="rainbow-border fade">
+    <textarea id="input_textarea" placeholder="What do you want to create?" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault(); search();}"></textarea>
+    <script>document.getElementById("input_textarea").focus()</script>
+  </div>
 
      </div>
-
-
-
-
     </div>
     </center>
  <!-- </div> -->
-
-
 
 <div id="filePopup" class="popup-overlay" style="display: none;">
   <div class="popup-content">
@@ -257,7 +306,11 @@ padding:0px;
   </div>
 </div>
 
+
+    <script>document.getElementById("input_textarea").focus()</script>
+
 <script>
+
 
  const avatarImg = document.getElementById('avatar');
   const savedAvatar = localStorage.getItem('avatar');
@@ -288,6 +341,11 @@ setRandomDescription();
       });
     };
 
+
+    function focusTextArea() {
+        document.getElementById("input_textarea").focus();
+    }
+
   /*  function openFileExplorer(file) {
   const popup = document.getElementById('filePopup');
   const iframe = document.getElementById('fileIframe');
@@ -310,11 +368,20 @@ function closeFileExplorer() {
   popup.style.display = 'flex';
 }
 
+function search() {
+  const query = document.getElementById("input_textarea").value;
+    const popup = document.getElementById('filePopup');
+  const iframe = document.getElementById('fileIframe');
+  iframe.src = `grid.html?query=${encodeURIComponent(query)}`;
+  popup.style.display = 'flex';
+}
+
 function closeFileExplorer() {
   const popup = document.getElementById('filePopup');
   const iframe = document.getElementById('fileIframe');
   iframe.src = '';
   popup.style.display = 'none';
+  focusTextArea()
 }
 
     
