@@ -124,6 +124,7 @@
       editorToolbar.style.display = "block";
       editBtn.style.display = "none";
       homeBtn.style.display = "block";
+         document.getElementById("editor-area").focus();
     }
 
     function runPreview() {
@@ -156,7 +157,12 @@
       editBtn.style.display = "block";
       homeBtn.style.display = "block";
       setTimeout(() => enterEditor(""), 500);
+   
     }
+
+     
+     
+      
   </script>
 </body>
 </html>
