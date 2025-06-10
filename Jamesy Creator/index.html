@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -201,10 +202,61 @@ padding:0px;
     }
 }
 
+    .center-middle {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
 hide {
   display:none;
 }
 
+
+    .spacer2 {
+        height:100px;
+        display:none;
+        }
+
+
+
+    
+    @media (max-height:650px) {
+           .logo {
+               display:none;
+               }
+
+        .spacer2 {
+            display:block;
+            height:60px;
+}
+        
+        }
+
+    @media (max-height:500px) {
+           .spacer2 {
+               display:none;
+               }
+
+        textarea {
+           height:80px;
+            }
+        }
+
+
+    @media (max-height:350px) {
+              .title {
+                  display:none;
+                  }
+
+        .e8fbd {
+            display:none;
+            }
+        
+        }
+    
 </style>
 </head>
 <body>
@@ -212,10 +264,12 @@ hide {
   <!-- <div class="container">
      <div class="centered-div"> -->
         <center>
+          
         <img src="shapes.png" class="logo fade">
-        <br>
+            <div class="spacer2"></div>
+        <br class="e8fbd">
         <span class="title fade">Welcome back, <span class="username"></span>!</span>
-        <br>
+        <br class="e8fbd">
     <hide>    <span class="description fade" id="description">Let's create something. Start by opening an app by clicking the "Open" button.</span></hide>
         <div class="spacer"></div>
 
@@ -255,7 +309,7 @@ hide {
      </div>
     </div>
     </center>
- <!-- </div> -->
+    <!-- </div> -->
 
 <div id="filePopup" class="popup-overlay" style="display: none;">
   <div class="popup-content">
