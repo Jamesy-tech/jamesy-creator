@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Markdown Preview</title>
+  <title>Jamesy Creator</title>
+    <link rel="icon" href="shapes.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
@@ -50,17 +51,45 @@
        width:150px;
        margin-top:50px;
     }
+
+      .icon {
+          border-radius:10px;
+          padding:5px;
+          transition:0.3s;
+          }
+      .icon:hover {
+  background:whitesmoke;
+          }
+
+      #edit {
+         display:block;
+          }
+
+      #home {
+          display:block;
+       }
   </style>
 </head>
 <body>
+    
+    <a id="home" href="index.html" style="position:fixed;top:60px;left:20px;"><img class="icon" src="shapes.png" style="height:40px;cursor:pointer;"></a>
+
+        <a id="edit" href="index.html" style="position:fixed;top:120px;left:20px;"><img class="icon" src="edit.png" style="height:40px;cursor:pointer;"></a>
+
   <div id="output"><center><img class="loader" src="loading.gif"></center></div>
   <script>
+
+      document.getElementById("edit").style.display = "none";
+      document.getElementById("home").style.display = "none";
+      
     const content = sessionStorage.getItem('md_content');
     if (content) {
       document.getElementById('output').innerHTML = marked.parse(content);
+        document.getElementById("edit").style.display = "";
+        document.getElementById("home").style.display = "";
     } else {
       setTimeout(() => {
-     document.getElementById('output').innerText = "No markdown content found.";
+     document.getElementById('output').innerText = "No markdown file found.";
      setTimeout(() => {
         window.location.href = "https://jamesy-tech.github.io/jamesy-creator/Jamesy Creator/open.html"
      }, 1000);
