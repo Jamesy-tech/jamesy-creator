@@ -85,7 +85,7 @@
     const content = sessionStorage.getItem('md_content');
     if (content) {
       document.getElementById('output').innerHTML = marked.parse(content);
-        document.getElementById("edit").style.display = "";
+      //  document.getElementById("edit").style.display = "";
         document.getElementById("home").style.display = "";
     } else {
       setTimeout(() => {
