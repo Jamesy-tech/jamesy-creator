@@ -6,7 +6,8 @@ const filesToCache = [
   "/Jamesy Creator/grid.html",
   "/Jamesy Creator/shapes.png",
   "/Jamesy Creator/open.html",
-  "/Jamesy Creator/view_md.html"
+  "/Jamesy Creator/view_md.html",
+  "/Jamesy Creator/login.html"
 ];
 
 self.addEventListener("install", event => {
