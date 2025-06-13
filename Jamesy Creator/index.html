@@ -173,6 +173,22 @@
 
     }
 
+        #menuBtn {
+      padding:10px;
+      cursor:pointer;
+      margin-top:3px;
+      margin-left:5px;
+      background:white;
+      margin-right:10px;
+      height:35px;
+      border-radius:10px;
+      display:none;
+      transition: 0.3s;
+    }
+
+    #menuBtn:hover {
+      background:whitesmoke;
+    }
 
     @media (max-width:1000px) {
       #apps {
@@ -185,21 +201,33 @@
               display: none;
             }
 
+            #menuBtn {
+              display:inline-block;
+            }
+
+            .logo {
+              display:none;
+            }
+
             .main {
               margin-left:25px;
             }
     }
+
+
+
   </style>
 </head>
 <body>
 
   <div class="top-nav">
     <img src="shapes.png" onclick="home()" class="logo">
-    <span class="title" onclick="home()">Jamesy Creator</span>
+   <span id="menuBtn" onclick="toggleSide()"><span class="material-symbols-outlined" style="font-size: 35px;">menu</span></span>
+    <span class="title">Jamesy Creator</span>
   </div>
 
   <div class="layout">
-    <div class="side-nav">
+    <div class="side-nav" id="side-nav">
       <button class="active" onclick="page('dashboard')"><span class="material-symbols-outlined">home</span>Home</button>
       <button onclick="page('apps')"><span class="material-symbols-outlined">apps</span>Apps</button>
       <button onclick="page('shop')"><span class="material-symbols-outlined">shopping_cart</span>Shop</button>
@@ -291,6 +319,18 @@
 
 }
 
+function toggleSide() {
+
+  console.log("toggleSide() fired")
+
+  const sideNav = document.getElementById("side-nav");
+  if (sideNav.style.display === "flex") {
+    sideNav.style.display = "none";
+  } else {
+    sideNav.style.display = "flex";
+  }
+}
+
 
      const avatarImg = document.getElementById('avatar');
   const savedAvatar = localStorage.getItem('avatar');
@@ -335,16 +375,14 @@ if (!localStorage.getItem("userPassword")) {
     window.location.href = "login.html";
   }
 
-
-
-
-    if ("serviceWorker" in navigator) {
+      if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/service-worker.js")
       .then(() => console.log("Service Worker registered"))
       .catch(err => console.error("Service Worker registration failed:", err));
   }
 
-      </script>
+
+    </script>
 
 </body>
 </html>
