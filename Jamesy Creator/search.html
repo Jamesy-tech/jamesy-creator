@@ -306,6 +306,7 @@ padding:0px;
     function topMode() {
 
         document.querySelectorAll('.extra-buttons').forEach(e => e.style.display =  "none");
+        document.querySelectorAll('.section').forEach(e => e.style.display =  "none");
 
         document.getElementById("searchInput").blur();
         
@@ -337,6 +338,7 @@ padding:0px;
     function centerMode() {
 
 document.querySelectorAll('.extra-buttons').forEach(e => e.style.display =  "inline-block");
+document.querySelectorAll('.section').forEach(e => e.style.display =  "block");
 
       if (container.classList.contains("active")) {
         container.classList.remove("active");
