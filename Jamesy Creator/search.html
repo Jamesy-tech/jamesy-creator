@@ -251,10 +251,10 @@
       <input autocomplete="off" type="text" id="searchInput" placeholder="Search..." onclick="centerMode()" />
     </div>
     <div>
-      <a href="https://jamesy-tech.github.io/jamesy-creator-docs?event=window"> <button class="extra-buttons">Docs</button> </a>
-      <a href="https://jamesy-tech.github.io/jamesy-creator-drawings?event=window"> <button class="extra-buttons">Drawings</button></a>
-      <a href="https://jamesy-tech.github.io/text-editor?event=window"><button class="extra-buttons">Code</button></a>
-      <a href="https://jamesy-tech.github.io/jamesy-creator-notes?event=window">  <button class="extra-buttons">Notes</button></a>
+      <a href="https://jamesy-tech.github.io/jamesy-creator-docs?event=window" target="_top"> <button class="extra-buttons">Docs</button> </a>
+      <a href="https://jamesy-tech.github.io/jamesy-creator-drawings?event=window" target="_top"> <button class="extra-buttons">Drawings</button></a>
+      <a href="https://jamesy-tech.github.io/text-editor?event=window" target="_top"><button class="extra-buttons">Code</button></a>
+      <a href="https://jamesy-tech.github.io/jamesy-creator-notes?event=window" target="_top">  <button class="extra-buttons">Notes</button></a>
     </div>
 
     <div class="section fade">
@@ -326,7 +326,7 @@
       } else {
         filtered.forEach(result => {
           const li = document.createElement("li");
-          li.innerHTML = `<a href="${result.url}">${result.title}</a>`;
+          li.innerHTML = `<a target="_top" href="${result.url}">${result.title}</a>`;
           resultsList.appendChild(li);
         });
       }
