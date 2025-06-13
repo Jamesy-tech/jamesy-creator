@@ -124,9 +124,9 @@
           width:400px;
         }
 
-        #searchLogo {
-          
-        }
+     /*  #searchLogo {
+           
+        } */
 
       
     }
@@ -330,6 +330,10 @@ padding:0px;
 
     function topMode() {
 
+       const query = input.value.trim().toLowerCase();
+     
+      if (!query) return;
+
         document.getElementById("searchLogo").style.marginLeft = "20px";
 
         document.querySelectorAll('.extra-buttons').forEach(e => e.style.display =  "none");
@@ -338,9 +342,6 @@ padding:0px;
         document.getElementById("searchInput").blur();
         
         document.getElementById("searchLogo").textContent = "Jamesy Creator"
-
-      const query = input.value.trim().toLowerCase();
-      if (!query) return;
 
       container.classList.add("active");
       querySpan.textContent = input.value;
