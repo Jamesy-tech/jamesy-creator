@@ -1,152 +1,121 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/docs.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
 <title>Jamesy Creator</title>
- <link rel="icon" href="shapes_padding.png">
-<style>
-
+<link rel="icon" href="shapes.png">
+  <style>
     body {
-        font-family:"Mulish";
-        background:#ebf2ff;
-        height:200vh
-    }
-
-    .fade {
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-    }
-
-    .fade.loaded {
-      opacity: 1;
-    }
-
-  .container {
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-
-  .centered-div {
-    text-align: center;
-  }
-
-  .logo {
-    width:200px;
-  }
-
-  .title {
-    font-size:34px;
-    cursor:default;
-  }
-
-  .button {
-      background:#3177bd;
-      padding:10px;
-      height:40px;
+      padding: 0;
+      overflow:hidden;
+      padding-right:15px;
+      margin: 0;
+      background: ghostwhite;
       font-family: "Mulish";
-      width:125px;
-      cursor:pointer;
-      border-radius:25px;
-      color:white;
-      border:none;
-      outline:none;
-  }
+    }
 
-  .button:hover {
-    filter:brightness(110%);
-  }
-
-  .open {
-    margin:10px;
-  }
-
-  .description {
-    font-size:18px;
-    cursor: default;
-    display:block;
-    margin:10px;
-    width:400px;
-  }
-
-  .section {
-   background:white;
-   border-radius:25px;
-   display:inline-block;
-   margin:10px;
-   text-align: left;
-   width:315px;
-   height:200px;
-   padding:25px;
-  }
-
-  .section img {
-    width:150px;
-  }
-
-  .section-title {
-     padding:0px;
-   margin:0px;
-   font-size: 24px;
-   padding-top:0px;
-   margin-top:0px;
-   display:block;
-  }
-
-  .section-desc {
-display:block;
-padding:0px;
-  }
-
-.spacer {
-    height:20px;
-}
+    * {
+        font-family: "Mulish";
+    }
 
 
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
+    .top-nav {
+      height: 60px;
+      background: ghostwhite;
+      display:flex;
+      padding:20px;
+      width: 100%;
+    }
 
-.popup-content {
-  background: white;
-  width: 90%;
-  height: 90%;
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-}
+    .layout {
+      display: flex;
+      height: calc(100vh - 80px);
+    }
 
-.popup-content iframe {
-  width: 100%;
-  height: 100%;
-}
+    .side-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 300px;
+      padding-top:10px;
+      background: ghostwhite;
+      height: 100%;
+    }
 
-.close-btn {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 28px;
-  color: #333;
-  cursor: pointer;
-  z-index: 10000;
-}
+    .side-nav button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 90%;
+      padding: 15px;
+      border-radius: 25px;
+      border: none;
+      background: transparent;
+      margin-bottom: 6px;
+      text-align: left;
+      outline-color:solid dodgerblue 2px;
+      font-size: 16px;
+      cursor: pointer;
+    }
 
 
-  .rainbow-border {
+    .side-nav button:hover {
+      background: #f2f2f2;
+    }
+
+    .active {
+      background: #baf0ff !important;
+    }
+
+    .main {
+      flex-grow: 1;
+      border-radius: 20px;
+      background: white;
+      height: 100%;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .logo {
+        height:60px;
+        cursor:pointer;
+
+    }
+
+    .title {
+        font-size:24px;
+        margin-top:13px;
+        cursor:default;
+        margin-left:10px;
+    }
+
+    .apps-iframe {
+        width:100%;
+        border:none;
+        outline:none;
+        margin:none;
+        border-radius:20px;
+        padding:none;
+        box-shadow:none;
+        height:100vh;
+    }
+
+    .page {
+        display:none;
+    }
+
+    .welcome_text {
+        font-size:35px;
+        display:block;
+        margin-top:60px;
+        cursor:default;
+    }
+
+   .rainbow-border {
       position: relative;
       border-radius: 12px;
       padding: 2px;
@@ -174,6 +143,9 @@ padding:0px;
 
     textarea {
       width: 100%;
+        background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px); 
+  -webkit-backdrop-filter: blur(8px); 
       height: 125px;
       border: none;
       outline: none;
@@ -187,141 +159,66 @@ padding:0px;
       box-sizing: border-box;
     }
 
+
     @keyframes borderAnimation {
       0% { background-position: 0% 50%; }
       100% { background-position: 100% 50%; }
     }
 
+    .search-bar {
+        margin-bottom:12px;
+        display:block;
+        width:60%;
+        height:30px;
 
-    @media (max-width:1000px) {
-    .section {
-        width:85%;
     }
-    .rainbow-border {
-      width:90%;
-    }
-}
 
-    .center-middle {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-
-hide {
-  display:none;
-}
-
-
-    .spacer2 {
-        height:100px;
-        display:none;
-        }
-
-
-
-    
-    @media (max-height:610px) {
-           .logo {
-               display:none;
-               }
-
-        .spacer2 {
-            display:block;
-            height:60px;
-}
-        
-        }
-
-    @media (max-height:500px) {
-           .spacer2 {
-               display:none;
-               }
-
-        textarea {
-           height:80px;
-            }
-        }
-
-
-    @media (max-height:350px) {
-              .title {
-                  display:none;
-                  }
-
-        .e8fbd {
-            display:none;
-            }
-        
-        }
-    
-</style>
+  </style>
 </head>
 <body>
-<button class="button open fade" onclick="openFileExplorer('Home');">Open</button>
-  <!-- <div class="container">
-     <div class="centered-div"> -->
-        <center>
 
-            <br class="e8fbd">
-          
-        <img src="shapes.png" class="logo fade">
-            <div class="spacer2"></div>
-        <br class="e8fbd">
-        <span class="title fade">Welcome back, <span class="username"></span>!</span>
-        <br class="e8fbd">
-    <hide>    <span class="description fade" id="description">Let's create something. Start by opening an app by clicking the "Open" button.</span></hide>
-        <div class="spacer"></div>
-
-        <div class="sections-container">
-        
-     <!--   <div class="section fade">
-            <center>
-       
-            </center>
-            <br>
-            <span class="section-title">Documents</span>
-            <br>
-            <span class="section-desc">A creative place to write, plan, build, and share.</span> 
-            <br>
-            <button class="button" onclick="openFileExplorer('Apps/Workspace');">Show in apps</button>
-        </div>
-
-
-
-          <div class="section fade">
-            <center>
-            </center>
-            <br>
-            <span class="section-title">Drawings</span>
-            <br>
-         <span class="section-desc">A canvas built for all — no drawing skills needed.</span> 
-            <br>
-            <button class="button" onclick="openFileExplorer('Apps/Workspace');">Show in apps</button>
-        </div>
-      -->
-
-       <div class="rainbow-border fade">
-    <textarea id="input_textarea" placeholder="What do you want to create?" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault(); search();}"></textarea>
-    <script>document.getElementById("input_textarea").focus()</script>
+  <div class="top-nav">
+    <img src="shapes.png" onclick="home()" class="logo">
+    <span class="title" onclick="home()">Jamesy Creator</span>
   </div>
 
-     </div>
+  <div class="layout">
+    <div class="side-nav">
+      <button class="active" onclick="page('dashboard')"><span class="material-symbols-outlined">dashboard</span>Dashboard</button>
+      <button onclick="page('apps')"><span class="material-symbols-outlined">apps</span>Apps</button>
+      <button onclick="page('shop')"><span class="material-symbols-outlined">shopping_cart</span>Shop</button>
+         <button onclick="page('profile')"><span class="material-symbols-outlined">account_circle</span>Profile</button>
+           <button onclick="page('account')"><span class="material-symbols-outlined">settings</span>Account & Settings</button>
     </div>
-    </center>
-    <!-- </div> -->
 
-<div id="filePopup" class="popup-overlay" style="display: none;">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closeFileExplorer()">&times;</span>
-    <iframe id="fileIframe" src="" frameborder="0"></iframe>
+    <div class="main">
+
+           <div id="dashboard" class="page">
+             <iframe src="search.html" class="apps-iframe"></iframe>
+        </div>
+
+        <div id="apps" class="page">
+            <iframe src="grid.html" class="apps-iframe"></iframe>
+        </div>
+
+         <div id="shop" class="page">
+            <iframe src="shop.html" class="apps-iframe"></iframe>
+        </div>
+
+         <div id="profile" class="page">
+            <iframe src="profile.html" class="apps-iframe"></iframe>
+        </div>
+
+        <div id="account" class="page">
+            <iframe src="account.html" class="apps-iframe"></iframe>
+        </div>
+
+
+    </div>
   </div>
-</div>
 
 
-<div style="
+  <div style="
   position: fixed;
   bottom: 0;
   left: 0;
@@ -362,13 +259,24 @@ hide {
   </div>
 </div>
 
+  <script>
 
-    <script>document.getElementById("input_textarea").focus()</script>
+ document.getElementById("dashboard").style.display = "block";
 
-<script>
+  function page(pageId) {
+
+  document.querySelectorAll(".page").forEach(e => e.style.display = "none");
+
+  document.getElementById(pageId).style.display = "block";
+
+  document.querySelectorAll(".side-nav button").forEach(btn => btn.classList.remove("active"));
+
+  event.currentTarget.classList.add("active");
+
+}
 
 
- const avatarImg = document.getElementById('avatar');
+     const avatarImg = document.getElementById('avatar');
   const savedAvatar = localStorage.getItem('avatar');
   if (savedAvatar) {
     avatarImg.src = savedAvatar;
@@ -377,71 +285,17 @@ hide {
   }
 
    document.getElementById('usernameDisplay').textContent = localStorage.getItem('username') || 'Guest';
-
-const descriptions = [
-  "Let's get designing! Find your apps in the 'Open' menu and dive in."
- 
-];
-
-function setRandomDescription() {
-  const randomIndex = Math.floor(Math.random() * descriptions.length);
-  const selectedDescription = descriptions[randomIndex];
-  document.getElementById("description").textContent = selectedDescription;
-}
-
-setRandomDescription();
-
-    window.onload = function() {
-      document.querySelectorAll('.fade').forEach(element => {
-        element.classList.add('loaded');
-      });
-    };
+    document.querySelectorAll('.username').forEach(e => e.textContent = localStorage.getItem('username') || 'Guest');
 
 
-    function focusTextArea() {
-        document.getElementById("input_textarea").focus();
+    function home() {
+        window.location.reload()
+        window.location.href = "index.html"
     }
 
-  /*  function openFileExplorer(file) {
-  const popup = document.getElementById('filePopup');
-  const iframe = document.getElementById('fileIframe');
-  iframe.src = `files.html?file=${encodeURIComponent(file)}`;
-  popup.style.display = 'flex';
-}
+ 
 
-function closeFileExplorer() {
-  const popup = document.getElementById('filePopup');
-  const iframe = document.getElementById('fileIframe');
-  iframe.src = '';
-  popup.style.display = 'none';
-} */
-
-
- function openFileExplorer(file) {
-  const popup = document.getElementById('filePopup');
-  const iframe = document.getElementById('fileIframe');
-  iframe.src = `grid.html?file=${encodeURIComponent(file)}`;
-  popup.style.display = 'flex';
-}
-
-function search() {
-  const query = document.getElementById("input_textarea").value;
-    const popup = document.getElementById('filePopup');
-  const iframe = document.getElementById('fileIframe');
-  iframe.src = `grid.html?query=${encodeURIComponent(query)}`;
-  popup.style.display = 'flex';
-}
-
-function closeFileExplorer() {
-  const popup = document.getElementById('filePopup');
-  const iframe = document.getElementById('fileIframe');
-  iframe.src = '';
-  popup.style.display = 'none';
-  focusTextArea()
-}
-
-    
-const username = localStorage.getItem("username");
+sername = localStorage.getItem("username");
 document.querySelectorAll('.username').forEach(el => el.textContent = username);
 
 
@@ -466,13 +320,8 @@ if (!localStorage.getItem("userPassword")) {
   }
 
 
-      if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/service-worker.js")
-      .then(() => console.log("Service Worker registered"))
-      .catch(err => console.error("Service Worker registration failed:", err));
-  }
-    
-</script>
+
+    </script>
+
 </body>
-</html></body>
 </html>
