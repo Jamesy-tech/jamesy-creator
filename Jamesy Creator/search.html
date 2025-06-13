@@ -5,6 +5,7 @@
   <title>Jamesy Creator</title>
   <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -20,47 +21,43 @@
         font-family:"Mulish";
     }
 
-      .button {
+    .button {
       background:#3177bd;
       padding:10px;
       height:40px;
-      font-family: "Mulish";
       width:125px;
       cursor:pointer;
       border-radius:25px;
       color:white;
       border:none;
       outline:none;
-  }
+    }
 
-  .button:hover {
-    filter:brightness(110%);
-  }
+    .button:hover {
+      filter:brightness(110%);
+    }
 
+    .container {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      width:100%;
+      transform: translateX(-50%);
+      transition: all 0.8s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
 
-  .container {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  width:100%;
-  transform: translateX(-50%);
-  transition: all 0.8s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-@media (max-width: 400px) {
-  .container {
-    top: 5% !important;
-  }
-
-  .container.active {
-    top: 5% !important;
-  }
-}
-
+    @media (max-width: 400px) {
+      .container {
+        top: 5% !important;
+      }
+      .container.active {
+        top: 5% !important;
+      }
+    }
 
     .container.active {
       top: 20px;
@@ -86,49 +83,41 @@
     }
 
     .search-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.6s ease;
+      position: relative;
+      width: 550px;
     }
 
     .search-box input {
-      width: 550px;
-      padding: 10px 16px;
+      width: 100%;
+      padding: 10px 16px 10px 40px;
       font-size: 16px;
       background:white;
-      font-family:"Mulish";
       outline:none;
-      border:solid whitesmoke 2px;
-      border-radius: 24px;
-      outline: none;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       transition: width 0.6s ease;
     }
 
-    .search-box input:focus {
-        outline:solid dodgerblue 2px;
+    .search-box .material-icons {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      font-size: 20px;
     }
 
     @media (max-width:700px) {
-
-        .search-box input {
-           display:none;
-        }
-
-      
+      .search-box input {
+        display:none;
+      }
     }
 
     @media (max-width:900px) {
-
-        .search-box input {
-          width:400px;
-        }
-
-     /*  #searchLogo {
-           
-        } */
-
-      
+      .search-box {
+        width: 400px;
+      }
     }
 
     .search-box button {
@@ -145,7 +134,7 @@
     }
 
     .search-box button:hover {
-       filter:brightness(105%)
+      filter:brightness(105%);
     }
 
     .search-box button .material-symbols-outlined {
@@ -185,73 +174,66 @@
     }
 
     .extra-buttons {
-        display:inline-block;
-        margin:2px;
-        width:100px;
-        padding:10px;
-        padding-top:7px;
-        padding-bottom:7px;
-        background:white;
-        cursor:pointer;
-        border:solid whitesmoke 2px;
-        outline:none;
-        transition:0.2s;
-        box-shadow:none;
-        border-radius:5px;
+      display:inline-block;
+      margin:2px;
+      width:100px;
+      padding:10px;
+      padding-top:7px;
+      padding-bottom:7px;
+      background:white;
+      cursor:pointer;
+      border:solid whitesmoke 2px;
+      outline:none;
+      transition:0.2s;
+      border-radius:5px;
     }
 
     .extra-buttons:hover {
-        background:dodgerblue;
-        color:white;
-        border:solid dodgerblue 2px;
+      background:dodgerblue;
+      color:white;
+      border:solid dodgerblue 2px;
     }
-    
+
     a {
-        color:transparent;
+      color:transparent;
     }
- 
-       .description {
-    font-size:18px;
-    cursor: default;
-    display:block;
-    margin:10px;
-    width:400px;
-  }
 
-  .section {
-   background:aliceblue;
-   border-radius:25px;
-   display:inline-block;
-   margin:0px;
-   text-align: left;
-   width:85%;
-   height:200px;
-   padding:25px;
-  }
+    .description {
+      font-size:18px;
+      cursor: default;
+      display:block;
+      margin:10px;
+      width:400px;
+    }
 
-  .section img {
-    width:150px;
-  }
+    .section {
+      background:aliceblue;
+      border-radius:25px;
+      display:inline-block;
+      margin:0px;
+      text-align: left;
+      width:85%;
+      height:200px;
+      padding:25px;
+    }
 
-  .section-title {
-     padding:0px;
-   margin:0px;
-   font-size: 24px;
-   padding-top:0px;
-   margin-top:0px;
-   display:block;
-  }
+    .section img {
+      width:150px;
+    }
 
-  .section-desc {
-display:block;
-padding:0px;
-  }
+    .section-title {
+      padding:0px;
+      margin:0px;
+      font-size: 24px;
+      padding-top:0px;
+      margin-top:0px;
+      display:block;
+    }
 
-
-
-
-
-
+    .section-desc {
+      display:block;
+      padding:0px;
+    }
   </style>
 </head>
 <body>
@@ -259,45 +241,35 @@ padding:0px;
   <div class="container" id="searchContainer">
     <div class="logo" id="searchLogo">Welcome back, <span class="username">Guest</span>!</div>
     <div class="search-box">
+      <span class="material-icons">search</span>
       <input autocomplete="off" type="text" id="searchInput" placeholder="Search..." onclick="centerMode()" />
-    <!--  <button onclick="topMode()" class="searchBtn">
-        <span class="material-symbols-outlined">search</span>
-      </button> -->
+    </div>
+    <div>
+      <a href="https://jamesy-tech.github.io/jamesy-creator-docs?event=window"> <button class="extra-buttons">Docs</button> </a>
+      <a href="https://jamesy-tech.github.io/jamesy-creator-drawings?event=window"> <button class="extra-buttons">Drawings</button></a>
+      <a href="https://jamesy-tech.github.io/text-editor?event=window"><button class="extra-buttons">Code</button></a>
+      <a href="https://jamesy-tech.github.io/jamesy-creator-notes?event=window">  <button class="extra-buttons">Notes</button></a>
     </div>
 
-    <div>
-   <a href="https://jamesy-tech.github.io/jamesy-creator-docs?event=window"> <button class="extra-buttons">Docs</button> </a>
-     <a href="https://jamesy-tech.github.io/jamesy-creator-drawings?event=window"> <button class="extra-buttons">Drawings</button></a>
-       <a href="https://jamesy-tech.github.io/text-editor?event=window"><button class="extra-buttons">Code</button></a>
-         <a href="https://jamesy-tech.github.io/jamesy-creator-notes?event=window">  <button class="extra-buttons">Notes</button></a>
-            </div>
+    <div class="section fade">
+      <center></center>
+      <br>
+      <span class="section-title">Documents</span>
+      <br>
+      <span class="section-desc">A creative place to write, plan, build, and share.</span> 
+      <br>
+      <button class="button" onclick="window.location.href = 'https://jamesy-tech.github.io/jamesy-creator-docs/';">Open editor</button>
+    </div>
 
-
-             <div class="section fade">
-            <center>
-       
-            </center>
-            <br>
-            <span class="section-title">Documents</span>
-            <br>
-            <span class="section-desc">A creative place to write, plan, build, and share.</span> 
-            <br>
-            <button class="button" onclick="window.location.href = 'https://jamesy-tech.github.io/jamesy-creator-docs/';">Open editor</button>
-        </div>
-
-
-
-          <div class="section fade">
-            <center>
-            </center>
-            <br>
-            <span class="section-title">Drawings</span>
-            <br>
-         <span class="section-desc">A canvas built for all — no drawing skills needed.</span> 
-            <br>
-            <button class="button" onclick="window.location.href = 'https://jamesy-tech.github.io/jamesy-creator-drawings/';">Open editor</button>
-        </div>
-
+    <div class="section fade">
+      <center></center>
+      <br>
+      <span class="section-title">Drawings</span>
+      <br>
+      <span class="section-desc">A canvas built for all — no drawing skills needed.</span> 
+      <br>
+      <button class="button" onclick="window.location.href = 'https://jamesy-tech.github.io/jamesy-creator-drawings/';">Open editor</button>
+    </div>
   </div>
 
   <div class="results">
@@ -306,7 +278,6 @@ padding:0px;
   </div>
 
   <script>
-
     document.getElementById("searchInput").focus()
 
     const username_elements = document.querySelectorAll('.username')
@@ -329,20 +300,13 @@ padding:0px;
     ];
 
     function topMode() {
-
-       const query = input.value.trim().toLowerCase();
-     
+      const query = input.value.trim().toLowerCase();
       if (!query) return;
-
-        document.getElementById("searchLogo").style.marginLeft = "20px";
-
-        document.querySelectorAll('.extra-buttons').forEach(e => e.style.display =  "none");
-        document.querySelectorAll('.section').forEach(e => e.style.display =  "none");
-
-        document.getElementById("searchInput").blur();
-        
-        document.getElementById("searchLogo").textContent = "Jamesy Creator"
-
+      document.getElementById("searchLogo").style.marginLeft = "20px";
+      document.querySelectorAll('.extra-buttons').forEach(e => e.style.display =  "none");
+      document.querySelectorAll('.section').forEach(e => e.style.display =  "none");
+      document.getElementById("searchInput").blur();
+      document.getElementById("searchLogo").textContent = "Jamesy Creator"
       container.classList.add("active");
       querySpan.textContent = input.value;
       resultsList.innerHTML = "";
@@ -356,26 +320,22 @@ padding:0px;
       } else {
         filtered.forEach(result => {
           const li = document.createElement("li");
-         // li.innerHTML = `<a href="${result.url}" target="_top">${result.title}</a>`;
-         li.innerHTML = `<a href="${result.url}">${result.title}</a>`;
+          li.innerHTML = `<a href="${result.url}">${result.title}</a>`;
           resultsList.appendChild(li);
         });
       }
     }
 
     function centerMode() {
-
-        document.getElementById("searchLogo").style.marginLeft = "0px";
-
-document.querySelectorAll('.extra-buttons').forEach(e => e.style.display =  "inline-block");
-document.querySelectorAll('.section').forEach(e => e.style.display =  "block");
-
+      document.getElementById("searchLogo").style.marginLeft = "0px";
+      document.querySelectorAll('.extra-buttons').forEach(e => e.style.display =  "inline-block");
+      document.querySelectorAll('.section').forEach(e => e.style.display =  "block");
       if (container.classList.contains("active")) {
         container.classList.remove("active");
         resultsList.innerHTML = "";
         const username = localStorage.getItem("username");
-document.getElementById("searchLogo").textContent = 
-    username ? `Welcome back, ${username}!` : "Guest!";
+        document.getElementById("searchLogo").textContent = 
+          username ? `Welcome back, ${username}!` : "Guest!";
         querySpan.textContent = "";
       }
     }
@@ -385,9 +345,6 @@ document.getElementById("searchLogo").textContent =
         topMode();
       }
     });
-
-
-
   </script>
 
 </body>
