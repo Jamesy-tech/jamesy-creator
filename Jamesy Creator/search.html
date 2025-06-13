@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jamesy Creator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Mulish', sans-serif;
+      height: 100vh;
+      padding-bottom:250px;
+      background: white;
+    }
+
+    * {
+        font-family:"Mulish";
+    }
+
+      .button {
+      background:#3177bd;
+      padding:10px;
+      height:40px;
+      font-family: "Mulish";
+      width:125px;
+      cursor:pointer;
+      border-radius:25px;
+      color:white;
+      border:none;
+      outline:none;
+  }
+
+  .button:hover {
+    filter:brightness(110%);
+  }
+
+
+  .container {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width:100%;
+  transform: translateX(-50%);
+  transition: all 0.8s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+@media (max-width: 400px) {
+  .container {
+    top: 5% !important;
+  }
+
+  .container.active {
+    top: 5% !important;
+  }
+}
+
+
+    .container.active {
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      flex-direction: row;
+      justify-content: flex-start;
+      width: 100%;
+      max-width: 800px;
+      padding: 0 20px !important;
+    }
+
+    .logo {
+      font-size: 30px;
+      color: black;
+      transition: all 0.6s ease;
+    }
+
+    .container.active .logo {
+      font-size: 24px;
+      margin-right: 20px;
+      white-space: nowrap;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.6s ease;
+    }
+
+    .search-box input {
+      width: 550px;
+      padding: 10px 16px;
+      font-size: 16px;
+      background:white;
+      font-family:"Mulish";
+      outline:none;
+      border:solid whitesmoke 2px;
+      border-radius: 24px;
+      outline: none;
+      transition: width 0.6s ease;
+    }
+
+    .search-box input:focus {
+        outline:solid dodgerblue 2px;
+    }
+
+    .search-box button {
+      background-color: dodgerblue;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+
+    .search-box button:hover {
+       filter:brightness(105%)
+    }
+
+    .search-box button .material-symbols-outlined {
+      font-size: 24px;
+    }
+
+    .results {
+      margin-top: 100px;
+      display: none;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .container.active ~ .results {
+      display: block;
+    }
+
+    .results ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .results li {
+      margin-bottom: 15px;
+    }
+
+    .results a {
+      text-decoration: none;
+      color: #1a0dab;
+      font-size: 18px;
+    }
+
+    .results a:hover {
+      text-decoration: underline;
+    }
+
+    .extra-buttons {
+        display:inline-block;
+        margin:2px;
+        width:100px;
+        padding:10px;
+        padding-top:7px;
+        padding-bottom:7px;
+        background:white;
+        cursor:pointer;
+        border:solid whitesmoke 2px;
+        outline:none;
+        transition:0.2s;
+        box-shadow:none;
+        border-radius:5px;
+    }
+
+    .extra-buttons:hover {
+        background:dodgerblue;
+        color:white;
+        border:solid dodgerblue 2px;
+    }
+    
+    a {
+        color:transparent;
+    }
+ 
+       .description {
+    font-size:18px;
+    cursor: default;
+    display:block;
+    margin:10px;
+    width:400px;
+  }
+
+  .section {
+   background:aliceblue;
+   border-radius:25px;
+   display:inline-block;
+   margin:10px;
+   text-align: left;
+   width:85%;
+   height:200px;
+   padding:25px;
+  }
+
+  .section img {
+    width:150px;
+  }
+
+  .section-title {
+     padding:0px;
+   margin:0px;
+   font-size: 24px;
+   padding-top:0px;
+   margin-top:0px;
+   display:block;
+  }
+
+  .section-desc {
+display:block;
+padding:0px;
+  }
+
+
+
+
+
+  </style>
+</head>
+<body>
+
+  <div class="container" id="searchContainer">
+    <div class="logo" id="searchLogo">Welcome back, <span class="username">Guest</span>!</div>
+    <div class="search-box">
+      <input autocomplete="off" type="text" id="searchInput" placeholder="Search..." onclick="centerMode()" />
+    <!--  <button onclick="topMode()" class="searchBtn">
+        <span class="material-symbols-outlined">search</span>
+      </button> -->
+    </div>
+
+    <div>
+   <a href="https://jamesy-tech.github.io/jamesy-creator-docs?event=window"> <button class="extra-buttons">Docs</button> </a>
+     <a href="https://jamesy-tech.github.io/jamesy-creator-drawings?event=window"> <button class="extra-buttons">Drawings</button></a>
+       <a href="https://jamesy-tech.github.io/text-editor?event=window"><button class="extra-buttons">Code</button></a>
+         <a href="https://jamesy-tech.github.io/jamesy-creator-notes?event=window">  <button class="extra-buttons">Notes</button></a>
+            </div>
+
+
+             <div class="section fade">
+            <center>
+       
+            </center>
+            <br>
+            <span class="section-title">Documents</span>
+            <br>
+            <span class="section-desc">A creative place to write, plan, build, and share.</span> 
+            <br>
+            <button class="button" onclick="window.location.href = 'https://jamesy-tech.github.io/jamesy-creator-docs/';">Open editor</button>
+        </div>
+
+
+
+          <div class="section fade">
+            <center>
+            </center>
+            <br>
+            <span class="section-title">Drawings</span>
+            <br>
+         <span class="section-desc">A canvas built for all — no drawing skills needed.</span> 
+            <br>
+            <button class="button" onclick="window.location.href = 'https://jamesy-tech.github.io/jamesy-creator-drawings/';">Open editor</button>
+        </div>
+
+  </div>
+
+  <div class="results">
+    <p><strong>Results for:</strong> <span id="searchQuery"></span></p>
+    <ul id="resultsList"></ul>
+  </div>
+
+  <script>
+
+    document.getElementById("searchInput").focus()
+
+    const username_elements = document.querySelectorAll('.username')
+    username_elements.forEach(e => e.textContent = localStorage.getItem('username') || 'Guest')
+
+    const container = document.getElementById("searchContainer");
+    const input = document.getElementById("searchInput");
+    const querySpan = document.getElementById("searchQuery");
+    const resultsList = document.getElementById("resultsList");
+
+    const fakeResults = [
+      { title: "Docs", url: "https://jamesy-tech.github.io/jamesy-creator-docs?event=window" },
+      { title: "Drawings", url: "https://jamesy-tech.github.io/jamesy-creator-drawings?event=window" },
+      { title: "Code", url: "https://jamesy-tech.github.io/text-editor?event=window" },
+      { title: "Notes", url: "https://jamesy-tech.github.io/jamesy-creator-notes?event=window" },
+      { title: "MD Viewer & Editor", url: "view_md.html?event=window" },
+      { title: "Account & Settings", url: "account.html?event=window" },
+      { title: "LocalStorage & Files", url: "files.html?event=window" },
+      { title: "Profile", url: "profile.html?event=window" },
+    ];
+
+    function topMode() {
+
+        document.querySelectorAll('.extra-buttons').forEach(e => e.style.display =  "none");
+
+        document.getElementById("searchInput").blur();
+        
+        document.getElementById("searchLogo").textContent = "Jamesy Creator"
+
+      const query = input.value.trim().toLowerCase();
+      if (!query) return;
+
+      container.classList.add("active");
+      querySpan.textContent = input.value;
+      resultsList.innerHTML = "";
+
+      const filtered = fakeResults.filter(result =>
+        result.title.toLowerCase().includes(query)
+      );
+
+      if (filtered.length === 0) {
+        resultsList.innerHTML = `<li>No results found for "${query}"</li>`;
+      } else {
+        filtered.forEach(result => {
+          const li = document.createElement("li");
+         // li.innerHTML = `<a href="${result.url}" target="_top">${result.title}</a>`;
+         li.innerHTML = `<a href="${result.url}">${result.title}</a>`;
+          resultsList.appendChild(li);
+        });
+      }
+    }
+
+    function centerMode() {
+
+document.querySelectorAll('.extra-buttons').forEach(e => e.style.display =  "inline-block");
+
+      if (container.classList.contains("active")) {
+        container.classList.remove("active");
+        resultsList.innerHTML = "";
+        const username = localStorage.getItem("username");
+document.getElementById("searchLogo").textContent = 
+    username ? `Welcome back, ${username}!` : "Guest!";
+        querySpan.textContent = "";
+      }
+    }
+
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        topMode();
+      }
+    });
+
+
+
+  </script>
+
+</body>
+</html>
