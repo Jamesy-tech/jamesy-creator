@@ -126,6 +126,7 @@
 
       const fileInput = document.getElementById('fileinput');
 
+      
 window.addEventListener('keydown', function(e) {
   const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
   const ctrlOrCmd = isMac ? e.metaKey : e.ctrlKey;
@@ -154,6 +155,7 @@ window.addEventListener('keydown', function(e) {
     const homeBtn = document.getElementById('home');
 
     let markdownContent = sessionStorage.getItem('md_content');
+let fromEditor = sessionStorage.getItem('from_editor') === "true";
 
     function enterEditor(initial = '') {
       output.innerHTML = `<textarea id="editor-area" spellcheck="false">${initial}</textarea>`;
@@ -186,16 +188,21 @@ window.addEventListener('keydown', function(e) {
     });
 
     if (markdownContent) {
-      output.innerHTML = marked.parse(markdownContent);
-      editBtn.style.display = "block";
-      homeBtn.style.display = "block";
-    } else {
-      editBtn.style.display = "block";
-      homeBtn.style.display = "block";
-      setTimeout(() => enterEditor(""), 1500);
-   
-    }
+  output.innerHTML = marked.parse(markdownContent);
+  editBtn.style.display = "block";
+  homeBtn.style.display = "block";
+  
 
+  if (fromEditor) {
+    sessionStorage.removeItem('from_editor');
+  }
+
+} else {
+
+  editBtn.style.display = "block";
+  homeBtn.style.display = "block";
+  setTimeout(() => enterEditor(""), 1500);
+}
      
      
       
