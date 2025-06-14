@@ -183,7 +183,7 @@ let fromEditor = localStorage.getItem('from_editor') === "true";
     }
 
     editBtn.addEventListener('click', () => {
-      const current = sessionStorage.getItem('md_content') || '';
+      const current = localStorage.getItem('md_content') || '';
       enterEditor(current);
     });
 
