@@ -154,8 +154,8 @@ window.addEventListener('keydown', function(e) {
     const editorToolbar = document.getElementById('editor-toolbar');
     const homeBtn = document.getElementById('home');
 
-    let markdownContent = sessionStorage.getItem('md_content');
-let fromEditor = sessionStorage.getItem('from_editor') === "true";
+    let markdownContent = localStorage.getItem('md_content');
+let fromEditor = localStorage.getItem('from_editor') === "true";
 
     function enterEditor(initial = '') {
       output.innerHTML = `<textarea id="editor-area" spellcheck="false">${initial}</textarea>`;
@@ -167,14 +167,14 @@ let fromEditor = sessionStorage.getItem('from_editor') === "true";
 
     function runPreview() {
       const editorText = document.getElementById('editor-area').value;
-      sessionStorage.setItem('md_content', editorText);
+      localStorage.setItem('md_content', editorText);
       output.innerHTML = marked.parse(editorText);
       editorToolbar.style.display = "none";
       editBtn.style.display = "block";
     }
 
     function downloadFile() {
-      const text = document.getElementById('editor-area')?.value || sessionStorage.getItem('md_content') || '';
+      const text = document.getElementById('editor-area')?.value || localStorage.getItem('md_content') || '';
       const blob = new Blob([text], { type: 'text/markdown' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
@@ -194,7 +194,7 @@ let fromEditor = sessionStorage.getItem('from_editor') === "true";
   
 
   if (fromEditor) {
-    sessionStorage.removeItem('from_editor');
+    localStorage.removeItem('from_editor');
   }
 
 } else {
