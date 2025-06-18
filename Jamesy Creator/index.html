@@ -244,15 +244,19 @@
         opacity: 1;
       }
 
-      @media (max-width: 800px) {
-        .mobile-menu-btn {
-          display: block;
-        }
+     @media (max-width: 800px) {
+  .mobile-menu-btn {
+    display: block;
+  }
 
-        .mobile-overlay {
-          display: block;
-        }
+  .mobile-overlay:not(.active) {
+    display: none !important;
+  }
 
+  .mobile-overlay.active {
+    display: block;
+  }
+  
         aside {
           position: fixed;
           top: 0;
@@ -276,6 +280,17 @@
           margin-left: 0;
         }
       }
+
+   .cards .card:last-child:nth-child(odd):nth-child(n+3) {
+  grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  .cards .card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -324,12 +339,12 @@
    <div class="cards">
   <a href="https://jamesy-tech.github.io/jamesy-creator-docs" class="card green">Docs</a>
   <a href="https://jamesy-tech.github.io/jamesy-creator-drawings" class="card yellow">Drawings</a>
-  <a href="https://jamesy-tech.github.io/text-editor" class="card blue">Code</a>
+ <!-- <a href="https://jamesy-tech.github.io/text-editor" class="card blue">Code</a> -->
   <a href="https://jamesy-tech.github.io/jamesy-creator-notes" class="card orange">Notes</a>
 </div>
 
         <br>
-            <div class="cards">
+      <!--     <div class="cards">
  <a href="view_md.html" class="card aliceblue">MD Viewer & Editor</a>
              
             </div>
@@ -337,7 +352,7 @@
           <div class="cards">
   <a href="files.html" class="card aliceblue">Local Storage & Files</a>
              
-            </div>
+            </div> -->
         <br>
 
             <div class="cards">
