@@ -262,13 +262,42 @@ width:100px;
 </center>
 
 <script>
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const changePassword = urlParams.get('changePassword')
+if (changePassword === 'true') {
+    activateChangePassword();
+}
+
+function activateChangePassword() {
+   document.getElementById("username").style.display = "none";
+
+   setTimeout(() => {
+       document.getElementById("welcome").textContent = "Change password";
+       document.getElementById("typewriter3").textContent = "Confirm";
+   }, 500);
+
+   setTimeout(() => {
+    document.getElementById("password").focus();
+   }, 1001);
+
+        
+   }
+   
+
+
     function saveUsername() {
         document.getElementById("loading").style.display = "block";
         document.getElementById("login").style.display = "none";
         var username = document.getElementById('username').value.trim();
         var password = document.getElementById('password').value.trim();
  var password = document.getElementById('password').value.trim();
-        if (username === '') {
+     
+       if (username === '') {
+
+            if (changePassword == 'true') {
+                   
+            } else {
             document.getElementById('usernameError').style.display = 'block';
             document.getElementById("username").style.border = "solid red 1px";
             document.getElementById("username").focus();
@@ -279,8 +308,12 @@ width:100px;
             document.getElementById("login").style.display = "block";
                document.getElementById("username").focus();
         }, 500);
-            
-            return;
+    
+
+            return; 
+
+    }
+
         } else if (password === '') {
                
             
@@ -312,7 +345,7 @@ width:100px;
 
     function showSignIn2() {
         setTimeout(() => {
-           window.location.href = "../index.html";
+           window.location.href = "https://jamesy-tech.github.io/jamesy-creator";
         }, 1500);
     }
  function showDiv() {
@@ -336,6 +369,8 @@ checkLockStatus();
 
 
 setInterval(checkLockStatus, 6000);
+
+
 
 
 
