@@ -88,8 +88,8 @@
 <body>
   <div class="main">
 
-    <span class="title">Account & Settings</span>
-    <hr />
+  <!--  <span class="title">Account & Settings</span>
+    <hr /> -->
 
     <span class="section-title">Username</span>
     <div>
@@ -113,7 +113,7 @@
     <button class="button9 right" onclick="window.open('setwallpaper.html')">Change Wallpaper</button>
   </div>
 
-   <img src="back.png" style="position: fixed; bottom: 20px; left: 20px; width: 30px; height: 30px; cursor: pointer;" onclick="quit()">
+   <!-- <img src="back.png" style="position: fixed; bottom: 20px; left: 20px; width: 30px; height: 30px; cursor: pointer;" onclick="quit()"> -->
 
   <script>
 
@@ -124,6 +124,8 @@
     }, 100);
   }
 
+  let account_username = localStorage.getItem("username");
+  document.getElementById("usernameDisplay").textContent = account_username;
 
     function changeUsername() {
       document.getElementById('usernamechanger').style.display = 'block';
@@ -134,12 +136,14 @@
       if (username.trim()) {
         document.getElementById('usernameDisplay').textContent = username;
         document.getElementById('usernamechanger').style.display = 'none';
+        localStorage.setItem("username", username);
       }
     }
 
     function changePassword() {
-      alert("Password change feature coming soon!");
+      window.location.href = "login.html?changePassword=true"
     }
+
   </script>
 </body>
 </html>
