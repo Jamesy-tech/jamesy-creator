@@ -1,610 +1,380 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Jamesy Creator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="icon" href="shapes.png">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: "Mulish";
-      margin: 0;
-      padding: 0;
-    }
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="core-images/icon.png">
+    <title>Sign In - Jamesy Creator</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: white;
+            padding-left:50px;
+            padding-right:50px;
+            margin-right:25px;
+            margin-left:25px;
+            background-size: cover;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    body {
-      background-color: #eaf0fb;
-      display: flex;
-      min-height: 100vh;
-    }
+        * {
+            font-family: verdana;
+        }
 
-    aside {
-      width: 220px;
-      background-color: #eaf0fb;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      height: 100vh;
-      gap: 1rem;
-      transition: transform 0.3s ease-in-out;
-    }
+        .signinWindow {
+            width: 95vw;
+            border: solid aquamarine 2px;
+            outline: solid black 1px;
+            height: 80vh;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+        }
 
-    aside button {
-      background: none;
-      border: none;
-      padding: 12px 16px;
-      text-align: left;
-      border-radius: 24px;
-      font-size: 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #1f1f1f;
-    }
+        .signininput {
+            width: 100%;
+            margin:0;
+            height: 30px;
+            font-size: 16px;
+            margin-top: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+            font-family: verdana;
+            border: solid black 1px;
+            outline:solid white 1px;
+            margin-bottom: 10px;
+        }
 
-      
-    aside button:hover {
-    background: #dde7f5;
-    }
+        .signininput:focus {
+            font-size: 16px;
+            outline: solid dodgerblue 1px;
+            border:solid dodgerblue 1px;
+            background-size: cover;
+        }
 
-    aside button .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-      font-size: 20px;
-    }
+        .signinbtn {
+            border-radius: 5px;
+            width: 111px;
+            height: 35px;
+            cursor: pointer;
+            border: solid black 1px;
+            margin: 3px;
+            margin-left: 6px;
+            background: aquamarine;
+        }
 
-    aside button.active {
-      background-color: #005cb2;
+        .signinbtn:hover {
+            background: palegreen;
+            box-shadow: 2px 2px lightgray;
+        }
+
+        .signinbtn2 {
+            background: transparent;
+            transition: 0.3s;
+            border: solid black 1px;
+        }
+
+        .signinbtn2:hover {
+            background: yellow;
+            outline: solid aquamarine 3px;
+        }
+
+        #usernameError {
+            margin-top: 0px;
+            margin-bottom: 9px;
+        }
+
+        gray {
+            font-size: 28px;
+            color: gray;
+            display: inline-block;
+        }
+
+        big {
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        #usernameLoading {
+            display: block;
+        }
+
+        #usernameLoading img {
+            width: 80px;
+        }
+
+        .back {
+            background: transparent;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .back:hover {
+            color: darkblue;
+        }
+
+        .login-container {
+            width: 600px;
+            border: solid black 1px;
+        }
+
+        .usernametext {
+            margin-bottom: 0px;
+            padding-bottom: 4px;
+        }
+
+        .undersearch-buttons {
+              text-decoration: none;
       color: white;
-    }
-
-    aside button.active .material-symbols-outlined {
-      color: white;
-    }
-
-    main {
-      flex-grow: 1;
-      padding: 2rem;
-    }
-
-    .page {
-      display: none;
-    }
-
-    .page.active {
       display: block;
-    }
-
-    .header {
-      font-size: 28px;
-      font-weight: bold;
-    display:block;
-        margin-left:10px;
-      margin-bottom: 1.5rem;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      padding: 1.5rem;
-      border-radius: 16px;
-      font-size: 18px;
-        cursor:pointer;
-      font-weight: 500;
-        text-decoration:none;
-      color: #1f1f1f;
-    }
-
-      .card:hover {
-       /* outline:solid #99c0ff 2px;  */
-          text-decoration:underline;
+      padding: 5px;
+      margin-left:5px;
+      border-radius: 5px;
+       background:#335fff;
+      height: 40px;
+    margin-top:10px;
+      text-align: center;
+            outline:none;
+      cursor: pointer;
+      width: 100%;
+            
+            border:none;
       
-          }
+      transition:0.3s;
+        }
 
-  /*  .blue { background: #dbe9ff; color: #1a73e8; }
-    .red { background: #fdecec; color: #b00020; }
-    .yellow { background: #fff5d7; color: #795300; }
-    .green { background: #e0f3ea; color: #137333; } */
+        .undersearch-buttons:hover {
+             background:#577bff;
+        }
 
-      .card.green { background: #daf5dc; color: #1a5e2e; }
-.card.yellow { background: #fff3c7; color: #8a5800; }
-.card.blue { background: #c9e1fc; color: #215a99; }
-.card.red { background: #f9dada; color: #9e1c1c; }
-      .card.aliceblue { background:aliceblue; color:black; }
-      .card.teal {
-  background: #d2f2f0;
-  color: #00796b;
-}
-      .card.orange {
-  background: #ffe6cc;
-  color: #d35400;
-}
-.card.slate {
-  background: #eceff1;
-  color: #37474f;
-}
+        .loading {
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
 
-      .card.pink {
-  background: #fce4ec;
-  color: #c2185b;
-}
-      .card.gray {
-  background: #f5f5f5;
-  color: #616161;
-}
-      .card.purple {
-  background: #e9ddfb;
-  color: #5e35b1;
-}
-     
+        .login-block {
+            width: 500px;
+            height: 600px;
+            border-radius: 10px;
+            background: white;
+            padding:20px;
+            padding-top:40px;
+          
+        }
 
-.footer {
-  position: absolute;
-  bottom: 90px;
-  left: 1rem;
-  right: 1rem;
-  font-size: 13px;
-  color: #444;
-}
- 
-    .footer a {
-      color: #444;
-      text-decoration: none;
-      margin-right: 8px;
-    }
-
-      .fill {
+        #usernamesave {
+            display: none;
+            cursor: default;
+        }
         
-        width:100%;
-          background:white;
-          border-radius:15px;
-          border:none;
-          outline:none;
-          height:100vh;
-
-          }
-
-      .logo { 
-          width:40px;
-          height:40px;
-          }
-
-      .title {
-          display:inline-block;
-          margin-left:10px;
-          cursor:default;
-         margin-top:10px;
-          font-size:14px;
-          }
-
-      .logo-container {
-            display:flex;
-          }
-
-      .home-scroll {
-          background:transparent;
-          padding-bottom:25vh;
-          padding-left:3px;
-          padding-right:3px;
-          overflow-y:scroll;
-          overflow-x:hidden;
-          height:100vh;
-          }
-
-
-      .mobile-menu-btn {
-        display: none;
-        position: fixed;
-        top: 1rem;
-        left: 1rem;
-        z-index: 1001;
-      background:aliceblue;
-        color: black;
-        border: none;
-        border-radius: 12px;
-        padding: 12px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .mobile-menu-btn:hover {
-       
-        transform: scale(1.05);
-      }
-
-      .mobile-menu-btn .material-symbols-outlined {
-        font-size: 24px;
-        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-      }
-
-      /* Mobile overlay */
-      .mobile-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-      }
-
-      .mobile-overlay.active {
-        opacity: 1;
-      }
-
-     @media (max-width: 800px) {
-  .mobile-menu-btn {
-    display: block;
-  }
-
-  .mobile-overlay:not(.active) {
-    display: none !important;
-  }
-
-  .mobile-overlay.active {
-    display: block;
-  }
-  
-        aside {
-          position: fixed;
-          top: 0;
-          left: 0;
-          z-index: 1000;
-          transform: translateX(-100%);
-          box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+        #typewriter3 {
+          display:block;
         }
+      #username {
+        display:block;
+      }
+      
+      #loading {
+        display:block;
+      }
+      #login {
+        display:none;
+          width:90%
+      }
+      
+#usernamediv {
 
-        aside.mobile-open {
-          transform: translateX(0);
-        }
-
-        main {
-          width: 100%;
-          padding: 1rem;
-          padding-top: 4rem;
-        }
-
-        .header {
-          margin-left: 0;
-        }
+}
+      .loadinggif {
+        width:28%;
+        margin-top:20px;
       }
 
-   .cards .card:last-child:nth-child(odd):nth-child(n+3) {
-  grid-column: span 2;
-}
+        .image-block {
+          height:700px;
+            width:1100px;
+            display: flex;
+        justify-content: center;
+        align-items: center;
+             border-radius:50px;
+            background:aliceblue;
+            margin-right:20px;
+            }
 
-@media (max-width: 768px) {
-  .cards .card:last-child {
-    grid-column: 1 / -1;
-  }
-}
+        .smallicon {
+width:100px;
+            }
+                
 
-
-.description {
-  font-size:16px;
-  display:block;
-  margin-left:15px;
-  margin-bottom:15px;
-  padding:0px;
-}
-
-.banner {
-  width:100%;
-  height:140px;
-  background:url("nav_banner.png");
-  background-size:cover;
-  margin-bottom:30px;
-  border-radius:15px;
-}
-
-  </style>
+            @media (max-width:1100px) {
+                .image-block {
+                    display:none;
+                }
+            }
+      
+    </style>
 </head>
 <body>
-
-  <button class="mobile-menu-btn" id="menu-button" onclick="toggleMobileNav()">
-    <span class="material-symbols-outlined">menu</span>
-  </button>
-
-
-  <div class="mobile-overlay" onclick="closeMobileNav()"></div>
-
-  <aside id="nav">
-    <button onclick="showPage('home')" class="active">
-      <span class="material-symbols-outlined">home</span>
-      Home
-    </button>
-    <button onclick="showPage('apps')">
-      <span class="material-symbols-outlined">apps</span>
-      Apps
-    </button>
-    <button onclick="showPage('profile')">
-           <span class="material-symbols-outlined">person</span>
-      Profile
-    </button>
-      <button onclick="showPage('settings')">
-      <span class="material-symbols-outlined">settings</span>
-      Settings
-    </button>
-    <div class="footer">
-        <div class="logo-container">
-      <img src="shapes.png" class="logo"> <span class="title">Jamesy Creator</span>
-            </div>
+<div class="image-block">
+    <center>
+<img src="blocks.png">
+    </center>
     </div>
-  </aside>
+<center>
 
-  <main>
-    <div id="home" class="page active">
-
-        <div class="home-scroll">
-
+<div class="login-block">
+  
+    <center>
+        <div id="loading">
+          <img src="loading.gif" class="loadinggif">
+          </div>
+          
+      <div id="login">
+          <br><br>
+        <img src="icon.png" class="smallicon">
+        <h1 class="title" id="welcome">Let's get started</h1>
+     <div id="usernamediv">
+        <span class="usernametext" id="undertext"></span>
+        <input id="username" autocomplete="off" class="signininput" onkeydown="if(event.keyCode==13) { document.getElementById('password').focus() }" placeholder="Name">
+       <span class="usernametext" id="passwordtext"></span>
+ <input id="password" autocomplete="off" class="signininput" type="password" onkeydown="if(event.keyCode==13) saveUsername()" placeholder="Choose a password">
+       </div>
+        <k id="usernameError" style="color: red; display: none;">Please enter a valid username</k>
+          <k id="passwordError" style="color: red; display: none;">Please enter a valid password</k>
       
+     <button class="undersearch-buttons" onclick="saveUsername()" id="typewriter3">Let's go!</button>
+        <br><br>
+        <span id="usernamesave">Applying username, please wait...</span>
+    </center>
 
-            <div class="banner"> </div>
-      <div class="header">Welcome back, <span class="username"></span>!</div>
-    <!-- <span class="description">Where should we start?</span> -->
-          <div class="cards">
- <a href="open.html" class="card teal">Open file</a>
-            </div>
-        <br>
-   <div class="cards">
-  <a href="https://jamesy-tech.github.io/jamesy-creator-docs" class="card green">Docs</a>
-  <a href="https://jamesy-tech.github.io/jamesy-creator-drawings" class="card yellow">Drawings</a>
- <!-- <a href="https://jamesy-tech.github.io/text-editor" class="card blue">Code</a> -->
-  <a href="https://jamesy-tech.github.io/jamesy-creator-notes" class="card orange">Notes</a>
 </div>
 
-      <!--     <div class="cards">
- <a href="view_md.html" class="card aliceblue">MD Viewer & Editor</a>
-             
-            </div>
-<br>
-          <div class="cards">
-  <a href="files.html" class="card aliceblue">Local Storage & Files</a>
-             
-            </div> -->
+</div>
+</center>
+
+<script>
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const changePassword = urlParams.get('changePassword')
+if (changePassword === 'true') {
+    activateChangePassword();
+}
+
+function activateChangePassword() {
+   document.getElementById("username").style.display = "none";
+
+   setTimeout(() => {
+       document.getElementById("welcome").textContent = "Change password";
+       document.getElementById("typewriter3").textContent = "Confirm";
+   }, 500);
+
+   setTimeout(() => {
+    document.getElementById("password").focus();
+   }, 1001);
 
         
+   }
+   
 
-        <br>
 
-            <div class="cards">
+    function saveUsername() {
+        document.getElementById("loading").style.display = "block";
+        document.getElementById("login").style.display = "none";
+        var username = document.getElementById('username').value.trim();
+        var password = document.getElementById('password').value.trim();
+ var password = document.getElementById('password').value.trim();
+     
+       if (username === '') {
 
-            <a href="#" onclick="showPage('profile'); " class="card aliceblue">Profile</a>
-  
-            </div>
+            if (changePassword == 'true') {
+                   
+            } else {
+            document.getElementById('usernameError').style.display = 'block';
+            document.getElementById("username").style.border = "solid red 1px";
+            document.getElementById("username").focus();
 
-        <br>
-         <div class="cards">
+             
+          setTimeout(() => {
+             document.getElementById("loading").style.display = "none";
+            document.getElementById("login").style.display = "block";
+               document.getElementById("username").focus();
+        }, 500);
+    
+
+            return; 
+
+    }
+
+        } else if (password === '') {
+               
+            
+             document.getElementById('passwordError').style.display = 'block';
 
             
-            <a href="#" onclick="showPage('settings');" class="card aliceblue">Account & Settings</a>
-  
-            </div>
+           setTimeout(() => {
+             document.getElementById("loading").style.display = "none";
+            document.getElementById("login").style.display = "block";
+               document.getElementById("password").focus();
+        }, 500);
+            
 
-                <br>
-
-                <div class="cards">
-
-            <a href="#" onclick="showPage('apps'); " class="card aliceblue">All apps & tools...</a>
-  
-            </div>
-
-
-
-            </div>
-    </div>
-
-    
-
-    <div id="apps" class="page">
-      <br>
-          <div class="header">Apps & tools</div>
-     <iframe src="grid.html" class="fill"></iframe>
-    </div>
-
-        <div id="profile" class="page">
-          <br>
-<div class="header">Profile</div>
-     <iframe src="profile.html?event=window" class="fill"></iframe>
-    </div>
-
-        <div id="settings" class="page">
-          <br>
-            <div class="header">Account & Settings</div>
-     <iframe src="account.html?event=window" class="fill"></iframe>
-    </div>
-
-  </main>
-
-     <div style="
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  background: #fff;
-  border-top: 2px solid whitesmoke;
-  display: flex;
-  align-items: center;
-  padding: 16px 24px;
-  gap: 16px;
-  margin: 0;
-" id="banner">
-  <img 
-    src="avatars/guest.png" 
-    alt="Profile" 
-    id="avatar"
-    style="
-      height: 48px;
-      width: 48px;
-      border-radius: 50%;
-      object-fit: cover;
-    "
-  />
-  <div style="display: flex; flex-direction: column; line-height: 1.2;">
-    <span 
-      id="usernameDisplay" class="username"
-      style="
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: #333;
-      "
-    >
-      Guest
-    </span>
-    <span style="font-size: 0.875rem; color: #666;">
-      0 points
-    </span>
-  </div>
-</div>
-
-  <script>
-
-     const username_fill = document.querySelectorAll(".username")
-     username_fill.forEach(e => e.textContent = localStorage.getItem("username"));
-      
-    function showPage(id) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-
-      document.querySelectorAll('aside button').forEach(btn => btn.classList.remove('active'));
-      event.target.closest('button').classList.add('active');
-      
-      if (window.innerWidth <= 800) {
-        closeMobileNav();
-      }
+                
+           document.getElementById("password").style.border = "solid red 1px";
+            document.getElementById("password").focus();
+            return;
+        } else {
+            document.getElementById('usernameError').style.display = 'none';
+            document.getElementById("loading").style.display = "block";
+            document.getElementById("login").style.display = "none";
+            
+        }
+        
+        localStorage.setItem('username', username);
+ localStorage.setItem('userPassword', password);
+        showSignIn2();
     }
 
-
-function toggleMobileNav() {
- const nav = document.getElementById('nav');
- const overlay = document.querySelector('.mobile-overlay');
- const button = document.getElementById("menu-button")
- 
- nav.classList.toggle('mobile-open');
- overlay.classList.toggle('active');
- button.style.display = button.style.display === 'none' ? 'block' : 'none';
-}
-
-    function closeMobileNav() {
-      const nav = document.getElementById('nav');
-      const overlay = document.querySelector('.mobile-overlay');
-      
-      nav.classList.remove('mobile-open');
-      overlay.classList.remove('active');
-      document.getElementById("menu-button").style.display = "block";
+    function showSignIn2() {
+        setTimeout(() => {
+           window.location.href = "https://jamesy-tech.github.io/jamesy-creator";
+        }, 1500);
     }
+ function showDiv() {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("login").style.display = "inline-block";
+     document.getElementById("username").focus();
+     }
+setTimeout(showDiv, 1000)
 
 
-    document.addEventListener('click', function(event) {
-      const nav = document.getElementById('nav');
-      const menuBtn = document.querySelector('.mobile-menu-btn');
-      
-      if (window.innerWidth <= 800 && 
-          nav.classList.contains('mobile-open') && 
-          !nav.contains(event.target) && 
-          !menuBtn.contains(event.target)) {
-        closeMobileNav();
-      }
-    });
+   function checkLockStatus() {
+    const isLocked = localStorage.getItem("locked");
+    if (isLocked === "true") {
 
-    function updateAvatar() {
-  const avatarImg = document.getElementById('avatar');
-  const savedAvatar = localStorage.getItem('avatar');
-  
-  
-  if (savedAvatar) {
-    
-    avatarImg.src = savedAvatar;
-    
-    avatarImg.onerror = function() {
-      console.error('Failed to load avatar:', savedAvatar);
-      console.log('Falling back to default avatar');
-      avatarImg.src = 'avatars/guest.png';
-    };
-    
-    avatarImg.onload = function() {
-
-    };
-  } else {
-    console.log('No avatar stored, using default');
-    avatarImg.src = 'avatars/guest.png';
-  }
-}
-
-      updateAvatar();
-
-
- setInterval(updateAvatar, 10000);
-
-
- 
-
-
-function toggleSide() {
-
-  console.log("toggleSide() fired")
-
-  const sideNav = document.getElementById("nav");
-  if (sideNav.style.display === "flex") {
-    sideNav.style.display = "none";
-  } else {
-    sideNav.style.display = "flex";
-  }
-}
-
-
-
-
-
-    function home() {
-        window.location.reload()
-        window.location.href = "index.html"
+        window.location.href = "Jamesy Creator/loginback.html";
     }
-
- 
-
-
-
-const user = localStorage.getItem("username");
-
-if (!user || user.toLowerCase() === "guest") {
-  window.location.href = "login.html";
 }
 
-            document.addEventListener('keydown', function(event) {
-    if (event.ctrlKey && event.key === 'q') {
-        window.location.href = 'loginback.html?path=lock';
-    }
-});
 
-if (localStorage.getItem('locked') === 'true') {
-  window.location.href = 'loginback.html?path=lock';
-}
-
-if (!localStorage.getItem("userPassword")) {
-    window.location.href = "login.html";
-  }
-
-      if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/service-worker.js")
-      .then(() => console.log("Service Worker registered"))
-      .catch(err => console.error("Service Worker registration failed:", err));
-  }
+checkLockStatus();
 
 
-      
-  </script>
+setInterval(checkLockStatus, 6000);
+
+
+
+
+
+</script>
+
 </body>
 </html>
