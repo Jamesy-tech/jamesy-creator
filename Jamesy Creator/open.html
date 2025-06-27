@@ -249,7 +249,7 @@ function handleFile(file) {
   if (name.endsWith('.jcdoc')) {
     const reader = new FileReader();
     reader.onload = function(evt) {
-      localStorage.setItem('jcdoc_content', evt.target.result);
+      sessionStorage.setItem('jcdoc_content', evt.target.result);
       window.location.href = 'https://jamesy-tech.github.io/jamesy-creator-docs/JC%20Docs/docs.html';
     };
     reader.readAsText(file);
