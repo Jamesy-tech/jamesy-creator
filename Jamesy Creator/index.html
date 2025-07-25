@@ -487,6 +487,14 @@
     }
 
 
+    const urlParams = new URLSearchParams(window.location.search);
+const page = urlParams.get('page');
+
+if (page) {
+  showPage(page);
+}
+
+
 function toggleMobileNav() {
  const nav = document.getElementById('nav');
  const overlay = document.querySelector('.mobile-overlay');
