@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="icon" href="shapes.png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
   <style>
     * {
@@ -84,8 +85,8 @@
       font-size: 28px;
       font-weight: bold;
     display:block;
-        margin-left:10px;
-      margin-bottom: 1.5rem;
+        margin-left:14px;
+      margin-bottom: 1.4rem;
     }
 
     .cards {
@@ -354,10 +355,57 @@
             <div class="banner"> </div>
       <div class="header">Welcome back, <span class="username"></span>!</div>
     <!-- <span class="description">Where should we start?</span> -->
+
+ <style>
+  #searchContainer {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  #searchBar {
+    width: 100%;
+    font-size: 18px;
+    height: 50px;
+    padding: 10px 45px 10px 15px; /* extra right padding for button */
+    outline: none;
+    border-radius: 5px;
+    font-family: "Mulish";
+    border: solid whitesmoke 1px;
+    box-sizing: border-box;
+    display: block;
+  }
+
+  #searchBtn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: "Material Symbols Outlined";
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: black;
+    padding: 0;
+    line-height: 1;
+  }
+</style>
+
+<div id="searchContainer">
+  <input id="searchBar" placeholder="Search for apps & tools...">
+  <button id="searchBtn" aria-label="Search">arrow_forward</button>
+</div>
+
+
+
+
+
           <div class="cards">
  <a href="open.html" class="card teal">Open file</a>
             </div>
         <br>
+
    <div class="cards">
   <a href="https://jamesy-tech.github.io/jamesy-creator-docs" class="card green">Docs</a>
   <a href="https://jamesy-tech.github.io/jamesy-creator-drawings" class="card yellow">Drawings</a>
@@ -410,9 +458,11 @@
 
     <div id="apps" class="page">
       <br>
-          <div class="header">Apps & tools</div>
-     <iframe src="grid.html" class="fill"></iframe>
+          <div class="header" id="apps_header">Apps & tools</div>
+     <iframe src="grid.html" id="apps_iframe" class="fill"></iframe>
     </div>
+
+    
 
         <div id="profile" class="page">
           <br>
@@ -475,6 +525,11 @@
      username_fill.forEach(e => e.textContent = localStorage.getItem("username"));
       
     function showPage(id) {
+
+       document.getElementById("apps_header").textContent = "Apps & Tools";
+
+      document.getElementById("apps_iframe").src = "grid.html"
+
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById(id).classList.add('active');
 
@@ -494,6 +549,29 @@ if (page) {
   showPage(page);
 }
 
+const searchBar = document.getElementById("searchBar");
+  const searchBtn = document.getElementById("searchBtn");
+
+  function goToSearch() {
+    const query = searchBar.value.trim();
+    if (query) {
+      setTimeout(() => {
+      document.getElementById("apps_iframe").src = `grid.html?query=${encodeURIComponent(query)}`;
+      document.getElementById("apps_header").textContent = "Search";
+      }, 10);
+
+       showPage("apps");
+
+    }
+  }
+
+  searchBar.focus();
+
+  searchBar.addEventListener("keydown", e => {
+    if (e.key === "Enter") goToSearch();
+  });
+
+  searchBtn.addEventListener("click", goToSearch);
 
 function toggleMobileNav() {
  const nav = document.getElementById('nav');
