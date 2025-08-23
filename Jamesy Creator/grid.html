@@ -53,6 +53,7 @@
   </style>
 </head>
 <body>
+
   <div class="grid" id="cardGrid">
     
     <div class="card" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator/Jamesy Creator/open.html');">
@@ -113,7 +114,20 @@
       <div class="content">Themes (Legacy)</div>
     </div>
 
-         <div class="card" onclick="goTo('https://www.roblox.com/join/1r7p0');">
+   
+
+  </div>
+
+  <br id="br_divider">
+
+  <hr id="hr_divider">
+
+  <br id="br_divider2">
+
+    <div class="grid">
+  
+
+        <div class="card" onclick="goTo('https://www.roblox.com/join/1r7p0');">
       <div class="color-block nav_banner" style="background-image:url('sky_sprint.png'); background-size:cover;"></div>
       <div class="content">Sky Sprint [Roblox]</div>
     </div>
@@ -133,19 +147,24 @@
       <div class="content">Chat</div>
   </div>
 
-
-  </div>
+</div>
 
   <br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br> 
   <script>
+
     function goTo(link) {
       window.top.location.href = link;
     }
 
     document.addEventListener("DOMContentLoaded", () => {
+
       const params = new URLSearchParams(window.location.search);
       const q = params.get("query");
       if (!q) return;
+
+      document.getElementById("hr_divider").style.display = "none";
+      document.getElementById("br_divider").style.display = "none";
+      document.getElementById("br_divider2").style.display = "none";
 
       const term = decodeURIComponent(q).toLowerCase().trim();
 
