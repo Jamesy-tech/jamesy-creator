@@ -1,291 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>MD Viewer & Editor</title>
-  <link rel="icon" href="shapes.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <style>
-
-    body {
-      padding:0px;
-      margin:0;
-       font-family: "Mulish";
-    }
-
-    .body {
-      font-family: 'Mulish', sans-serif;
-      padding: 2rem;
-      background: white;
-      max-width: 720px;
-      margin: auto;
-      color: #1a1a1a;
-      line-height: 1.6;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 700;
-      margin-top: 1.5em;
-    }
-    code {
-      background: #f0f0f0;
-      padding: 0.2em 0.4em;
-      border-radius: 4px;
-      font-family: monospace;
-    }
-    pre {
-      background: #f4f4f4;
-      padding: 1rem;
-      border-radius: 4px;
-      overflow: auto;
-    }
-    blockquote {
-      border-left: 4px solid #ccc;
-      padding-left: 1em;
-      color: #555;
-      margin: 1em 0;
-    }
-    a {
-      color: #0366d6;
-    }
-    hr {
-      border-top: 1px solid #ddd;
-    }
-    .loader {
-      width: 150px;
-      margin-top: 50px;
-    }
-    .icon {
-      border-radius: 10px;
-      padding: 5px;
-      transition: 0.3s;
-    }
-    .icon:hover {
-      background: whitesmoke;
-    }
-    .toolbar-btn {
-      background: #eee;
-      border: none;
-      padding: 10px 15px;
-      margin-left: 5px;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 8px;
-    }
-    #editor-toolbar {
-      position: fixed;
-      top: 50px;
-      right: 20px;
-      display: none;
-    }
- #editor-area {
-  width: 100%;
-  max-width: 100%;
-  height:80vh;
-     margin-top:0px;
-     overflow:scroll;
-  font-family: monospace;
-  font-size: 1rem;
-  padding: 1rem;
-  border: none;
-  outline: none;
-  resize: vertical;
-  box-sizing: border-box;
-  background: #f9f9f9;
-  scrollbar-width: none; 
-  -ms-overflow-style: none;
-  overflow: hidden;
-  border-radius:15px;
-  resize: none;
+<meta charset="UTF-8">
+<title>Markdown Editor</title>
+<link rel="icon" href="shapes.png">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+body {
+  margin:0;
+  font-family:'Rubik',sans-serif;
+  background:#f5f5f7;
+  display:flex;
+  flex-direction:column;
+  height:100vh;
+  overflow:hidden;
+  color:#1a1a1a;
 }
 
-textarea::-webkit-scrollbar {
-  display: none; 
+header {
+  background:#111;
+  color:#fff;
+  padding:12px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
-    
 
-  </style>
+header .logo { display:flex; align-items:center; gap:10px; font-weight:600; }
+header img { height:22px; }
+
+header nav a {
+  color:#fff;
+  text-decoration:none;
+  margin-right:30px; /* extra spacing */
+  font-weight:500;
+}
+header nav a:last-child { margin-right:0; }
+header nav a:hover { text-decoration:underline; }
+
+.toolbar {
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  padding:8px 12px;
+  background:#eaeaea;
+  align-items:center;
+  border-bottom:1px solid #ccc;
+}
+
+.toolbar-left input {
+  padding:6px 10px;
+  border-radius:4px;
+  border:1px solid #ccc;
+  outline:none;
+  font-family:'Rubik',sans-serif;
+  width:260px;
+}
+
+.toolbar-right button {
+  background:#111;
+  color:#fff;
+  border:none;
+  padding:8px 14px;
+  border-radius:6px;
+  cursor:pointer;
+  font-family:'Rubik',sans-serif;
+  font-weight:500;
+}
+.toolbar-right button:hover { background:#333; }
+
+.editor-container {
+  display:flex;
+  flex:1;
+  height:100%;
+  min-height:0;
+}
+
+textarea {
+  flex:1;
+  border:none;
+  outline:none;
+  resize:none;
+  padding:1rem;
+  font-family:monospace;
+  font-size:1rem;
+  background:#fff;
+  box-shadow:inset 0 0 0 1px #ddd;
+  overflow:auto;
+  min-width:0;
+  white-space:pre-wrap; /* wrap long lines */
+  word-wrap:break-word;
+}
+
+.preview {
+  flex:1;
+  padding:1rem 1.5rem;
+  overflow:auto;
+  background:#fafafa;
+  border-left:1px solid #ddd;
+  font-family:Arial,sans-serif;
+  min-width:0;
+  word-wrap:break-word;
+  box-sizing:border-box;
+}
+
+.divider {
+  width:6px;
+  background:#ccc;
+  cursor:col-resize;
+  flex:0 0 auto;
+}
+
+.preview h1,.preview h2,.preview h3{margin-top:1.5rem;font-weight:600;}
+.preview code{background:#eee;padding:0.2em 0.4em;border-radius:4px;word-break:break-word;}
+.preview pre{background:#f4f4f4;padding:0.8rem;border-radius:6px;overflow:auto;white-space:pre-wrap;word-wrap:break-word;}
+.highlight{background:yellow;padding:0.1em;}
+
+/* Notification */
+#notify {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#111;
+  color:#fff;
+  padding:10px 16px;
+  border-radius:6px;
+  min-width:150px;
+  font-family:'Rubik',sans-serif;
+  box-shadow:0 0 10px rgba(0,0,0,0.3);
+  display:none;
+}
+#notify .progress {
+  height:2px;
+  background:#0f0;
+  width:100%;
+  margin-top:4px;
+  border-radius:1px;
+  transition:width 0.05s linear;
+}
+</style>
 </head>
 <body>
 
-  <div class="jamesy-creator">
-  <style>
-    .jamesy-creator {
-      height: 28px;
-      position: sticky;
-      margin-bottom:0px;
-      padding:5px;
-      display:flex;
-      padding-top:7px;
-      padding-left:12px;
-      background: rgba(0, 0, 0, 0.8);
-    }
-    .icon_jamesy-creator {
-      height: 90%;
-      cursor:default;
-    }
+<header>
+  <div class="logo"><img src="shapes.png">Markdown Editor</div>
+  <nav>
+    <a href="https://jamesy-tech.github.io/jamesy-creator">Home</a>
+    <a href="https://jamesy-tech.github.io/jamesy-creator/Jamesy%20Creator/index.html?page=apps">Apps</a>
+    <a href="https://jamesy-tech.github.io/jamesy-creator/Jamesy%20Creator/index.html?page=profile">Profile</a>
+    <a href="https://jamesy-tech.github.io/jamesy-creator/Jamesy%20Creator/index.html?page=settings">Settings</a>
+  </nav>
+</header>
 
-    .title_jamesy-creator {
-       color:white;
-       cursor:default;
-       margin-left:7px;
-       margin-right:25px;
-       margin-top:2px;
-    }
-
-    .button_jamesy-creator {
-     background:transparent;
-     border:none;
-     outline: none;
-     color:white;
-     padding:0px;
-     margin-left:20px;
-     cursor:pointer;
-     text-decoration: none;
-     margin-top:2px;
-     transition: 0.2s;
-    }
-    
-    .button_jamesy-creator:hover {
-        transform: scale(1.06);
-    }
-
-  </style>
-  <img src="shapes.png" class="icon_jamesy-creator">
-  <span class="title_jamesy-creator" id="title_jamesy-creator">Jamesy Creator</span>
-
-  <a class="button_jamesy-creator" href="https://jamesy-tech.github.io/jamesy-creator/">Home</a>
-    <a class="button_jamesy-creator" href="https://jamesy-tech.github.io/jamesy-creator/Jamesy%20Creator/index.html#apps">Apps</a>
-      <a class="button_jamesy-creator" href="https://jamesy-tech.github.io/jamesy-creator/Jamesy%20Creator/index.html#profile">Profile</a>
-        <a class="button_jamesy-creator" href="https://jamesy-tech.github.io/jamesy-creator/Jamesy%20Creator/index.html#account">Account</a>
-
-        <script>
-
-            const title = document.title
-
-            document.getElementById("title_jamesy-creator").textContent = title
-
-        </script>
-
+<div class="toolbar">
+  <div class="toolbar-left">
+    <input type="text" id="findInput" placeholder="Find...">
+  </div>
+  <div class="toolbar-right">
+    <button onclick="openPreview()">Run</button>
+    <button onclick="openFile()">Open</button>
+    <button onclick="saveFile()">Save</button>
+    <button onclick="downloadFile()">Download</button>
+  </div>
 </div>
 
+<div class="editor-container">
+  <textarea id="editor" spellcheck="false"></textarea>
+  <div class="divider" id="divider"></div>
+  <div class="preview" id="preview"></div>
+</div>
 
-  <div class="body">
+<div id="notify"><span id="notify-text"></span><div class="progress" id="notify-progress"></div></div>
 
-  <a id="home" href="index.html" style="position:fixed;bottom:60px;left:20px;">
-    <img class="icon" src="shapes.png" style="height:40px;cursor:pointer;">
-  </a>
+<script>
+const editor = document.getElementById('editor');
+const preview = document.getElementById('preview');
+const findInput = document.getElementById('findInput');
+const divider = document.getElementById('divider');
+const notify = document.getElementById('notify');
+const notifyProgress = document.getElementById('notify-progress');
 
-  <a id="edit" style="position:fixed;bottom:120px;left:20px;cursor:pointer;">
-    <img class="icon" src="edit.png" style="height:40px;">
-  </a>
+// Load from localStorage
+editor.value = localStorage.getItem('md_content') || '# Welcome!\n\nStart typing Markdown!';
+updatePreview();
 
- <!--    <a style="position:fixed;bottom:120px;left:20px;cursor:pointer;">
-    <img class="icon" src="folder.png" style="height:40px;">
-  </a> -->
-
-  <div id="editor-toolbar">
-    <button class="toolbar-btn" onclick="runPreview()">Run</button>
-    <button class="toolbar-btn" onclick="downloadFile()">Download</button>
-  </div>
-
-    <br> 
-    
-  <div id="output"><center><img class="loader" src="loading.gif"></center></div>
-
-    <input type="file" accept=".md" id="fileinput" style="display:none;" />
-
-    </div>
-
-  <script>
-
-      const fileInput = document.getElementById('fileinput');
-
-      
-window.addEventListener('keydown', function(e) {
-  const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-  const ctrlOrCmd = isMac ? e.metaKey : e.ctrlKey;
-
-  if (ctrlOrCmd && e.key.toLowerCase() === 'o') {
-    e.preventDefault();
-    fileInput.click();
+// Update preview
+function updatePreview() {
+  let html = marked.parse(editor.value);
+  const query = findInput.value.trim();
+  if(query){
+    const regex = new RegExp(query,'gi');
+    html = html.replace(regex,m=>`<span class="highlight">${m}</span>`);
   }
-});
+  preview.innerHTML = html;
 
-      fileInput.addEventListener('change', function() {
-  const file = fileInput.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    enterEditor(e.target.result);
-  };
-  reader.readAsText(file);
-});
-
-      
-    const output = document.getElementById('output');
-    const editBtn = document.getElementById('edit');
-    const editorToolbar = document.getElementById('editor-toolbar');
-    const homeBtn = document.getElementById('home');
-
-    let markdownContent = localStorage.getItem('md_content');
-let fromEditor = localStorage.getItem('from_editor') === "true";
-
-    function enterEditor(initial = '') {
-      output.innerHTML = `<textarea id="editor-area" spellcheck="false">${initial}</textarea>`;
-      editorToolbar.style.display = "block";
-      editBtn.style.display = "none";
-      homeBtn.style.display = "block";
-         document.getElementById("editor-area").focus();
-    }
-
-    function runPreview() {
-      const editorText = document.getElementById('editor-area').value;
-      localStorage.setItem('md_content', editorText);
-      output.innerHTML = marked.parse(editorText);
-      editorToolbar.style.display = "none";
-      editBtn.style.display = "block";
-    }
-
-    function downloadFile() {
-      const text = document.getElementById('editor-area')?.value || localStorage.getItem('md_content') || '';
-      const blob = new Blob([text], { type: 'text/markdown' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = "document.md";
-      link.click();
-    }
-
-    editBtn.addEventListener('click', () => {
-      const current = localStorage.getItem('md_content') || '';
-      enterEditor(current);
-    });
-
-    if (markdownContent) {
-  output.innerHTML = marked.parse(markdownContent);
-  editBtn.style.display = "block";
-  homeBtn.style.display = "block";
-  
-
-  if (fromEditor) {
-    localStorage.removeItem('from_editor');
+  // Highlight in editor
+  if(query){
+    const cursor = editor.selectionStart;
+    editor.value = editor.value.replace(/\x01/g,''); // reset previous marks
+    editor.value = editor.value.replace(new RegExp(query,'gi'),m=>`\x01${m}\x01`);
+    editor.selectionStart = cursor;
+    editor.selectionEnd = cursor;
   }
-
-} else {
-
-  editBtn.style.display = "block";
-  homeBtn.style.display = "block";
-  setTimeout(() => enterEditor(""), 1500);
 }
-     
-     
-      
-  </script>
+
+// Editor input
+editor.addEventListener('input',()=>{
+  localStorage.setItem('md_content',editor.value);
+  updatePreview();
+});
+
+// Search input
+findInput.addEventListener('input', updatePreview);
+
+// Ctrl shortcuts
+window.addEventListener('keydown', e=>{
+  const ctrlOrCmd = e.ctrlKey || e.metaKey;
+  if(ctrlOrCmd && e.key.toLowerCase()==='f'){e.preventDefault(); findInput.focus();}
+  if(ctrlOrCmd && e.key.toLowerCase()==='o'){e.preventDefault();openFile();}
+  if(ctrlOrCmd && e.key.toLowerCase()==='s'){e.preventDefault();saveFile();}
+});
+
+// Fullscreen preview
+function openPreview(){
+  const html = marked.parse(editor.value);
+  const newTab = window.open();
+  newTab.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Preview</title>
+      <style>
+        body{font-family:Arial,sans-serif;padding:2rem;line-height:1.6;overflow-wrap:break-word;}
+        pre{background:#f4f4f4;padding:1rem;border-radius:6px;overflow:auto;white-space:pre-wrap;word-wrap:break-word;}
+        code{background:#eee;padding:0.2em 0.4em;border-radius:4px;word-break:break-word;}
+      </style>
+    </head>
+    <body>${marked.parse(editor.value)}</body>
+    </html>
+  `);
+  newTab.document.close();
+}
+
+// Download Markdown
+function downloadFile(){
+  const blob = new Blob([editor.value],{type:'text/markdown'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download='document.md';
+  link.click();
+}
+
+// Save
+function saveFile(){
+  localStorage.setItem('md_content',editor.value);
+  showNotification('Saved!',3000);
+}
+
+// Clear editor
+function clearEditor(){
+  if(confirm('Clear editor?')){
+    editor.value='';
+    localStorage.removeItem('md_content');
+    updatePreview();
+  }
+}
+
+// Open file
+function openFile(){
+  const input=document.createElement('input');
+  input.type='file';
+  input.accept='.md,.txt';
+  input.onchange=e=>{
+    const file=e.target.files[0];
+    if(!file) return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      editor.value=ev.target.result;
+      localStorage.setItem('md_content',editor.value);
+      updatePreview();
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}
+
+// Divider drag
+let isResizing=false;
+divider.addEventListener('mousedown',()=>{isResizing=true;document.body.style.cursor='col-resize';});
+window.addEventListener('mousemove',e=>{
+  if(!isResizing) return;
+  const container=document.querySelector('.editor-container');
+  const offset=e.clientX-container.offsetLeft;
+  const totalWidth=container.offsetWidth;
+  const percent=Math.max(20,Math.min(80,(offset/totalWidth)*100));
+  editor.style.flex=`0 0 ${percent}%`;
+  preview.style.flex=`1 0 ${100-percent}%`;
+  updatePreview();
+});
+window.addEventListener('mouseup',()=>{isResizing=false;document.body.style.cursor='';});
+
+// Notification
+function showNotification(text,duration){
+  notify.style.display='block';
+  document.getElementById('notify-text').innerText=text;
+  notifyProgress.style.width='100%';
+  let start = Date.now();
+  const interval = setInterval(()=>{
+    let elapsed = Date.now()-start;
+    notifyProgress.style.width = `${100-((elapsed/duration)*100)}%`;
+    if(elapsed>=duration){
+      clearInterval(interval);
+      notify.style.display='none';
+    }
+  },20);
+}
+
+// Initial preview
+updatePreview();
+</script>
 </body>
 </html>
