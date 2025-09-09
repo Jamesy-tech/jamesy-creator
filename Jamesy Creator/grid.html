@@ -715,56 +715,58 @@
       }
     }
 
-    // Search functionality
-    document.getElementById('searchInput').addEventListener('input', function(e) {
-      const searchTerm = e.target.value.toLowerCase().trim();
-      
-      if (searchTerm === '') {
-        showPage('home');
-        return;
-      }
+// Search functionality
+document.getElementById('searchInput').addEventListener('input', function(e) {
+  const searchTerm = e.target.value.toLowerCase().trim();
+  
+  if (searchTerm === '') {
+    showPage('home');
+    return;
+  }
 
-      // Show search page
-      document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-      });
-      document.querySelectorAll('.nav-item').forEach(nav => {
-        nav.classList.remove('active');
-      });
-      document.getElementById('page-search').classList.add('active');
-      document.getElementById('navIndicator').classList.remove('active');
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+  document.querySelectorAll('.nav-item').forEach(nav => {
+    nav.classList.remove('active');
+  });
+  document.getElementById('page-search').classList.add('active');
+  document.getElementById('navIndicator').classList.remove('active');
 
-      // Get all app cards
-      const allCards = document.querySelectorAll('.app-card');
-      const searchResults = document.getElementById('searchResults');
-      const noResults = document.getElementById('noResults');
-      
-      searchResults.innerHTML = '';
-      let foundResults = false;
+  const allCards = document.querySelectorAll('.app-card');
+  const searchResults = document.getElementById('searchResults');
+  const noResults = document.getElementById('noResults');
+  
+  searchResults.innerHTML = '';
+  let foundResults = false;
 
-      allCards.forEach(card => {
-        const name = card.querySelector('.app-name')?.textContent.toLowerCase() || '';
-        const category = card.querySelector('.app-category')?.textContent.toLowerCase() || '';
-        const description = card.querySelector('.app-description')?.textContent.toLowerCase() || '';
-        const dataList = card.getAttribute('data-list')?.toLowerCase() || '';
-        
-        const combined = name + ' ' + category + ' ' + description + ' ' + dataList;
-        
-        if (combined.includes(searchTerm)) {
-          const clonedCard = card.cloneNode(true);
-          searchResults.appendChild(clonedCard);
-          foundResults = true;
-        }
-      });
+  const seen = new Set();
 
-      if (foundResults) {
-        noResults.style.display = 'none';
-        searchResults.style.display = 'grid';
-      } else {
-        noResults.style.display = 'block';
-        searchResults.style.display = 'none';
-      }
-    });
+  allCards.forEach(card => {
+    const name = card.querySelector('.app-name')?.textContent.toLowerCase() || '';
+    const category = card.querySelector('.app-category')?.textContent.toLowerCase() || '';
+    const description = card.querySelector('.app-description')?.textContent.toLowerCase() || '';
+    const dataList = card.getAttribute('data-list')?.toLowerCase() || '';
+    
+    const combined = name + ' ' + category + ' ' + description + ' ' + dataList;
+    
+    if (combined.includes(searchTerm) && !seen.has(name)) {
+      const clonedCard = card.cloneNode(true);
+      searchResults.appendChild(clonedCard);
+      seen.add(name); 
+      foundResults = true;
+    }
+  });
+
+  if (foundResults) {
+    noResults.style.display = 'none';
+    searchResults.style.display = 'grid';
+  } else {
+    noResults.style.display = 'block';
+    searchResults.style.display = 'none';
+  }
+});
+
 
     // Initialize indicator position
     document.addEventListener("DOMContentLoaded", () => {
