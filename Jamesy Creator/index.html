@@ -9,6 +9,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    
   <style>
     * {
       box-sizing: border-box;
@@ -19,9 +24,12 @@
 
     body {
       background-color: #eaf0fb;
-      display: flex;
       min-height: 100vh;
     }
+
+      .body {
+            display: flex;
+          }
 
     aside {
       width: 220px;
@@ -44,6 +52,7 @@
       font-size: 16px;
       cursor: pointer;
       display: flex;
+        font-family:"Rubik";
       align-items: center;
       gap: 10px;
       color: #1f1f1f;
@@ -312,54 +321,20 @@
   border-radius:15px;
 }
 
+      .top-nav {
+        height:50px;
+          background:white;
+          padding-top:7px;
+          margin-right:0px;
+          padding-right:0px;
+          display:flex;
+          padding-right:25px;
+          }
+
   </style>
-</head>
-<body>
 
-  <button class="mobile-menu-btn" id="menu-button" onclick="toggleMobileNav()">
-    <span class="material-symbols-outlined">menu</span>
-  </button>
-
-
-  <div class="mobile-overlay" onclick="closeMobileNav()"></div>
-
-  <aside id="nav">
-    <button onclick="showPage('home')" class="active">
-      <span class="material-symbols-outlined">home</span>
-      Home
-    </button>
-    <button onclick="showPage('apps')">
-      <span class="material-symbols-outlined">apps</span>
-      Apps
-    </button>
-    <button onclick="showPage('profile')">
-           <span class="material-symbols-outlined">person</span>
-      Profile
-    </button>
-      <button onclick="showPage('settings')">
-      <span class="material-symbols-outlined">settings</span>
-      Settings
-    </button>
-    <div class="footer">
-        <div class="logo-container">
-      <img src="shapes.png" class="logo"> <span class="title">Jamesy Creator</span>
-            </div>
-    </div>
-  </aside>
-
-  <main>
-    <div id="home" class="page active">
-
-        <div class="home-scroll">
-
-      
-
-            <div class="banner"> </div>
-      <div class="header">Welcome back, <span class="username"></span>!</div>
-    <!-- <span class="description">Where should we start?</span> -->
-
- <style>
-  #searchContainer {
+     <style>
+/*  #searchContainer {
     position: relative;
     width: 100%;
     margin-bottom: 20px;
@@ -369,7 +344,7 @@
     width: 100%;
     font-size: 18px;
     height: 50px;
-    padding: 10px 45px 10px 15px; /* extra right padding for button */
+    padding: 10px 45px 10px 15px; 
     outline: none;
     border-radius: 5px;
     font-family: "Mulish";
@@ -391,13 +366,156 @@
     color: black;
     padding: 0;
     line-height: 1;
-  }
-</style>
+  } */
 
-<div id="searchContainer">
+      #searchContainer {
+    width: 25%;
+    margin-left:auto;
+  }
+
+  #searchBar {
+    width: 100%;
+    font-size: 15px;
+    height: 35px;
+    padding: 4px;
+      padding-left:12px;
+    outline: none;
+    border-radius: 5px;
+    font-family: "Rubik";
+    border: solid whitesmoke 2px;
+    display: block;
+  }
+
+#searchBar:hover, #searchBar:focus {
+    border:solid skyblue 2px;
+    }
+         
+  #searchBtn {
+  display:none;
+  }
+
+    .logo {
+      height:35px;
+        width:35px;
+        margin-left:15px;
+        }
+
+         .title {
+             font-size:17px;
+             font-family:"Rubik";
+             }
+         
+     .top-nav-items {
+          display:flex;
+      }
+
+         .sign-in-items {
+           margin-left:10px;
+             font-family:"Rubik";
+             }
+
+         .sign-in-items button {
+             height:80%;
+             font-family:"Rubik";
+             width:100px;
+             font-size:14px;
+             border-radius:5px;
+             border:solid whitesmoke 1px;
+             cursor:pointer;
+             }
+
+         .sign-in-items button:hover {
+                border:solid pink 2px;
+             }
+         
+         .rainbow-btn {
+  background: linear-gradient(90deg,
+  #ffe0f0 0%,
+  #fff1cc 20%,
+  #e6ffe0 40%,
+  #d0e6ff 60%,
+  #e6dfff 80%,
+  #ffe0f0 100%) !important;
+  background-size: 300% 100%;
+  animation: rainbow 3s linear infinite;
+}
+
+@keyframes rainbow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+</style>
+    
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="top-nav-items">
+            <img class="logo" src="shapes.png">
+            <span class="title">Jamesy Creator</span>
+            </div>
+        <div id="searchContainer">
   <input id="searchBar" placeholder="Search for apps & tools...">
   <button id="searchBtn" aria-label="Search">arrow_forward</button>
 </div>
+
+        <div class="sign-in-items">
+            <button class="rainbow-btn" onclick="showPage('apps');">Create +</button>
+                </div>
+    </div>
+
+    <div class="body">
+  <button class="mobile-menu-btn" id="menu-button" onclick="toggleMobileNav()">
+    <span class="material-symbols-outlined">menu</span>
+  </button>
+
+
+  <div class="mobile-overlay" onclick="closeMobileNav()"></div>
+
+  <aside id="nav">
+    <button onclick="showPage('home')" class="active">
+      <span class="material-symbols-outlined">home</span>
+      Home
+    </button>
+    <button onclick="showPage('apps')">
+      <span class="material-symbols-outlined">apps</span>
+      Apps & Tools
+    </button>
+    <button onclick="showPage('profile')">
+           <span class="material-symbols-outlined">person</span>
+      Profile
+    </button>
+      <button onclick="showPage('settings')">
+      <span class="material-symbols-outlined">settings</span>
+      Settings
+    </button>
+    <div class="footer">
+        <div style="display:none;" class="logo-container">
+      <img src="shapes.png" class="logo"> <span class="title">Jamesy Creator</span>
+            </div>
+    </div>
+  </aside>
+
+  <main>
+    <div id="home" class="page active">
+
+        <div class="home-scroll">
+
+      
+
+            <div class="banner"> </div>
+            
+      <div class="header">Welcome back, <span class="username"></span>!</div>
+    <!-- <span class="description">Where should we start?</span> -->
+
+
+
+<!-- <div id="searchContainer">
+  <input id="searchBar" placeholder="Search for apps & tools...">
+  <button id="searchBtn" aria-label="Search">arrow_forward</button>
+</div> -->
 
 
 
@@ -459,9 +577,10 @@
     
 
     <div id="apps" class="page">
-      <br>
-          <div class="header" id="apps_header">Apps & tools</div>
+      
+        <div class="header" style="display:none;" id="apps_header">Apps & tools</div> 
      <iframe src="grid.html" id="apps_iframe" class="fill"></iframe>
+
     </div>
 
     
@@ -521,6 +640,7 @@
   </div>
 </div>
 
+        </div>
   <script>
 
      const username_fill = document.querySelectorAll(".username")
