@@ -146,6 +146,7 @@
       padding: 24px;
       overflow-y: auto;
       background: aliceblue;
+        margin-top:20px;
     }
 
     .page {
@@ -351,10 +352,10 @@
   </style>
 </head>
 <body>
-  <!-- Header with search -->
-  <div class="header">
-    <div class="search-container">
-      <input type="text" class="search-box" placeholder="Search for apps" id="searchInput">
+  
+  <div class="header" style="display:none;">
+    <div class="search-container" style="display:none;">
+      <input type="text" class="search-box" placeholder="Search Apps & Tools..." id="searchInput">
       <span class="search-icon material-symbols-outlined">search</span>
     </div>
   </div>
@@ -390,7 +391,7 @@
     <div class="content">
       <!-- Home page -->
       <div class="page active" id="page-home">
-        <div class="page-title">Featured Apps</div>
+        <div class="page-title">Featured</div>
         
         <div class="category-section">
           <div class="section-title">Most Popular</div>
@@ -469,7 +470,7 @@
 
       <!-- Productivity page -->
       <div class="page" id="page-productivity">
-        <div class="page-title">Productivity Apps</div>
+        <div class="page-title">Productivity</div>
         <div class="app-grid">
           
           <div class="app-card" data-list="document docs doc list table sheet" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-docs/');">
@@ -513,7 +514,7 @@
 
       <!-- Creative page -->
       <div class="page" id="page-creative">
-        <div class="page-title">Creative Apps</div>
+        <div class="page-title">Creative</div>
         <div class="app-grid">
           
           <div class="app-card" data-list="doodle draw drawing" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-drawings/');">
