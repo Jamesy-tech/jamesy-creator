@@ -5,187 +5,786 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet" />
-  <title>Jamesy Creator</title>
-  <link rel="icon" href="shapes.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet" />
+  <title>App Library</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+    
     body {
       margin: 0;
-      padding: 2rem 2rem 2rem;
-      padding-top: 52px;
-      font-family: "Lato", sans-serif;
-      background: #fff;
+      padding: 0;
+      font-family: "Rubik", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: aliceblue;
+      color: #202124;
+      line-height: 1.4;
+      overflow-x: hidden;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1rem;
+
+    /* Header with search */
+    .header {
+      background: #fff;
+      border-bottom: 1px solid #e0e4e7;
+      padding: 12px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto;
       position: relative;
     }
-    .card {
+
+    .search-box {
+      width: 100%;
+      padding: 12px 48px 12px 20px;
+      border: 1px solid #e0e4e7;
+      border-radius: 24px;
+      font-size: 16px;
+      background: aliceblue;
+      outline: none;
+      transition: all 0.3s ease;
+      font-family: "Rubik", sans-serif;
+    }
+
+    .search-box:focus {
       background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border-color: #1a73e8;
+      transform: translateY(-1px);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #5f6368;
+      font-size: 20px;
+    }
+
+    /* Main layout */
+    .main-container {
+      display: flex;
+      min-height: calc(100vh - 64px);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background: #fff;
+      border-right: 1px solid #e0e4e7;
       padding: 0;
+      flex-shrink: 0;
+      position: relative;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.08);
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 24px;
+      color: #5f6368;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
       cursor: pointer;
-      outline: 2px solid whitesmoke;
-      border-radius: 12px;
-      overflow: hidden;
-      transition: outline-color 0.15s;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+      height: 48px;
+      margin: 0;
     }
-    .card:hover {
-      outline-color: dodgerblue;
+
+    .nav-item:hover {
+      color: #1a73e8;
+      transform: translateX(4px);
     }
-    .card .color-block {
-      height: 80px;
-      background: #00b894;
-    }
-    .card .content {
-      padding: 1.5rem;
-    }
-    /* Style for no results message */
-    #noResultsMessage {
-      grid-column: 1 / -1;
-      text-align: center;
-      font-size: 1.2rem;
-      color: #555;
-      padding: 2rem 1rem;
+
+    .nav-item.active {
+      color: #1a73e8;
       font-weight: 600;
+    }
+
+    .nav-indicator {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 48px;
+      background: linear-gradient(90deg, aliceblue 0%, rgba(240, 248, 255, 0.6) 100%);
+      border-radius: 0 24px 24px 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1;
+      opacity: 0;
+      transform: translateX(-10px);
+      top: 48px;
+    }
+
+    .nav-indicator.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .nav-icon {
+      margin-right: 16px;
+      font-family: 'Material Symbols Outlined';
+      font-size: 22px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-item:hover .nav-icon {
+      transform: scale(1.1);
+    }
+
+    /* Main content */
+    .content {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+      background: aliceblue;
+    }
+
+    .page {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+      display: none;
+    }
+
+    .page.active {
+      opacity: 1;
+      transform: translateY(0);
+      display: block;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .page-title {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 32px;
+      color: #202124;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .category-section {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #3c4043;
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .app-card {
+      background: #fff;
+      border: 1px solid #e0e4e7;
+      border-radius: 16px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .app-card:hover {
+      border-color: dodgerblue;
+      box-shadow: 0 4px 12px rgba(30, 144, 255, 0.15);
+    }
+
+    .app-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .app-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      flex-shrink: 0;
+      background-size: cover;
+      background-position: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .app-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .app-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #202124;
+      margin: 0 0 6px 0;
+      line-height: 1.3;
+    }
+
+    .app-category {
+      font-size: 12px;
+      color: #5f6368;
+      margin-bottom: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .app-description {
+      font-size: 14px;
+      color: #5f6368;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .use-button {
+      background: dodgerblue;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 24px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: "Rubik", sans-serif;
+    }
+
+    .use-button:hover {
+      background: #1557b0;
+    }
+
+
+.sidebar .nav-item:first-of-type {
+  margin-top: 24px;
+}
+
+
+    .no-results {
+      text-align: center;
+      padding: 64px 24px;
+      color: #5f6368;
+    }
+
+    .no-results h3 {
+      margin: 0 0 12px 0;
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    .no-results p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        padding: 12px 0;
+        border-right: none;
+        border-bottom: 1px solid #e0e4e7;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      }
+
+      .nav-indicator {
+        display: none;
+      }
+      
+      .nav-item {
+        white-space: nowrap;
+        padding: 12px 20px;
+        min-width: auto;
+      }
+      
+      .nav-item.active {
+        background: aliceblue;
+        border-radius: 16px;
+        margin: 0 4px;
+      }
+      
+      .content {
+        padding: 16px;
+      }
+      
+      .app-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .page-title {
+        font-size: 24px;
+        margin-bottom: 24px;
+      }
     }
   </style>
 </head>
 <body>
-
-  <div class="grid" id="cardGrid">
-    
-    <div class="card" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator/Jamesy Creator/open.html');">
-      <div class="color-block nav_banner" style="background-image:url('nav_banner.png'); background-size:cover;"></div>
-      <div class="content">Open file</div>
+  <!-- Header with search -->
+  <div class="header">
+    <div class="search-container">
+      <input type="text" class="search-box" placeholder="Search for apps" id="searchInput">
+      <span class="search-icon material-symbols-outlined">search</span>
     </div>
-
-    <div class="card" data-list="document docs doc list table sheet" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-docs/');">
-      <div class="color-block"></div>
-      <div class="content">Docs</div>
-    </div>
-
-    <div class="card" data-list="doodle draw drawing" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-drawings/');">
-      <div class="color-block" style="background:#ffb347;"></div>
-      <div class="content">Drawings</div>
-    </div>
-
-    <div class="card" data-list="code script text editor coding blocks javascript html css" onclick="goTo('https://jamesy-tech.github.io/text-editor/');">
-      <div class="color-block" style="background:#1a1a1a;"></div>
-      <div class="content">Code</div>
-    </div>
-
-    <div class="card" data-list="list notes note task tasks orangered keep track" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-notes');">
-      <div class="color-block" style="background:orangered;"></div>
-      <div class="content">Notes</div>
-    </div>
-
-          <div class="card" data-list="list notes note task tasks orangered keep track" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator/Jamesy Creator/view_md.html');">
-      <div class="color-block" style="background:#d372f6;"></div>
-      <div class="content">MD Viewer &amp; Editor</div>
-    </div>
-      
-    <div class="card" onclick="goTo('account.html');">
-      <div class="color-block" style="background:#f67280;"></div>
-      <div class="content">Account &amp; Settings</div>
-    </div>
-
-    <div class="card" onclick="goTo('profile.html');">
-      <div class="color-block" style="background:#72cef6;"></div>
-      <div class="content">Profile</div>
-    </div>
-
-    <div class="card" data-list="localstorage files local storage saving files file manager" onclick="goTo('loginback.html?redirect=localstorage.html');">
-      <div class="color-block" style="background:#0984e3;"></div>
-      <div class="content">Local Storage &amp; Files</div>
-    </div>  
-
   </div>
 
-  <br id="br_divider">
-
-  <hr id="hr_divider">
-
-  <br id="br_divider2">
-
-    <div class="grid">
-  
-
-        <div class="card" onclick="goTo('https://www.roblox.com/join/1r7p0');">
-      <div class="color-block nav_banner" style="background-image:url('sky_sprint.png'); background-size:cover;"></div>
-      <div class="content">Sky Sprint [Roblox]</div>
+  <div class="main-container">
+    <!-- Sidebar navigation -->
+    <div class="sidebar">
+      <div class="nav-indicator" id="navIndicator"></div>
+      <a class="nav-item active" onclick="showPage('home')" id="nav-home">
+        
+        <span class="nav-icon material-symbols-outlined">home</span>
+        Home
+      </a>
+      <a class="nav-item" onclick="showPage('productivity')" id="nav-productivity">
+        <span class="nav-icon material-symbols-outlined">work</span>
+        Productivity
+      </a>
+      <a class="nav-item" onclick="showPage('creative')" id="nav-creative">
+        <span class="nav-icon material-symbols-outlined">palette</span>
+        Creative
+      </a>
+      <a class="nav-item" onclick="showPage('social')" id="nav-social">
+        <span class="nav-icon material-symbols-outlined">groups</span>
+        Social
+      </a>
+      <a class="nav-item" onclick="showPage('tools')" id="nav-tools">
+        <span class="nav-icon material-symbols-outlined">build</span>
+        Tools
+      </a>
     </div>
 
-     <div class="card" onclick="goTo('https://drive.google.com/drive/folders/1pnG02tlIRZdsHOZvhbLiVHfDQQDKhsbv?usp=sharing')">
-      <div class="color-block nav_banner" style="background-image:url('extensions.png'); background-size:cover;"></div>
-      <div class="content">Jamesy Creator Chrome Extension</div>
-  </div>
+    <!-- Main content -->
+    <div class="content">
+      <!-- Home page -->
+      <div class="page active" id="page-home">
+        <div class="page-title">Featured Apps</div>
+        
+        <div class="category-section">
+          <div class="section-title">Most Popular</div>
+          <div class="app-grid">
+            
+            <div class="app-card" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator/Jamesy Creator/open.html');">
+              <div class="app-header">
+                <div class="app-icon" style="background: #00b894;"></div>
+                <div class="app-info">
+                  <h3 class="app-name">Open File</h3>
+                  <div class="app-category">File Manager</div>
+                </div>
+              </div>
+              <div class="app-description">Open and manage your files with this intuitive file browser.</div>
+              <button class="use-button">Use</button>
+            </div>
 
-       <div class="card" onclick="goTo('https://jamesy-tech.github.io/MorningGlow/')">
-      <div class="color-block nav_banner" style="background-position:center;background-image:url('https://raw.githubusercontent.com/Jamesy-tech/MorningGlow/main/morningglowclub.png'); background-size:cover;"></div>
-      <div class="content">Morning Glow Club</div>
-  </div>
+            <div class="app-card" data-list="code script text editor coding blocks javascript html css" onclick="goTo('https://jamesy-tech.github.io/text-editor/');">
+              <div class="app-header">
+                <div class="app-icon" style="background: #1a1a1a;"></div>
+                <div class="app-info">
+                  <h3 class="app-name">Code Editor</h3>
+                  <div class="app-category">Development</div>
+                </div>
+              </div>
+              <div class="app-description">Write and edit code with syntax highlighting and smart features.</div>
+              <button class="use-button">Use</button>
+            </div>
 
-  <div class="card" data-list="quiz editor maker creator edit create quizzy quizzi3 jquizzi3 jquizzy" onclick="goTo('https://jamesy-tech.github.io/JQuizzi3');">
-      <div class="color-block" style="background:#6cf5dc;"></div>
-      <div class="content">JQuizzi3 Quiz Creator</div>
+            <div class="app-card" data-list="doodle draw drawing" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-drawings/');">
+              <div class="app-header">
+                <div class="app-icon" style="background: #ffb347;"></div>
+                <div class="app-info">
+                  <h3 class="app-name">Drawings</h3>
+                  <div class="app-category">Creative</div>
+                </div>
+              </div>
+              <div class="app-description">Create beautiful drawings and sketches with digital tools.</div>
+              <button class="use-button">Use</button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="category-section">
+          <div class="section-title">Recently Added</div>
+          <div class="app-grid">
+            
+            <div class="app-card" onclick="goTo('https://jamesy-tech.github.io/chat-app')">
+              <div class="app-header">
+                <div class="app-icon" style="background: #00cec9;"></div>
+                <div class="app-info">
+                  <h3 class="app-name">Chat</h3>
+                  <div class="app-category">Communication</div>
+                </div>
+              </div>
+              <div class="app-description">Connect and chat with others in real-time conversations.</div>
+              <button class="use-button">Use</button>
+            </div>
+
+            <div class="app-card" data-list="quiz editor maker creator edit create quizzy quizzi3 jquizzi3 jquizzy" onclick="goTo('https://jamesy-tech.github.io/JQuizzi3');">
+              <div class="app-header">
+                <div class="app-icon" style="background: #6cf5dc;"></div>
+                <div class="app-info">
+                  <h3 class="app-name">JQuizzi3 Quiz Creator</h3>
+                  <div class="app-category">Education</div>
+                </div>
+              </div>
+              <div class="app-description">Create interactive quizzes and educational content easily.</div>
+              <button class="use-button">Use</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Productivity page -->
+      <div class="page" id="page-productivity">
+        <div class="page-title">Productivity Apps</div>
+        <div class="app-grid">
+          
+          <div class="app-card" data-list="document docs doc list table sheet" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-docs/');">
+            <div class="app-header">
+              <div class="app-icon" style="background: #00b894;"></div>
+              <div class="app-info">
+                <h3 class="app-name">Docs</h3>
+                <div class="app-category">Documentation</div>
+              </div>
+            </div>
+            <div class="app-description">Create and edit documents with advanced formatting options.</div>
+            <button class="use-button">Use</button>
+          </div>
+
+          <div class="app-card" data-list="list notes note task tasks orangered keep track" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-notes');">
+            <div class="app-header">
+              <div class="app-icon" style="background: orangered;"></div>
+              <div class="app-info">
+                <h3 class="app-name">Notes</h3>
+                <div class="app-category">Note Taking</div>
+              </div>
+            </div>
+            <div class="app-description">Keep track of your thoughts and tasks with this simple note-taking app.</div>
+            <button class="use-button">Use</button>
+          </div>
+
+          <div class="app-card" data-list="list notes note task tasks orangered keep track" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator/Jamesy Creator/view_md.html');">
+            <div class="app-header">
+              <div class="app-icon" style="background: #d372f6;"></div>
+              <div class="app-info">
+                <h3 class="app-name">MD Viewer & Editor</h3>
+                <div class="app-category">Markdown</div>
+              </div>
+            </div>
+            <div class="app-description">View and edit Markdown files with live preview functionality.</div>
+            <button class="use-button">Use</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Creative page -->
+      <div class="page" id="page-creative">
+        <div class="page-title">Creative Apps</div>
+        <div class="app-grid">
+          
+          <div class="app-card" data-list="doodle draw drawing" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-drawings/');">
+            <div class="app-header">
+              <div class="app-icon" style="background: #ffb347;"></div>
+              <div class="app-info">
+                <h3 class="app-name">Drawings</h3>
+                <div class="app-category">Creative</div>
+              </div>
+            </div>
+            <div class="app-description">Create beautiful drawings and sketches with digital tools.</div>
+            <button class="use-button">Use</button>
+          </div>
+
+          <div class="app-card" data-list="code script text editor coding blocks javascript html css" onclick="goTo('https://jamesy-tech.github.io/text-editor/');">
+            <div class="app-header">
+              <div class="app-icon" style="background: #1a1a1a;"></div>
+              <div class="app-info">
+                <h3 class="app-name">Code Editor</h3>
+                <div class="app-category">Development</div>
+              </div>
+            </div>
+            <div class="app-description">Write and edit code with syntax highlighting and smart features.</div>
+            <button class="use-button">Use</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Social page -->
+      <div class="page" id="page-social">
+        <div class="page-title">Social & Entertainment</div>
+        <div class="app-grid">
+          
+          <div class="app-card" onclick="goTo('https://jamesy-tech.github.io/chat-app')">
+            <div class="app-header">
+              <div class="app-icon" style="background: #00cec9;"></div>
+              <div class="app-info">
+                <h3 class="app-name">Chat</h3>
+                <div class="app-category">Communication</div>
+              </div>
+            </div>
+            <div class="app-description">Connect and chat with others in real-time conversations.</div>
+            <button class="use-button">Use</button>
+          </div>
+
+          <div class="app-card" onclick="goTo('https://www.roblox.com/join/1r7p0');">
+            <div class="app-header">
+              <div class="app-icon" style="background: #fdcb6e;"></div>
+              <div class="app-info">
+                <h3 class="app-name">Sky Sprint</h3>
+                <div class="app-category">Games</div>
+              </div>
+            </div>
+            <div class="app-description">Experience thrilling aerial adventures in this Roblox game.</div>
+            <button class="use-button">Use</button>
+          </div>
+
+          <div class="app-card" onclick="goTo('https://jamesy-tech.github.io/MorningGlow/')">
+            <div class="app-header">
+              <div class="app-icon" style="background: #00cec9;"></div>
+              <div class="app-info">
+                <h3 class="app-name">Morning Glow Club</h3>
+                <div class="app-category">Community</div>
+              </div>
+            </div>
+            <div class="app-description">Join a community focused on positive morning routines and wellness.</div>
+            <button class="use-button">Use</button>
+          </div>
+
+          <div class="app-card" data-list="quiz editor maker creator edit create quizzy quizzi3 jquizzi3 jquizzy" onclick="goTo('https://jamesy-tech.github.io/JQuizzi3');">
+            <div class="app-header">
+              <div class="app-icon" style="background: #6cf5dc;"></div>
+              <div class="app-info">
+                <h3 class="app-name">JQuizzi3 Quiz Creator</h3>
+                <div class="app-category">Education</div>
+              </div>
+            </div>
+            <div class="app-description">Create interactive quizzes and educational content easily.</div>
+            <button class="use-button">Use</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Tools page -->
+      <div class="page" id="page-tools">
+        <div class="page-title">Tools & Utilities</div>
+        <div class="app-grid">
+          
+          <div class="app-card" onclick="goTo('account.html');">
+            <div class="app-header">
+              <div class="app-icon" style="background: #f67280;"></div>
+              <div class="app-info">
+                <h3 class="app-name">Account & Settings</h3>
+                <div class="app-category">System</div>
+              </div>
+            </div>
+            <div class="app-description">Manage your account settings and preferences.</div>
+            <button class="use-button">Use</button>
+          </div>
+
+          <div class="app-card" onclick="goTo('profile.html');">
+            <div class="app-header">
+              <div class="app-icon" style="background: #72cef6;"></div>
+              <div class="app-info">
+                <h3 class="app-name">Profile</h3>
+                <div class="app-category">Personal</div>
+              </div>
+            </div>
+            <div class="app-description">View and edit your personal profile information.</div>
+            <button class="use-button">Use</button>
+          </div>
+
+          <div class="app-card" data-list="localstorage files local storage saving files file manager" onclick="goTo('loginback.html?redirect=localstorage.html');">
+            <div class="app-header">
+              <div class="app-icon" style="background: #0984e3;"></div>
+              <div class="app-info">
+                <h3 class="app-name">Local Storage & Files</h3>
+                <div class="app-category">Storage</div>
+              </div>
+            </div>
+            <div class="app-description">Manage your local storage and file system efficiently.</div>
+            <button class="use-button">Use</button>
+          </div>
+
+          <div class="app-card" onclick="goTo('https://drive.google.com/drive/folders/1pnG02tlIRZdsHOZvhbLiVHfDQQDKhsbv?usp=sharing')">
+            <div class="app-header">
+              <div class="app-icon" style="background: #74b9ff;"></div>
+              <div class="app-info">
+                <h3 class="app-name">Chrome Extension</h3>
+                <div class="app-category">Browser Tool</div>
+              </div>
+            </div>
+            <div class="app-description">Enhance your browser experience with this Chrome extension.</div>
+            <button class="use-button">Use</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Search results -->
+      <div class="page" id="page-search">
+        <div class="page-title">Search Results</div>
+        <div class="app-grid" id="searchResults"></div>
+        <div class="no-results" id="noResults" style="display: none;">
+          <h3>No apps found</h3>
+          <p>Try searching with different keywords</p>
+        </div>
+      </div>
     </div>
-
-      <div class="card" onclick="goTo('https://jamesy-tech.github.io/chat-app')">
-      <div class="color-block nav_banner" style="background-position:center;background-image:url('https://raw.githubusercontent.com/Jamesy-tech/chat-app/main/public/chat_background.png'); background-size:cover;"></div>
-      <div class="content">Chat</div>
   </div>
 
-</div>
-
-  <br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br> 
   <script>
-
     function goTo(link) {
       window.top.location.href = link;
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
+    function showPage(pageId) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      
+      // Remove active from all nav items
+      document.querySelectorAll('.nav-item').forEach(nav => {
+        nav.classList.remove('active');
+      });
+      
+      // Show selected page and nav
+      document.getElementById('page-' + pageId).classList.add('active');
+      document.getElementById('nav-' + pageId).classList.add('active');
+      
+      // Move indicator
+      moveIndicator(pageId);
+    }
 
-      const params = new URLSearchParams(window.location.search);
-      const q = params.get("query");
-      if (!q) return;
+    function moveIndicator(pageId) {
+      const indicator = document.getElementById('navIndicator');
+      const activeNav = document.getElementById('nav-' + pageId);
+      
+      if (activeNav && window.innerWidth > 768) {
+        const sidebar = activeNav.closest('.sidebar');
+        const navItems = sidebar.querySelectorAll('.nav-item');
+        let topOffset = 24; // Start with the 24px top padding
+        
+        // Calculate exact position by counting nav items
+        for (let i = 0; i < navItems.length; i++) {
+          if (navItems[i].id === 'nav-' + pageId) {
+            topOffset += i * 48; // Each nav item is exactly 48px high
+            break;
+          }
+        }
+        
+        indicator.style.top = topOffset + 'px';
+        indicator.classList.add('active');
+      } else {
+        indicator.classList.remove('active');
+      }
+    }
 
-      document.getElementById("hr_divider").style.display = "none";
-      document.getElementById("br_divider").style.display = "none";
-      document.getElementById("br_divider2").style.display = "none";
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase().trim();
+      
+      if (searchTerm === '') {
+        showPage('home');
+        return;
+      }
 
-      const term = decodeURIComponent(q).toLowerCase().trim();
+      // Show search page
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      document.querySelectorAll('.nav-item').forEach(nav => {
+        nav.classList.remove('active');
+      });
+      document.getElementById('page-search').classList.add('active');
+      document.getElementById('navIndicator').classList.remove('active');
 
-      const cards = Array.from(document.querySelectorAll(".card"));
-      let visibleCount = 0;
+      // Get all app cards
+      const allCards = document.querySelectorAll('.app-card');
+      const searchResults = document.getElementById('searchResults');
+      const noResults = document.getElementById('noResults');
+      
+      searchResults.innerHTML = '';
+      let foundResults = false;
 
-      cards.forEach((card) => {
-        const text = card.querySelector(".content")?.textContent.toLowerCase() || "";
-        const data = card.getAttribute("data-list")?.toLowerCase() || "";
-        const combined = text + " " + data;
-
-        if (!combined.includes(term)) {
-          card.style.display = "none";
-        } else {
-          card.style.display = "";
-          visibleCount++;
+      allCards.forEach(card => {
+        const name = card.querySelector('.app-name')?.textContent.toLowerCase() || '';
+        const category = card.querySelector('.app-category')?.textContent.toLowerCase() || '';
+        const description = card.querySelector('.app-description')?.textContent.toLowerCase() || '';
+        const dataList = card.getAttribute('data-list')?.toLowerCase() || '';
+        
+        const combined = name + ' ' + category + ' ' + description + ' ' + dataList;
+        
+        if (combined.includes(searchTerm)) {
+          const clonedCard = card.cloneNode(true);
+          searchResults.appendChild(clonedCard);
+          foundResults = true;
         }
       });
 
-      let noResults = document.getElementById("noResultsMessage");
-      if (visibleCount === 0) {
-        if (!noResults) {
-          noResults = document.createElement("span");
-          noResults.id = "noResultsMessage";
-          noResults.textContent = "No results! Try searching something different.";
-          document.getElementById("cardGrid").appendChild(noResults);
-        }
+      if (foundResults) {
+        noResults.style.display = 'none';
+        searchResults.style.display = 'grid';
       } else {
-        if (noResults) {
-          noResults.remove();
-        }
+        noResults.style.display = 'block';
+        searchResults.style.display = 'none';
+      }
+    });
+
+    // Initialize indicator position
+    document.addEventListener("DOMContentLoaded", () => {
+      moveIndicator('home');
+      
+      // Handle URL query parameter for search
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get("query");
+      if (q) {
+        document.getElementById('searchInput').value = decodeURIComponent(q);
+        document.getElementById('searchInput').dispatchEvent(new Event('input'));
+      }
+    });
+
+    // Recalculate indicator position on resize
+    window.addEventListener('resize', () => {
+      const activeNav = document.querySelector('.nav-item.active');
+      if (activeNav) {
+        const pageId = activeNav.id.replace('nav-', '');
+        moveIndicator(pageId);
       }
     });
   </script>
