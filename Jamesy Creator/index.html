@@ -457,7 +457,7 @@
             <span class="title">Jamesy Creator</span>
             </div>
         <div id="searchContainer">
-  <input id="searchBar" placeholder="Search for apps & tools...">
+  <input id="searchBar" placeholder="Search for apps & tools..." autocomplete="off">
   <button id="searchBtn" aria-label="Search">arrow_forward</button>
 </div>
 
@@ -676,7 +676,7 @@ const searchBar = document.getElementById("searchBar");
 
   function goToSearch() {
     const query = searchBar.value.trim();
-    if (query) {
+   // if (query) {
       setTimeout(() => {
       document.getElementById("apps_iframe").src = `grid.html?query=${encodeURIComponent(query)}`;
       document.getElementById("apps_header").textContent = "Search";
@@ -684,7 +684,7 @@ const searchBar = document.getElementById("searchBar");
 
        showPage("apps");
 
-    }
+   // }
   }
 
   searchBar.focus();
