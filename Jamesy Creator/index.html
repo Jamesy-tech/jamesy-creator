@@ -665,7 +665,11 @@
       }
 
       if (id == "home") {
-          document.getElementById("searchBar").focus();
+       //   document.getElementById("searchBar").focus();
+      }
+
+      if (id == "apps") {
+    //    document.getElementById("searchBar").focus();
       }
 
     }
@@ -682,7 +686,9 @@ const searchBar = document.getElementById("searchBar");
   const searchBtn = document.getElementById("searchBtn");
 
   function goToSearch() {
+
     const query = searchBar.value.trim();
+
    // if (query) {
       setTimeout(() => {
       document.getElementById("apps_iframe").src = `grid.html?query=${encodeURIComponent(query)}`;
@@ -692,13 +698,18 @@ const searchBar = document.getElementById("searchBar");
        showPage("apps");
 
    // }
+
   }
 
   searchBar.focus();
 
-  searchBar.addEventListener("keydown", e => {
-    if (e.key === "Enter") goToSearch();
-  });
+searchBar.addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+//   searchBar.value = ""
+    goToSearch();
+  }
+});
 
   searchBtn.addEventListener("click", goToSearch);
 
