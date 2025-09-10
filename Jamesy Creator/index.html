@@ -420,31 +420,33 @@
              width:100px;
              font-size:14px;
              border-radius:5px;
-             border:solid whitesmoke 1px;
+             border:solid whitesmoke 0px;
+             color:black;
              cursor:pointer;
              }
 
          .sign-in-items button:hover {
                 border:solid pink 2px;
              }
-         
-         .rainbow-btn {
+
+      .rainbow-btn {
   background: linear-gradient(90deg,
-  #ffe0f0 0%,
-  #fff1cc 20%,
-  #e6ffe0 40%,
-  #d0e6ff 60%,
-  #e6dfff 80%,
-  #ffe0f0 100%) !important;
+    #ffe0f0 0%,
+    #fff1cc 20%,
+    #e6ffe0 40%,
+    #d0e6ff 60%,
+    #e6dfff 80%,
+    #ffe0f0 100%);
   background-size: 300% 100%;
   animation: rainbow 3s linear infinite;
 }
 
 @keyframes rainbow {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 0%; }
+  100% { background-position: 0% 0%; }
 }
+
 
 </style>
     
@@ -661,6 +663,11 @@
       if (window.innerWidth <= 800) {
         closeMobileNav();
       }
+
+      if (id == "home") {
+          document.getElementById("searchBar").focus();
+      }
+
     }
 
 
