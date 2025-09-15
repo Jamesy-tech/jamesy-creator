@@ -137,7 +137,7 @@ function createSettingCard(setting) {
 }
 
 function openGoogleSearch(query){
-    window.open('https://www.google.com/search?q='+encodeURIComponent(query), '_blank');
+    window.top.location.href = "https://www.google.com/search?q='+encodeURIComponent(query), '_blank'";
 }
 
 function displayResults(){
