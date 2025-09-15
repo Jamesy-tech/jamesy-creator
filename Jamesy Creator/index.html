@@ -686,6 +686,7 @@ const searchBar = document.getElementById("searchBar");
   const searchBtn = document.getElementById("searchBtn");
 
 function goToSearch() {
+
   const query = searchBar.value.trim();
   const isLikelyLink = /\b(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s]*)?\b/i.test(query);
 
@@ -698,6 +699,7 @@ function goToSearch() {
     }, 10);
 
     showPage("apps");
+
   }
 }
 
@@ -709,16 +711,18 @@ if (searchTerm) {
   if (searchBar) {
     searchBar.value = searchTerm;
     goToSearch();
+  } else {
+    //  searchBar.focus();
   }
+} else {
+   // searchBar.focus();
 }
 
-
-  searchBar.focus();
 
 searchBar.addEventListener("keydown", e => {
   if (e.key === "Enter") {
     e.preventDefault();
-//   searchBar.value = ""
+   searchBar.value = ""
     goToSearch();
   }
 });
