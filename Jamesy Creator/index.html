@@ -668,6 +668,8 @@
         closeMobileNav();
       }
 
+      document.getElementById("searchBar").value = "";
+
       if (id == "home") {
        //   document.getElementById("searchBar").focus();
       }
@@ -703,13 +705,13 @@ function goToSearch() {
       document.getElementById("apps_iframe").src = `grid.html?query=${encodeURIComponent(query)}`;
       document.getElementById("apps_header").textContent = "Search";
       
-  //    document.getElementById("searchBar").blur();
+       searchBar.blur();
 
     }, 10);
 
     showPage("apps");
 
-  
+ //  document.getElementById("searchBar").blur();
 
   }
 }
@@ -727,14 +729,15 @@ if (searchTerm) {
   }
 } else {
    // searchBar.focus();
-   searchBar.focus();
+  // searchBar.focus();
 }
 
+searchBar.focus();
 
 searchBar.addEventListener("keydown", e => {
   if (e.key === "Enter") {
     e.preventDefault();
-   searchBar.value = ""
+ //  searchBar.value = ""
     goToSearch();
   }
 });
