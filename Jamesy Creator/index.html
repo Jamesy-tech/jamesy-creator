@@ -701,6 +701,18 @@ function goToSearch() {
   }
 }
 
+const pageParams = new URLSearchParams(window.location.search);
+const searchTerm = urlParams.get('query');
+
+if (searchTerm) {
+  const searchBar = document.getElementById('searchBar');
+  if (searchBar) {
+    searchBar.value = searchTerm;
+    goToSearch();
+  }
+}
+
+
   searchBar.focus();
 
 searchBar.addEventListener("keydown", e => {
