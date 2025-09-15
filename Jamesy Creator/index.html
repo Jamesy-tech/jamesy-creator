@@ -453,6 +453,7 @@
 </head>
 <body>
 
+
     <div class="top-nav">
         <div class="top-nav-items">
             <img class="logo" src="shapes.png">
@@ -643,6 +644,9 @@
 </div>
 
         </div>
+
+
+
   <script>
 
      const username_fill = document.querySelectorAll(".username")
@@ -675,6 +679,7 @@
     }
 
 
+
     const urlParams = new URLSearchParams(window.location.search);
 const page = urlParams.get('page');
 
@@ -694,11 +699,17 @@ function goToSearch() {
     window.location.href = `https://${query}`;
   } else {
     setTimeout(() => {
+
       document.getElementById("apps_iframe").src = `grid.html?query=${encodeURIComponent(query)}`;
       document.getElementById("apps_header").textContent = "Search";
+      
+      document.getElementById("searchBar").blur();
+
     }, 10);
 
     showPage("apps");
+
+  
 
   }
 }
@@ -716,6 +727,7 @@ if (searchTerm) {
   }
 } else {
    // searchBar.focus();
+   searchBar.focus();
 }
 
 
@@ -845,8 +857,6 @@ if (!localStorage.getItem("userPassword")) {
       .catch(err => console.error("Service Worker registration failed:", err));
   }
 
-
-      
   </script>
 </body>
 </html>
