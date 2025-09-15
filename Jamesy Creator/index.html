@@ -685,21 +685,21 @@ if (page) {
 const searchBar = document.getElementById("searchBar");
   const searchBtn = document.getElementById("searchBtn");
 
-  function goToSearch() {
+function goToSearch() {
+  const query = searchBar.value.trim();
+  const isLikelyLink = /\b(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s]*)?\b/i.test(query);
 
-    const query = searchBar.value.trim();
-
-   // if (query) {
-      setTimeout(() => {
+  if (isLikelyLink) {
+    window.location.href = `https://${query}`;
+  } else {
+    setTimeout(() => {
       document.getElementById("apps_iframe").src = `grid.html?query=${encodeURIComponent(query)}`;
       document.getElementById("apps_header").textContent = "Search";
-      }, 10);
+    }, 10);
 
-       showPage("apps");
-
-   // }
-
+    showPage("apps");
   }
+}
 
   searchBar.focus();
 
