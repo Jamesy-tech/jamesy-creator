@@ -1,820 +1,470 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet" />
-  <title>App Library</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "Rubik", -apple-system, BlinkMacSystemFont, sans-serif;
-      background: aliceblue;
-      color: #202124;
-      line-height: 1.4;
-        padding-left:5px;
-      overflow-x: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&family=Mulish:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* Header with search */
-    .header {
-      background: #fff;
-      border-bottom: 1px solid #e0e4e7;
-      padding: 12px 24px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-    }
+        body {
+            font-family: "Rubik", sans-serif;
+            font-weight: 400;
+            background-color: #ffffff;
+            color: #000000;
+            min-height: 100vh;
+        }
 
-    .search-container {
-      max-width: 600px;
-      margin: 0 auto;
-      position: relative;
-    }
+        .content-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid #e5e5e5;
+            background-color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    .search-box {
-      width: 100%;
-      padding: 12px 48px 12px 20px;
-      border: 1px solid #e0e4e7;
-      border-radius: 24px;
-      font-size: 16px;
-      background: aliceblue;
-      outline: none;
-      transition: all 0.3s ease;
-      font-family: "Rubik", sans-serif;
-    }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #666666;
+        }
 
-    .search-box:focus {
-      background: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      border-color: #1a73e8;
-      transform: translateY(-1px);
-    }
+        .breadcrumb-link {
+            color: #0078d4;
+            text-decoration: none;
+        }
 
-    .search-icon {
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #5f6368;
-      font-size: 20px;
-    }
+        .breadcrumb-link:hover {
+            text-decoration: underline;
+        }
 
-  .main-container {
-  display: flex;
-  min-height: calc(100vh - 64px);
-  flex-direction: row-reverse;
+        .breadcrumb-separator {
+            margin: 0 8px;
+        }
+
+        .page-title {
+            font-family: "Mulish", sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 12px;
+        }
+
+        .search-container {
+            display: none;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .search-input {
+            display: none;
+            width: 100%;
+            max-width: 520px;
+            height: 40px;
+            padding: 8px 12px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .search-info {
+            font-size: 15px;
+            color: #666666;
+            margin-top: 6px;
+        }
+
+        .content-body {
+            padding: 18px 22px;
+        /*   max-width: 1200px; */
+            margin: 0 auto;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 56px 20px;
+        }
+
+        .no-results-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px;
+            opacity: 0.4;
+        }
+
+        .no-results h2 {
+            font-family: "Mulish", sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000000;
+        }
+
+        .no-results p {
+            font-size: 15px;
+            color: #666666;
+            margin-bottom: 24px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+   .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* changed 350px → 300px */
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
 
-    .sidebar {
-      width: 245px;
-      background: #fff;
-    /*  border-right: 1px solid #e0e4e7; */
-      padding: 0;
-      flex-shrink: 0;
-      margin-left:6px;
-      position: relative;
-   /*   box-shadow: 2px 0 8px rgba(0,0,0,0.08); */
-    }
+        .setting-link {
+            text-decoration: none;
+            color: inherit;
+        }
 
-    .nav-item {
-      display: flex;
-      align-items: center;
-      padding: 12px 24px;
-      color: #5f6368;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 2;
-      height: 48px;
-      margin: 0;
-    }
+        .setting-card {
+            background-color: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.16s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-    .nav-item:hover {
-      color: #1a73e8;
-      transform: translateX(4px);
-    }
+        .setting-card:hover {
+            border-color: #0078d4;
+            box-shadow: 0 6px 18px rgba(0, 120, 212, 0.08);
+            transform: translateY(-2px);
+        }
 
-    .nav-item.active {
-      color: #1a73e8;
-      font-weight: 600;
-    }
+        .setting-icon {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 8px;
+            background-color: transparent; /* Changed from #f7f9fb to transparent */
+            opacity: 0.95;
+        }
 
-    .nav-indicator {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 48px;
-      background: linear-gradient(90deg, aliceblue 0%, rgba(240, 248, 255, 0.6) 100%);
-      border-radius: 24px 0px 0px 24px;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 1;
-      opacity: 0;
-         transform: translateX(10px);
-      top: 48px;
-        margin-left:10px;
-    }
+        .setting-info {
+            flex: 1;
+        }
 
-    .nav-indicator.active {
-      opacity: 1;
-      transform: translateX(0);
-    }
+        .setting-category {
+            font-size: 11px;
+            color: #0078d4;
+            margin-bottom: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
 
-    .nav-icon {
-      margin-right: 16px;
-      font-family: 'Material Symbols Outlined';
-      font-size: 22px;
-      transition: all 0.3s ease;
-    }
+        .setting-title {
+            font-family: "Mulish", sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
 
-    .nav-item:hover .nav-icon {
-      transform: scale(1.1);
-    }
+        .setting-description {
+            font-size: 13px;
+            color: #666666;
+            line-height: 1.4;
+        }
 
-    /* Main content */
-    .content {
-      flex: 1;
-      padding: 24px;
-      overflow-y: auto;
-      background: aliceblue;
-        margin-top:20px;
-    }
+        .setting-arrow {
+            width: 16px;
+            height: 16px;
+            opacity: 0.6;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
 
-    .page {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.4s ease;
-      display: none;
-    }
+        .google-search-card {
+            background-color: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: all 0.16s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            margin-top: 8px;
+        }
 
-    .page.active {
-      opacity: 1;
-      transform: translateY(0);
-      display: block;
-      animation: fadeInUp 0.5s ease;
-    }
+        .google-search-card:hover {
+            border-color: #d1d1d1;
+            background-color: #f5f5f5;
+        }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .google-search-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-    .page-title {
-      font-size: 28px;
-      font-weight: 600;
-      margin-bottom: 32px;
-      color: #202124;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    }
+        .google-icon {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
 
-    .category-section {
-      margin-bottom: 40px;
-    }
+        .google-search-text {
+            font-size: 14px;
+            color: #666666;
+        }
 
-    .section-title {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #3c4043;
-    }
+        .external-link-icon {
+            width: 14px;
+            height: 14px;
+            opacity: 0.5;
+        }
 
-    .app-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
-    }
+        @media (max-width: 768px) {
+            .content-header,
+            .content-body {
+                padding: 16px;
+            }
 
-    .app-card {
-      background: #fff;
-      border: 1px solid #e0e4e7;
-      border-radius: 16px;
-      padding: 20px;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+            .page-title {
+                font-size: 22px;
+            }
 
-    .app-card:hover {
-      border-color: dodgerblue;
-      box-shadow: 0 4px 12px rgba(30, 144, 255, 0.15);
-    }
-
-    .app-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    .app-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 12px;
-      flex-shrink: 0;
-      background-size: cover;
-      background-position: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    .app-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .app-name {
-      font-size: 18px;
-      font-weight: 600;
-      color: #202124;
-      margin: 0 0 6px 0;
-      line-height: 1.3;
-    }
-
-    .app-category {
-      font-size: 12px;
-      color: #5f6368;
-      margin-bottom: 12px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .app-description {
-      font-size: 14px;
-      color: #5f6368;
-      line-height: 1.5;
-      margin-bottom: 16px;
-    }
-
-    .use-button {
-      background: dodgerblue;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 24px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: "Rubik", sans-serif;
-    }
-
-    .use-button:hover {
-      background: #1557b0;
-    }
-
-
-.sidebar .nav-item:first-of-type {
-  margin-top: 25px;
-}
-
-
-    .no-results {
-      text-align: center;
-      padding: 64px 24px;
-      color: #5f6368;
-    }
-
-    .no-results h3 {
-      margin: 0 0 12px 0;
-      font-size: 24px;
-      font-weight: 500;
-    }
-
-    .no-results p {
-      margin: 0;
-      font-size: 16px;
-    }
-
-    /* Mobile responsive */
-    @media (max-width: 768px) {
-      .main-container {
-        flex-direction: column;
-      }
-      
-      .sidebar {
-        width: 100%;
-        display: flex;
-        overflow-x: auto;
-        padding: 12px 0;
-        border-right: none;
-        border-bottom: 1px solid #e0e4e7;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      }
-
-      .nav-indicator {
-        display: none;
-      }
-      
-      .nav-item {
-        white-space: nowrap;
-        padding: 12px 20px;
-        min-width: auto;
-      }
-      
-      .nav-item.active {
-        background: aliceblue;
-        border-radius: 16px;
-        margin: 0 4px;
-      }
-      
-      .content {
-        padding: 16px;
-      }
-      
-      .app-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-
-      .page-title {
-        font-size: 24px;
-        margin-bottom: 24px;
-      }
-    }
-  </style>
+            .search-input {
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-  
-  <div class="header" style="display:none;">
-    <div class="search-container" style="display:none;">
-      <input type="text" class="search-box" placeholder="Search Apps & Tools..." id="searchInput">
-      <span class="search-icon material-symbols-outlined">search</span>
+    <div class="content-header">
+        <div class="breadcrumb">
+            <a href="index.html" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">&gt;</span>
+            <span>Search results</span>
+        </div>
+        <h1 class="page-title">Search results</h1>
+        <div class="search-container">
+            <input id="searchInput" class="search-input" type="search" placeholder="Search apps and settings" autocapitalize="off" autocomplete="off" />
+        </div>
+        <div style="display:none" class="search-info" id="searchInfo">Search results for ""</div>
     </div>
-  </div>
-
-  <div class="main-container">
-    <!-- Sidebar navigation -->
-    <div class="sidebar">
-      <div class="nav-indicator" id="navIndicator"></div>
-      <a class="nav-item active" onclick="showPage('home')" id="nav-home">
-        
-        <span class="nav-icon material-symbols-outlined">home</span>
-        Home
-      </a>
-      <a class="nav-item" onclick="showPage('productivity')" id="nav-productivity">
-        <span class="nav-icon material-symbols-outlined">work</span>
-        Productivity
-      </a>
-      <a class="nav-item" onclick="showPage('creative')" id="nav-creative">
-        <span class="nav-icon material-symbols-outlined">palette</span>
-        Creative
-      </a>
-      <a class="nav-item" onclick="showPage('social')" id="nav-social">
-        <span class="nav-icon material-symbols-outlined">groups</span>
-        Social
-      </a>
-      <a class="nav-item" onclick="showPage('tools')" id="nav-tools">
-        <span class="nav-icon material-symbols-outlined">build</span>
-        Tools
-      </a>
-    </div>
-
-    <!-- Main content -->
-    <div class="content">
-      <!-- Home page -->
-      <div class="page active" id="page-home">
-        <div class="page-title">Featured</div>
-        
-        <div class="category-section">
-          <div class="section-title">Most Popular</div>
-          <div class="app-grid">
-            
-            <div class="app-card" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator/Jamesy Creator/open.html');">
-              <div class="app-header">
-                <div class="app-icon" style="background: #00b894;"></div>
-                <div class="app-info">
-                  <h3 class="app-name">Open File</h3>
-                  <div class="app-category">File Manager</div>
-                </div>
-              </div>
-              <div class="app-description">Open, manage, and edit all your files with this tool, giving you quick access and full control over your work.</div>
-              <button class="use-button">Open</button>
-            </div>
-
-            <div class="app-card" data-list="code script text editor coding blocks javascript html css" onclick="goTo('https://jamesy-tech.github.io/text-editor/');">
-              <div class="app-header">
-                <div class="app-icon" style="background: #1a1a1a;"></div>
-                <div class="app-info">
-                  <h3 class="app-name">Code Editor</h3>
-                  <div class="app-category">Development</div>
-                </div>
-              </div>
-              <div class="app-description">Write and edit code with ease, creating and improving programs efficiently.</div>
-              <button class="use-button">Open</button>
-            </div>
-
-            <div class="app-card" data-list="doodle draw drawing" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-drawings/');">
-              <div class="app-header">
-                <div class="app-icon" style="background: #ffb347;"></div>
-                <div class="app-info">
-                  <h3 class="app-name">Drawings</h3>
-                  <div class="app-category">Creative</div>
-                </div>
-              </div>
-              <div class="app-description">Create beautiful drawings and art with everyday tools, bringing your ideas to life in a fun and creative way.</div>
-              <button class="use-button">Open</button>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="category-section">
-          <div class="section-title">Recently Added</div>
-          <div class="app-grid">
-            
-            <div class="app-card" onclick="goTo('https://jamesy-tech.github.io/chat-app')">
-              <div class="app-header">
-                <div class="app-icon" style="background: #00cec9;"></div>
-                <div class="app-info">
-                  <h3 class="app-name">Chat</h3>
-                  <div class="app-category">Communication</div>
-                </div>
-              </div>
-              <div class="app-description">Connect and chat with others in real-time conversations.</div>
-              <button class="use-button">Open</button>
-            </div>
-
-            <div class="app-card" data-list="quiz editor maker creator edit create quizzy quizzi3 jquizzi3 jquizzy" onclick="goTo('https://jamesy-tech.github.io/JQuizzi3');">
-              <div class="app-header">
-                <div class="app-icon" style="background: #6cf5dc;"></div>
-                <div class="app-info">
-                  <h3 class="app-name">Quiz Creator</h3>
-                  <div class="app-category">Education</div>
-                </div>
-              </div>
-              <div class="app-description">Create interactive quizzes and educational content easily.</div>
-              <button class="use-button">Open</button>
-            </div>
-
-          </div>
-        </div>
-
-          <br><br><br>
-            <br><br><br>
-
-      </div>
-
-      <!-- Productivity page -->
-      <div class="page" id="page-productivity">
-        <div class="page-title">Productivity</div>
-        <div class="app-grid">
-          
-          <div class="app-card" data-list="document docs doc list table sheet" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-docs/');">
-            <div class="app-header">
-              <div class="app-icon" style="background: #00b894;"></div>
-              <div class="app-info">
-                <h3 class="app-name">Docs</h3>
-                <div class="app-category">Documentation</div>
-              </div>
-            </div>
-            <div class="app-description">Create and edit documents easily, write and manage your work in one place.</div>
-            <button class="use-button">Open</button>
-          </div>
-
-          <div class="app-card" data-list="list notes note task tasks orangered keep track" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-notes');">
-            <div class="app-header">
-              <div class="app-icon" style="background: orangered;"></div>
-              <div class="app-info">
-                <h3 class="app-name">Notes</h3>
-                <div class="app-category">Note Taking</div>
-              </div>
-            </div>
-            <div class="app-description">Keep track of your thoughts and tasks with this simple note-taking app.</div>
-            <button class="use-button">Open</button>
-          </div>
-
-          <div class="app-card" data-list="list notes note task tasks orangered keep track" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator/Jamesy Creator/view_md.html');">
-            <div class="app-header">
-              <div class="app-icon" style="background: #d372f6;"></div>
-              <div class="app-info">
-                <h3 class="app-name">MD Viewer & Editor</h3>
-                <div class="app-category">Markdown</div>
-              </div>
-            </div>
-            <div class="app-description">View and edit Markdown files with live preview functionality.</div>
-            <button class="use-button">Open</button>
-          </div>
-
-        </div>
-
-          <br><br><br>
-            <br><br><br>
-
-      </div>
-
-      <!-- Creative page -->
-      <div class="page" id="page-creative">
-        <div class="page-title">Creative</div>
-        <div class="app-grid">
-          
-          <div class="app-card" data-list="doodle draw drawing" onclick="goTo('https://jamesy-tech.github.io/jamesy-creator-drawings/');">
-            <div class="app-header">
-              <div class="app-icon" style="background: #ffb347;"></div>
-              <div class="app-info">
-                <h3 class="app-name">Drawings</h3>
-                <div class="app-category">Creative</div>
-              </div>
-            </div>
-            <div class="app-description">Create beautiful drawings and art with everyday tools, bringing your ideas to life in a fun and creative way.</div>
-            <button class="use-button">Open</button>
-          </div>
-
-          <div class="app-card" data-list="code script text editor coding blocks javascript html css" onclick="goTo('https://jamesy-tech.github.io/text-editor/');">
-            <div class="app-header">
-              <div class="app-icon" style="background: #1a1a1a;"></div>
-              <div class="app-info">
-                <h3 class="app-name">Code Editor</h3>
-                <div class="app-category">Development</div>
-              </div>
-            </div>
-            <div class="app-description">Write and edit code with ease, creating and improving programs efficiently.</div>
-            <button class="use-button">Open</button>
-          </div>
-
-        </div>
-
-          <br><br><br>
-            <br><br><br>
-
-      </div>
-
-      <!-- Social page -->
-      <div class="page" id="page-social">
-        <div class="page-title">Social & Entertainment</div>
-        <div class="app-grid">
-          
-       <!-- <div class="app-card" onclick="goTo('https://jamesy-tech.github.io/chat-app')">
-            <div class="app-header">
-              <div class="app-icon" style="background: #00cec9;"></div>
-              <div class="app-info">
-                <h3 class="app-name">Chat</h3>
-                <div class="app-category">Communication</div>
-              </div>
-            </div>
-            <div class="app-description">Connect and chat with others in real-time conversations.</div>
-            <button class="use-button">Open</button>
-          </div>  -->
-
-        <!--  <div class="app-card" onclick="goTo('https://www.roblox.com/join/1r7p0');">
-            <div class="app-header">
-              <div class="app-icon" style="background: #fdcb6e;"></div>
-              <div class="app-info">
-                <h3 class="app-name">Sky Sprint</h3>
-                <div class="app-category">Games</div>
-              </div>
-            </div>
-            <div class="app-description">Play Sky Sprint by JamesyGames on Roblox, and get a free skin as well!</div>
-            <button class="use-button">Play</button>
-          </div> -->
-
-         <!-- <div class="app-card" onclick="goTo('https://jamesy-tech.github.io/MorningGlow/')">
-            <div class="app-header">
-              <div class="app-icon" style="background: #00cec9;"></div>
-              <div class="app-info">
-                <h3 class="app-name">Morning Glow Club</h3>
-                <div class="app-category">Community</div>
-              </div>
-            </div>
-            <div class="app-description">Join a community wearing the powerful Fitbit Inspire 3 to become unstoppable.</div>
-            <button class="use-button">Join</button>
-          </div> -->
-
-          <div class="app-card" data-list="quiz editor maker creator edit create quizzy quizzi3 jquizzi3 jquizzy" onclick="goTo('https://jamesy-tech.github.io/JQuizzi3');">
-            <div class="app-header">
-              <div class="app-icon" style="background: #6cf5dc;"></div>
-              <div class="app-info">
-                <h3 class="app-name">Quiz Creator</h3>
-                <div class="app-category">Education</div>
-              </div>
-            </div>
-            <div class="app-description">Create interactive quizzes and educational content easily.</div>
-            <button class="use-button">Open</button>
-          </div>
-
-        </div>
-
-          <br><br><br>
-            <br><br><br>
-  
-
-      </div>
-
-      <!-- Tools page -->
-      <div class="page" id="page-tools">
-        <div class="page-title">Tools & Utilities</div>
-        <div class="app-grid">
-          
-          <div class="app-card" onclick="goTo('account.html');">
-            <div class="app-header">
-              <div class="app-icon" style="background: #f67280;"></div>
-              <div class="app-info">
-                <h3 class="app-name">Account & Settings</h3>
-                <div class="app-category">System</div>
-              </div>
-            </div>
-            <div class="app-description">Manage your account settings and preferences.</div>
-            <button class="use-button">Open</button>
-          </div>
-
-          <div class="app-card" onclick="goTo('profile.html');">
-            <div class="app-header">
-              <div class="app-icon" style="background: #72cef6;"></div>
-              <div class="app-info">
-                <h3 class="app-name">Profile</h3>
-                <div class="app-category">Personal</div>
-              </div>
-            </div>
-            <div class="app-description">View and edit your personal profile information.</div>
-            <button class="use-button">Open</button>
-          </div>
-
-          <div class="app-card" data-list="localstorage files local storage saving files file manager" onclick="goTo('loginback.html?redirect=localstorage.html');">
-            <div class="app-header">
-              <div class="app-icon" style="background: #0984e3;"></div>
-              <div class="app-info">
-                <h3 class="app-name">Local Storage & Files</h3>
-                <div class="app-category">Storage</div>
-              </div>
-            </div>
-            <div class="app-description">Manage your local storage and file system efficiently.</div>
-            <button class="use-button">Open</button>
-          </div>
-
-          <div class="app-card" onclick="goTo('https://drive.google.com/drive/folders/1pnG02tlIRZdsHOZvhbLiVHfDQQDKhsbv?usp=sharing')">
-            <div class="app-header">
-              <div class="app-icon" style="background: #74b9ff;"></div>
-              <div class="app-info">
-                <h3 class="app-name">Chrome Extension</h3>
-                <div class="app-category">Browser Tool</div>
-              </div>
-            </div>
-            <div class="app-description">Add an extension to quickly create designs with a single click.</div>
-            <button class="use-button">Get</button>
-          </div>
-
-        </div>
-
-          <br><br><br>
-            <br><br><br>
-
-      </div>
-
-      <!-- Search results -->
-      <div class="page" id="page-search">
-        <div class="page-title">Search Results</div>
-        <div class="app-grid" id="searchResults"></div>
+    
+    <div class="content-body">
         <div class="no-results" id="noResults" style="display: none;">
-          <h3>No apps found</h3>
-          <p>Try searching with different keywords</p>
+            <div class="no-results-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                </svg>
+            </div>
+            <h2>No results found</h2>
+            <p>We couldn't find any settings that match your search. Try searching with different keywords or browse through the categories.</p>
         </div>
-      </div>
+        <div class="results-grid" id="resultsGrid"></div>
+        <div class="google-search-card" id="googleSearchCard" style="display: none;">
+            <div class="google-search-info">
+                <svg class="google-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                </svg>
+                <span class="google-search-text" id="googleSearchText">Search on Google</span>
+            </div>
+            <svg class="external-link-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z" />
+            </svg>
+        </div>
     </div>
-  </div>
+    <script>
+        const settingsData = [{
+            title: "Open File",
+            category: "Tools",
+            description: "",
+            link: "open.html",
+            icon: "shapes.png"
+        }, {
+            title: "Docs",
+            category: "Editors",
+            description: "",
+            link: "https://jamesy-tech.github.io/jamesy-creator-docs",
+            icon: "docs.png"
+        }, {
+            title: "Drawings",
+            category: "Creative",
+            description: "",
+            link: "https://jamesy-tech.github.io/jamesy-creator-drawings",
+            icon: "drawings.png"
+        }, {
+            title: "Code",
+            category: "Editors",
+            description: "",
+            link: "https://jamesy-tech.github.io/text-editor",
+            icon: "code.png"
+        }, {
+            title: "Notes",
+            category: "Note Taking",
+            description: "",
+            link: "https://jamesy-tech.github.io/jamesy-creator-notes",
+            icon: "notes.png"
+        }, {
+            title: "MD Viewer & Editor",
+            category: "Tools",
+            description: "",
+            link: "view_md.html",
+            icon: "markdown.png"
+        },  {
+            title: "Quiz Creator",
+            category: "Creative",
+            description: "",
+            link: "https://jamesy-tech.github.io/JQuizzi3",
+            icon: "jquizzi3.png"
+        }, {
+            title: "Chrome Extension",
+            category: "Browser Tool",
+            description: "",
+            link: "https://drive.google.com/drive/folders/1pnG02tlIRZdsHOZvhbLiVHfDQQDKhsbv",
+            icon: "open_in_new.png"
+        }, ];
 
-  <script>
-    function goTo(link) {
-      window.top.location.href = link;
-    }
-
-    function showPage(pageId) {
-      // Hide all pages
-      document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-      });
-      
-      // Remove active from all nav items
-      document.querySelectorAll('.nav-item').forEach(nav => {
-        nav.classList.remove('active');
-      });
-      
-      // Show selected page and nav
-      document.getElementById('page-' + pageId).classList.add('active');
-      document.getElementById('nav-' + pageId).classList.add('active');
-      
-      // Move indicator
-      moveIndicator(pageId);
-    }
-
-    function moveIndicator(pageId) {
-      const indicator = document.getElementById('navIndicator');
-      const activeNav = document.getElementById('nav-' + pageId);
-      
-      if (activeNav && window.innerWidth > 768) {
-        const sidebar = activeNav.closest('.sidebar');
-        const navItems = sidebar.querySelectorAll('.nav-item');
-        let topOffset = 24; // Start with the 24px top padding
-        
-        // Calculate exact position by counting nav items
-        for (let i = 0; i < navItems.length; i++) {
-          if (navItems[i].id === 'nav-' + pageId) {
-            topOffset += i * 48; // Each nav item is exactly 48px high
-            break;
-          }
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param) || '';
         }
-        
-        indicator.style.top = topOffset + 'px';
-        indicator.classList.add('active');
-      } else {
-        indicator.classList.remove('active');
-      }
-    }
 
-// Search functionality
-document.getElementById('searchInput').addEventListener('input', function(e) {
-  const searchTerm = e.target.value.toLowerCase().trim();
-  
-  if (searchTerm === '') {
-    showPage('home');
-    return;
-  }
+        function setQueryParam(query) {
+            const url = new URL(window.location.href);
+            if (query && query.trim()) url.searchParams.set('query', query.trim());
+            else url.searchParams.delete('query');
+            history.replaceState({}, '', url.toString());
+        }
 
-  document.querySelectorAll('.page').forEach(page => {
-    page.classList.remove('active');
-  });
-  document.querySelectorAll('.nav-item').forEach(nav => {
-    nav.classList.remove('active');
-  });
-  document.getElementById('page-search').classList.add('active');
-  document.getElementById('navIndicator').classList.remove('active');
+        function createSettingCard(setting) {
+            const link = document.createElement('a');
+            link.className = 'setting-link';
+            link.href = setting.link;
+            link.innerHTML = `
+                <div class="setting-card">
+                    <div class="setting-icon">
+                        <img src="${setting.icon}" alt="${setting.title} icon" style="width: 100%; height: 100%;">
+                    </div>
+                    <div class="setting-info">
+                        <div class="setting-category">${setting.category}</div>
+                        <div class="setting-title">${setting.title}</div>
+                        <div class="setting-description">${setting.description}</div>
+                    </div>
+                    <svg class="setting-arrow" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                    </svg>
+                </div>
+            `;
+            return link;
+        }
 
-  const allCards = document.querySelectorAll('.app-card');
-  const searchResults = document.getElementById('searchResults');
-  const noResults = document.getElementById('noResults');
-  
-  searchResults.innerHTML = '';
-  let foundResults = false;
+        function openGoogleSearch(query) {
+            const searchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(query + ' windows 11 settings');
+            window.open(searchUrl, '_blank');
+        }
 
-  const seen = new Set();
+        function displayResults() {
+            const query = getQueryParam('query') || '';
+            const searchInfo = document.getElementById('searchInfo');
+            const noResults = document.getElementById('noResults');
+            const resultsGrid = document.getElementById('resultsGrid');
+            const googleSearchCard = document.getElementById('googleSearchCard');
+            const googleSearchText = document.getElementById('googleSearchText');
+            const breadcrumbLast = document.querySelector('.breadcrumb span:last-child');
+            const pageTitle = document.querySelector('.page-title');
+            const searchInput = document.getElementById('searchInput');
 
-  allCards.forEach(card => {
-    const name = card.querySelector('.app-name')?.textContent.toLowerCase() || '';
-    const category = card.querySelector('.app-category')?.textContent.toLowerCase() || '';
-    const description = card.querySelector('.app-description')?.textContent.toLowerCase() || '';
-    const dataList = card.getAttribute('data-list')?.toLowerCase() || '';
-    
-    const combined = name + ' ' + category + ' ' + description + ' ' + dataList;
-    
-    if (combined.includes(searchTerm) && !seen.has(name)) {
-      const clonedCard = card.cloneNode(true);
-      searchResults.appendChild(clonedCard);
-      seen.add(name); 
-      foundResults = true;
-    }
-  });
+            searchInput.value = query;
 
-  if (foundResults) {
-    noResults.style.display = 'none';
-    searchResults.style.display = 'grid';
-  } else {
-    noResults.style.display = 'block';
-    searchResults.style.display = 'none';
-  }
-});
+            if (!query.trim()) {
+                pageTitle.textContent = 'Apps & Tools';
+                breadcrumbLast.textContent = 'Apps & Tools';
+                searchInfo.style.display = 'none';
+            } else {
+                pageTitle.textContent = 'Search results';
+                breadcrumbLast.textContent = 'Search results';
+                searchInfo.style.display = 'block';
+                searchInfo.textContent = `Search results for "${query}"`;
+            }
 
+            const filtered = (query.trim()) ? settingsData.filter(function(item) {
+                const s = query.toLowerCase();
+                return item.title.toLowerCase().includes(s) || item.category.toLowerCase().includes(s) || item.description.toLowerCase().includes(s);
+            }) : settingsData.slice();
 
-    // Initialize indicator position
-    document.addEventListener("DOMContentLoaded", () => {
-      moveIndicator('home');
-      
-      // Handle URL query parameter for search
-      const params = new URLSearchParams(window.location.search);
-      const q = params.get("query");
-      if (q) {
-        document.getElementById('searchInput').value = decodeURIComponent(q);
-        document.getElementById('searchInput').dispatchEvent(new Event('input'));
-      }
-    });
+            resultsGrid.innerHTML = '';
 
-    // Recalculate indicator position on resize
-    window.addEventListener('resize', () => {
-      const activeNav = document.querySelector('.nav-item.active');
-      if (activeNav) {
-        const pageId = activeNav.id.replace('nav-', '');
-        moveIndicator(pageId);
-      }
-    });
-  </script>
+            if (filtered.length === 0 && query.trim()) {
+                noResults.style.display = 'block';
+                resultsGrid.style.display = 'none';
+                googleSearchCard.style.display = 'flex';
+                googleSearchText.textContent = `Search "${query}" on Google`;
+            } else {
+                noResults.style.display = 'none';
+                resultsGrid.style.display = 'grid';
+                if (query.trim()) {
+                    googleSearchCard.style.display = 'flex';
+                    googleSearchText.textContent = `Search "${query}" on Google`;
+                } else {
+                    googleSearchCard.style.display = 'none';
+                }
+                filtered.forEach(function(item) {
+                    resultsGrid.appendChild(createSettingCard(item));
+                });
+            }
+            googleSearchCard.onclick = function() {
+                openGoogleSearch(query);
+            };
+        }
+
+        function debounce(fn, wait) {
+            let t;
+            return function() {
+                const args = arguments;
+                clearTimeout(t);
+                t = setTimeout(function() {
+                    fn.apply(null, args);
+                }, wait);
+            };
+        }
+
+        (function init() {
+            const searchInput = document.getElementById('searchInput');
+            const initial = getQueryParam('query') || '';
+            setQueryParam(initial);
+            displayResults();
+
+            const onInput = debounce(function(e) {
+                const v = e.target.value || '';
+                setQueryParam(v);
+                displayResults();
+            }, 180);
+
+            searchInput.addEventListener('input', onInput);
+            window.addEventListener('popstate', displayResults);
+        })();
+    </script>
 </body>
 </html>
