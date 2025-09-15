@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -277,7 +278,7 @@
                 </svg>
             </div>
             <h2>No results found</h2>
-            <p>We couldn't find any settings that match your search. Try searching with different keywords or browse through the categories.</p>
+            <p>We couldn't find any resources that match your search. Try searching with different keywords.</p>
         </div>
         <div class="results-grid" id="resultsGrid"></div>
         <div class="google-search-card" id="googleSearchCard" style="display: none;">
@@ -401,7 +402,8 @@
             if (!query.trim()) {
                 pageTitle.textContent = 'Apps & Tools';
                 breadcrumbLast.textContent = 'Apps & Tools';
-                searchInfo.style.display = 'none';
+                searchInfo.style.display = 'block';
+                searchInfo.textContent = "All resources";
             } else {
                 pageTitle.textContent = 'Search results';
                 breadcrumbLast.textContent = 'Search results';
