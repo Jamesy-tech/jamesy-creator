@@ -1,45 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apps & Tools</title>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&family=Mulish:wght@600;700&display=swap" rel="stylesheet">
-<style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:"Rubik",sans-serif; font-weight:400; background:#fff; color:#000; min-height:100vh; }
-.content-header { padding:24px 32px; border-bottom:1px solid #e5e5e5; background:#fff; position:sticky; top:0; z-index:100; }
-.breadcrumb { display:flex; align-items:center; margin-bottom:8px; font-size:14px; color:#666; }
-.breadcrumb-link { color:#0078d4; text-decoration:none; }
-.breadcrumb-link:hover { text-decoration:underline; }
-.breadcrumb-separator { margin:0 8px; }
-.page-title { font-family:"Mulish",sans-serif; font-size:28px; font-weight:700; color:#000; margin-bottom:12px; }
-.search-container { display:none; gap:12px; align-items:center; margin-bottom:8px; }
-.search-input { display:none; width:100%; max-width:520px; height:40px; padding:8px 12px; border:1px solid #e5e5e5; border-radius:8px; font-size:14px; }
-.search-info { font-size:15px; color:#666; margin-top:6px; }
-.content-body { padding:18px 22px; margin:0 auto; }
-.no-results { text-align:center; padding:56px 20px; display:none; }
-.no-results-icon { width:64px; height:64px; margin:0 auto 16px; opacity:0.4; }
-.no-results h2 { font-family:"Mulish",sans-serif; font-size:22px; font-weight:600; margin-bottom:12px; color:#000; }
-.no-results p { font-size:15px; color:#666; margin-bottom:24px; max-width:520px; margin-left:auto; margin-right:auto; line-height:1.5; }
-.results-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; margin-bottom:24px; }
-.setting-link { text-decoration:none; color:inherit; }
-.setting-card { background:#fff; border:1px solid #e5e5e5; border-radius:8px; padding:18px; cursor:pointer; transition:all 0.16s ease; display:flex; align-items:center; gap:12px; }
-.setting-card:hover { border-color:#0078d4; box-shadow:0 6px 18px rgba(0,120,212,0.08); transform:translateY(-2px); }
-.setting-icon { width:44px; height:44px; flex-shrink:0; display:grid; place-items:center; border-radius:8px; background:transparent; opacity:0.95; }
-.setting-info { flex:1; }
-.setting-category { font-size:11px; color:#0078d4; margin-bottom:6px; font-weight:600; text-transform:uppercase; letter-spacing:0.6px; }
-.setting-title { font-family:"Mulish",sans-serif; font-size:16px; font-weight:700; color:#000; margin-bottom:6px; line-height:1.2; }
-.setting-description { font-size:13px; color:#666; line-height:1.4; }
-.setting-arrow { width:16px; height:16px; opacity:0.6; margin-left:8px; flex-shrink:0; }
-.google-search-card { display:flex; align-items:center; justify-content:space-between; width:50%; margin:16px auto; background:#f9f9f9; border:1px solid #e5e5e5; border-radius:8px; padding:12px 16px; cursor:pointer; transition:all 0.16s ease; height:56px; display:none; }
-.google-search-card:hover { border-color:#d1d1d1; background:#f5f5f5; }
-.google-search-info { display:flex; align-items:center; gap:12px; }
-.google-icon { width:20px; height:20px; opacity:0.7; }
-.google-search-text { font-size:14px; color:#666; }
-.external-link-icon { width:14px; height:14px; opacity:0.5; }
-@media (max-width:768px){ .content-header, .content-body{ padding:16px; } .page-title{ font-size:22px; } .search-input{ max-width:100%; } }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apps & Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&family=Mulish:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Rubik", sans-serif;
+            font-weight: 400;
+            background: #fff;
+            color: #000;
+            min-height: 100vh;
+        }
+
+        .content-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid #e5e5e5;
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .breadcrumb-link {
+            color: #0078d4;
+            text-decoration: none;
+        }
+
+        .breadcrumb-link:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            margin: 0 8px;
+        }
+
+        .page-title {
+            font-family: "Mulish", sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 12px;
+        }
+
+        .search-container {
+            display: none;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .search-input {
+            display: none;
+            width: 100%;
+            max-width: 520px;
+            height: 40px;
+            padding: 8px 12px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .search-info {
+            font-size: 15px;
+            color: #666;
+            margin-top: 6px;
+        }
+
+        .content-body {
+            padding: 18px 22px;
+            margin: 0 auto;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 56px 20px;
+            display: none;
+        }
+
+        .no-results-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px;
+            opacity: 0.4;
+        }
+
+        .no-results h2 {
+            font-family: "Mulish", sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .no-results p {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 24px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .setting-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .setting-card {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.16s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .setting-card:hover {
+            border-color: #0078d4;
+            box-shadow: 0 6px 18px rgba(0, 120, 212, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .setting-icon {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 8px;
+            background: transparent;
+            opacity: 0.95;
+        }
+
+        .setting-info {
+            flex: 1;
+        }
+
+        .setting-category {
+            font-size: 11px;
+            color: #0078d4;
+            margin-bottom: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .setting-title {
+            font-family: "Mulish", sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+
+        .setting-description {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .setting-arrow {
+            width: 16px;
+            height: 16px;
+            opacity: 0.6;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+
+        .google-search-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 50%;
+            margin: 16px auto;
+            background: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: all 0.16s ease;
+            height: 56px;
+            display: none;
+        }
+
+        .google-search-card:hover {
+            border-color: #d1d1d1;
+            background: #f5f5f5;
+        }
+
+        .google-search-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+        .google-search-text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .external-link-icon {
+            width: 14px;
+            height: 14px;
+            opacity: 0.5;
+        }
+
+        #contextMenu {
+            position: absolute;
+            display: none;
+            background: #fff;
+            border: 2px solid whitesmoke;
+            border-radius: 6px;
+            z-index: 1000;
+            font-family: 'Rubik';
+        }
+
+        #deleteOption {
+            padding: 8px 20px;
+            cursor: pointer;
+        }
+
+        #deleteOption:hover {
+            background: #f5f5f5;
+        }
+
+        @media (max-width:768px){
+            .content-header, .content-body {
+                padding: 16px;
+            }
+            .page-title {
+                font-size: 22px;
+            }
+            .search-input {
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="content-header">
@@ -52,7 +282,7 @@ body { font-family:"Rubik",sans-serif; font-weight:400; background:#fff; color:#
     <div class="search-container">
         <input id="searchInput" class="search-input" type="search" placeholder="Search apps and settings" autocapitalize="off" autocomplete="off" />
     </div>
-    <div style="display:none" class="search-info" id="searchInfo">Search results for ""</div>
+    <div class="search-info" id="searchInfo" style="display:none">Search results for ""</div>
 </div>
 
 <div class="content-body">
@@ -67,6 +297,10 @@ body { font-family:"Rubik",sans-serif; font-weight:400; background:#fff; color:#
     </div>
 
     <div class="results-grid" id="resultsGrid"></div>
+
+    <hr id="customHr" style="margin:24px 0;">
+
+    <div class="results-grid" id="customGrid"></div>
 
     <div class="google-search-card" id="googleSearchCard">
         <div class="google-search-info">
@@ -84,137 +318,225 @@ body { font-family:"Rubik",sans-serif; font-weight:400; background:#fff; color:#
     </div>
 </div>
 
+<div id="contextMenu">
+    <div id="deleteOption">Delete</div>
+</div>
+
 <script>
-const settingsData = [
-{title:"Open File", category:"Tools", description:"", link:"open.html", icon:"shapes.png"},
-{title:"Docs", category:"Editors", description:"", link:"https://jamesy-tech.github.io/jamesy-creator-docs", icon:"docs.png"},
-{title:"Drawings", category:"Creative", description:"", link:"https://jamesy-tech.github.io/jamesy-creator-drawings", icon:"drawings.png"},
-{title:"Code", category:"Editors", description:"", link:"https://jamesy-tech.github.io/text-editor", icon:"code.png"},
-{title:"Notes", category:"Note Taking", description:"", link:"https://jamesy-tech.github.io/jamesy-creator-notes", icon:"notes.png"},
-{title:"MD Viewer & Editor", category:"Tools", description:"", link:"https://jamesy-tech.github.io/markdown-editor", icon:"markdown.png"},
-{title:"Quiz Creator", category:"Creative", description:"", link:"https://jamesy-tech.github.io/JQuizzi3", icon:"jquizzi3.png"},
-{title:"Chrome Extension", category:"Browser Tool", description:"", link:"https://drive.google.com/drive/folders/1pnG02tlIRZdsHOZvhbLiVHfDQQDKhsbv", icon:"open_in_new.png"}
-];
+    const settingsData = [
+        { title: "Open File", category: "Tools", description: "", link: "open.html", icon: "shapes.png" },
+        { title: "Docs", category: "Editors", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-docs", icon: "docs.png" },
+        { title: "Drawings", category: "Creative", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-drawings", icon: "drawings.png" },
+        { title: "Code", category: "Editors", description: "", link: "https://jamesy-tech.github.io/text-editor", icon: "code.png" },
+        { title: "Notes", category: "Note Taking", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-notes", icon: "notes.png" },
+        { title: "MD Viewer & Editor", category: "Tools", description: "", link: "https://jamesy-tech.github.io/markdown-editor", icon: "markdown.png" },
+        { title: "Quiz Creator", category: "Creative", description: "", link: "https://jamesy-tech.github.io/JQuizzi3", icon: "jquizzi3.png" },
+        { title: "Chrome Extension", category: "Browser Tool", description: "", link: "https://drive.google.com/drive/folders/1pnG02tlIRZdsHOZvhbLiVHfDQQDKhsbv", icon: "open_in_new.png" }
+    ];
 
-function getQueryParam(param){
-    return (new URLSearchParams(window.location.search)).get(param)||'';
-}
-
-function setQueryParam(query){
-    const url=new URL(window.location.href);
-    if(query && query.trim()) url.searchParams.set('query', query.trim());
-    else url.searchParams.delete('query');
-    history.replaceState({},'',url.toString());
-}
-
-function createSettingCard(setting) {
-    const link = document.createElement('a');
-    link.className = 'setting-link';
-    link.href = setting.link;
-
-    link.innerHTML = `
-        <div class="setting-card">
-            <div class="setting-icon">
-                <img src="${setting.icon}" alt="${setting.title} icon" style="width:100%; height:100%;">
-            </div>
-            <div class="setting-info">
-                <div class="setting-category">${setting.category}</div>
-                <div class="setting-title">${setting.title}</div>
-                <div class="setting-description">${setting.description}</div>
-            </div>
-            <svg class="setting-arrow" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
-            </svg>
-        </div>
-    `;
-
-    link.addEventListener('click', function(e) {
-        e.preventDefault(); // prevent normal navigation
-        window.top.location.href = setting.link; // redirect top window
-    });
-
-    return link;
-}
-
-function openGoogleSearch(query) {
-    window.top.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
-}
-
-function displayResults(){
-    const query=getQueryParam('query')||'';
-    const searchInfo=document.getElementById('searchInfo');
-    const noResults=document.getElementById('noResults');
-    const resultsGrid=document.getElementById('resultsGrid');
-    const googleSearchCard=document.getElementById('googleSearchCard');
-    const googleSearchText=document.getElementById('googleSearchText');
-    const breadcrumbLast=document.querySelector('.breadcrumb span:last-child');
-    const pageTitle=document.querySelector('.page-title');
-    const searchInput=document.getElementById('searchInput');
-
-    searchInput.value=query;
-
-    if(!query.trim()){
-        pageTitle.textContent='Apps & Tools';
-        breadcrumbLast.textContent='Apps & Tools';
-        searchInfo.style.display='block';
-        searchInfo.textContent="All resources";
-    } else {
-        pageTitle.textContent='Search results';
-        breadcrumbLast.textContent='Search results';
-        searchInfo.style.display='block';
-        searchInfo.textContent=`Search results for "${query}"`;
+    function getQueryParam(param) {
+        return (new URLSearchParams(window.location.search)).get(param) || '';
     }
 
-    const filtered=(query.trim()) ? settingsData.filter(item=>{
-        const s=query.toLowerCase();
-        return item.title.toLowerCase().includes(s) || item.category.toLowerCase().includes(s) || item.description.toLowerCase().includes(s);
-    }) : settingsData.slice();
+    function setQueryParam(query) {
+        const url = new URL(window.location.href);
+        if(query && query.trim()) url.searchParams.set('query', query.trim());
+        else url.searchParams.delete('query');
+        history.replaceState({}, '', url.toString());
+    }
 
-    resultsGrid.innerHTML='';
-
-    if(filtered.length===0 && query.trim()){
-        noResults.style.display='block';
-        resultsGrid.style.display='none';
-        googleSearchCard.style.display='flex';
-        googleSearchText.textContent=`Search "${query}" on Google`;
-    } else {
-        noResults.style.display='none';
-        resultsGrid.style.display='grid';
-        if(query.trim() && filtered.length>0){
-            googleSearchCard.style.display='none';
+    function createSettingCard(setting, allowDelete = false, index = null) {
+        const link = document.createElement('a');
+        link.className = 'setting-link';
+        link.href = setting.link;
+        link.innerHTML = `
+            <div class="setting-card">
+                <div class="setting-icon"><img src="${setting.icon}" alt="${setting.title} icon" style="width:100%;height:100%;"></div>
+                <div class="setting-info">
+                    <div class="setting-category">${setting.category}</div>
+                    <div class="setting-title">${setting.title}</div>
+                    <div class="setting-description">${setting.description}</div>
+                </div>
+                <svg class="setting-arrow" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                </svg>
+            </div>
+        `;
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.top.location.href = setting.link;
+        });
+        if (allowDelete && index !== null) {
+            link.addEventListener("contextmenu", function(e) {
+                e.preventDefault();
+                showContextMenu(e.pageX, e.pageY, index);
+            });
         }
-        filtered.forEach(item=>{
-            resultsGrid.appendChild(createSettingCard(item));
+        return link;
+    }
+
+    function createAddShortcutCard() {
+        const btn = document.createElement('div');
+        btn.className = 'setting-card';
+        btn.style.justifyContent = 'center';
+        btn.style.alignItems = 'center';
+        btn.style.cursor = 'pointer';
+        btn.innerHTML = `<div style="font-size:28px; font-weight:bold; color:black;">+</div>`;
+        btn.onclick = addCustomShortcut;
+        return btn;
+    }
+
+function displayResults() {
+    const query = getQueryParam('query') || '';
+    const searchInfo = document.getElementById('searchInfo');
+    const noResults = document.getElementById('noResults');
+    const resultsGrid = document.getElementById('resultsGrid');
+    const customGrid = document.getElementById('customGrid');
+    const customHr = document.getElementById('customHr');
+    const googleSearchCard = document.getElementById('googleSearchCard');
+    const googleSearchText = document.getElementById('googleSearchText');
+    const breadcrumbLast = document.querySelector('.breadcrumb span:last-child');
+    const pageTitle = document.querySelector('.page-title');
+    const searchInput = document.getElementById('searchInput');
+
+    searchInput.value = query;
+
+    if (!query.trim()) {
+        pageTitle.textContent = 'Apps & Tools';
+        breadcrumbLast.textContent = 'Apps & Tools';
+        searchInfo.style.display = 'block';
+        searchInfo.textContent = "All resources";
+
+        customGrid.style.display = 'grid';
+        customHr.style.display = 'block';
+        googleSearchCard.style.display = 'none';
+    } else {
+        pageTitle.textContent = 'Search results';
+        breadcrumbLast.textContent = 'Search results';
+        searchInfo.style.display = 'block';
+        searchInfo.textContent = `Search results for "${query}"`;
+
+        customGrid.style.display = 'none';
+        customHr.style.display = 'none';
+    }
+
+    const filteredSettings = query.trim() ?
+        settingsData.filter(item => {
+            const s = query.toLowerCase();
+            return item.title.toLowerCase().includes(s) ||
+                   item.category.toLowerCase().includes(s) ||
+                   item.description.toLowerCase().includes(s);
+        }) : settingsData.slice();
+
+    const customShortcuts = JSON.parse(localStorage.getItem("customShortcuts")) || [];
+    const filteredCustom = query.trim() ?
+        customShortcuts.filter(item => item.title.toLowerCase().includes(query.toLowerCase()))
+        : [];
+
+    resultsGrid.innerHTML = '';
+
+    let allResults = filteredSettings;
+    if (query.trim()) {
+        allResults = allResults.concat(filteredCustom);
+    }
+
+    if (allResults.length === 0 && query.trim()) {
+        noResults.style.display = 'block';
+        resultsGrid.style.display = 'none';
+        googleSearchCard.style.display = 'flex';
+        googleSearchText.textContent = `Search "${query}" on Google`;
+    } else {
+        noResults.style.display = 'none';
+        resultsGrid.style.display = 'grid';
+        googleSearchCard.style.display = 'none';
+
+        allResults.forEach(item => {
+            resultsGrid.appendChild(createSettingCard(item, false));
         });
     }
 
-    googleSearchCard.onclick=()=>{ openGoogleSearch(query); };
-}
-
-function debounce(fn,wait){
-    let t;
-    return function(){
-        const args=arguments;
-        clearTimeout(t);
-        t=setTimeout(()=>{ fn.apply(null,args); }, wait);
+    googleSearchCard.onclick = () => {
+        if (query.trim()) {
+            window.top.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+        }
     };
 }
 
-(function init(){
-    const searchInput=document.getElementById('searchInput');
-    const initial=getQueryParam('query')||'';
-    setQueryParam(initial);
-    displayResults();
 
-    const onInput=debounce(e=>{
-        const v=e.target.value||'';
-        setQueryParam(v);
+
+    function loadCustomShortcuts() {
+        const customGrid = document.getElementById("customGrid");
+        customGrid.innerHTML = "";
+        const custom = JSON.parse(localStorage.getItem("customShortcuts")) || [];
+        custom.forEach((item, i) => {
+            customGrid.appendChild(createSettingCard(item, true, i));
+        });
+        customGrid.appendChild(createAddShortcutCard());
+    }
+
+    function addCustomShortcut() {
+        const title = prompt("Enter shortcut name:");
+        if (!title) return;
+
+        let link = prompt("Enter shortcut link (URL):");
+        if (!link) return;
+        if (!/^https?:\/\//i.test(link)) link = "https://" + link;
+
+        let domain;
+        try { domain = new URL(link).hostname; } catch { domain = null; }
+        const icon = domain ? `https://www.google.com/s2/favicons?sz=64&domain=${domain}` : "open_in_new.png";
+
+        const shortcut = { title, category: "", description: "", link, icon };
+        const custom = JSON.parse(localStorage.getItem("customShortcuts")) || [];
+        custom.push(shortcut);
+        localStorage.setItem("customShortcuts", JSON.stringify(custom));
+        loadCustomShortcuts();
+    }
+
+    function showContextMenu(x, y, index) {
+        const menu = document.getElementById("contextMenu");
+        menu.style.left = x + "px";
+        menu.style.top = y + "px";
+        menu.style.display = "block";
+        menu.dataset.index = index;
+    }
+
+    document.addEventListener("click", () => {
+        document.getElementById("contextMenu").style.display = "none";
+    });
+
+    document.getElementById("deleteOption").onclick = function () {
+        const i = parseInt(document.getElementById("contextMenu").dataset.index);
+        const custom = JSON.parse(localStorage.getItem("customShortcuts")) || [];
+        custom.splice(i, 1);
+        localStorage.setItem("customShortcuts", JSON.stringify(custom));
+        loadCustomShortcuts();
+        document.getElementById("contextMenu").style.display = "none";
+    }
+
+    function debounce(fn, wait) {
+        let t;
+        return function () {
+            const args = arguments;
+            clearTimeout(t);
+            t = setTimeout(() => { fn.apply(null, args); }, wait);
+        }
+    }
+
+    (function init() {
+        const searchInput = document.getElementById('searchInput');
+        const initial = getQueryParam('query') || '';
+        setQueryParam(initial);
         displayResults();
-    },180);
-
-    searchInput.addEventListener('input', onInput);
-    window.addEventListener('popstate', displayResults);
-})();
+        loadCustomShortcuts();
+        const onInput = debounce(e => {
+            const v = e.target.value || '';
+            setQueryParam(v);
+            displayResults();
+        }, 180);
+        searchInput.addEventListener('input', onInput);
+        window.addEventListener('popstate', displayResults);
+    })();
 </script>
 </body>
 </html>
