@@ -482,10 +482,21 @@
       <span class="material-symbols-outlined">home</span>
       Home
     </button>
-    <button onclick="showPage('apps')">
+  <!--  <button onclick="showPage('apps')">
       <span class="material-symbols-outlined">apps</span>
       Apps & Tools
+    </button> -->
+
+      <button onclick="showPage('apps')">
+      <span class="material-symbols-outlined">add_2</span>
+      Create
     </button>
+
+      <button onclick="showPage('apps2')">
+      <span class="material-symbols-outlined">apps</span>
+      My Apps
+    </button>
+
     <button onclick="showPage('profile')">
            <span class="material-symbols-outlined">person</span>
       Profile
@@ -546,6 +557,13 @@
              
             </div> -->
 
+            <br>
+
+              <div class="cards">
+
+            <a href="#" onclick="window.location.href = 'https://jamesy-tech.github.io/markdown-editor';" class="card aliceblue">Markdown Viewer & Editor</a>
+  
+            </div>
         
 
         <br>
@@ -583,6 +601,13 @@
       
         <div class="header" style="display:none;" id="apps_header">Apps & tools</div> 
      <iframe src="grid.html" id="apps_iframe" class="fill"></iframe>
+
+    </div>
+
+     <div id="apps2" class="page">
+      
+        <div class="header" style="display:none;" id="apps_header">Apps & tools</div> 
+     <iframe src="grid.html?hide=true" id="apps_iframe" class="fill"></iframe>
 
     </div>
 
