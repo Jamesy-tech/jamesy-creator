@@ -488,7 +488,7 @@ function displayResults() {
    //     const icon = domain ? `https://www.google.com/s2/favicons?sz=64&domain=${domain}` : "open_in_new.png";
 
         const icon = "shapes.png"
-        
+
         const shortcut = { title, category: "", description: "", link, icon };
         const custom = JSON.parse(localStorage.getItem("customShortcuts")) || [];
         custom.push(shortcut);
@@ -527,10 +527,31 @@ function displayResults() {
     }
 
     (function init() {
+
         const searchInput = document.getElementById('searchInput');
         const initial = getQueryParam('query') || '';
         setQueryParam(initial);
         displayResults();
+
+     (function handleHideParam() {
+    const hide = getQueryParam('hide') === 'true';
+    const resultsGrid = document.getElementById('resultsGrid');
+    const customGrid = document.getElementById('customGrid');
+    const customHr = document.getElementById('customHr');
+    const pageTitle = document.querySelector('.page-title');
+    const breadcrumbLast = document.querySelector('.breadcrumb span:last-child');
+
+    if (hide) {
+        resultsGrid.style.display = 'none';
+        customGrid.style.display = 'grid';
+        customHr.style.display = 'none';
+        pageTitle.textContent = 'My Apps';
+        breadcrumbLast.textContent = 'My Apps';
+    }
+})();
+
+
+
         loadCustomShortcuts();
         const onInput = debounce(e => {
             const v = e.target.value || '';
