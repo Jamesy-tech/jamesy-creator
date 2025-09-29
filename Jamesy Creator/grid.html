@@ -484,8 +484,11 @@ function displayResults() {
 
         let domain;
         try { domain = new URL(link).hostname; } catch { domain = null; }
-        const icon = domain ? `https://www.google.com/s2/favicons?sz=64&domain=${domain}` : "open_in_new.png";
 
+   //     const icon = domain ? `https://www.google.com/s2/favicons?sz=64&domain=${domain}` : "open_in_new.png";
+
+        const icon = "shapes.png"
+        
         const shortcut = { title, category: "", description: "", link, icon };
         const custom = JSON.parse(localStorage.getItem("customShortcuts")) || [];
         custom.push(shortcut);
