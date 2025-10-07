@@ -112,11 +112,11 @@
         document.getElementById('feedback').value = '';
       } else {
         successMessage.style.color = 'red';
-        successMessage.textContent = 'Failed to send feedback. Try again later.';
+        successMessage.textContent = 'Failed to send feedback. Please try again later.';
       }
     } catch (error) {
       successMessage.style.color = 'red';
-      successMessage.textContent = 'An error occurred. Try again later.';
+      successMessage.textContent = 'An error occurred. Please try again later.';
       console.error(error);
     }
   }
