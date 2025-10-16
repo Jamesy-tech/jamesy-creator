@@ -219,10 +219,10 @@
       .mobile-menu-btn {
         display: none;
         position: fixed;
-        top: 0.5rem;
+        top: 0.25rem;
         left: 0.5rem;
         z-index: 1001;
-      background:aliceblue;
+      background:transparent;
         color: black;
         border: none;
         border-radius: 12px;
@@ -264,6 +264,18 @@
      @media (max-width: 1000px) {
   .mobile-menu-btn {
     display: block;
+  }
+
+  .logo {
+    margin-left:47px !important;
+  }
+
+  #searchContainer {
+    width:50% !important;
+  }
+
+  .title {
+    display:none;
   }
 
   .close-nav {
@@ -309,6 +321,12 @@
 @media (max-width: 768px) {
   .cards .card:last-child {
     grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 660px) {
+    .a2383 {
+    display:none;
   }
 }
 
