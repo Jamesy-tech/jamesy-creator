@@ -143,6 +143,10 @@
   color: #37474f;
 }
 
+.close-nav {
+  display:none;
+}
+
       .card.pink {
   background: #fce4ec;
   color: #c2185b;
@@ -259,6 +263,10 @@
      @media (max-width: 1000px) {
   .mobile-menu-btn {
     display: block;
+  }
+
+  .close-nav {
+    display:block;
   }
 
   .mobile-overlay:not(.active) {
@@ -510,6 +518,9 @@
       <span class="material-symbols-outlined">chat</span>
       Feedback
     </button>
+
+          <button onclick="toggleMobileNav()" class="close-nav">
+      <span class="material-symbols-outlined">arrow_back</span></button>
       
     <div class="footer">
         <div style="display:none;" class="logo-container">
