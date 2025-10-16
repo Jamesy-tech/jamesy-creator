@@ -486,7 +486,7 @@
 </div>
 
         <div class="sign-in-items">
-          <button class="light-btn a2383" onclick="downloadAsApp()">Download</button>
+          <button class="light-btn a2383" id="downloadAsAppBtn" onclick="downloadAsApp()">Download</button>
             <button class="rainbow-btn" onclick="showPage('apps');">Create +</button>
                 </div>
     </div>
@@ -737,6 +737,10 @@
     }
 
     window.addEventListener('load', setupInstall);
+
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+         document.getElementById("downloadAsAppBtn").style.display = "none";
+}
 
      const username_fill = document.querySelectorAll(".username")
      username_fill.forEach(e => e.textContent = localStorage.getItem("username"));
