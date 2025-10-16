@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 
+<link rel="manifest" href="manifest.json">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -456,6 +457,18 @@
 }
 
 
+.light-btn {
+  background:lightgreen;
+}
+
+.a2383 {
+    margin-right:6px;
+}
+
+.a2383:hover {
+    border-color:#40e07d !important;
+}
+
 </style>
     
 </head>
@@ -473,6 +486,7 @@
 </div>
 
         <div class="sign-in-items">
+          <button class="light-btn a2383" onclick="downloadAsApp()">Download</button>
             <button class="rainbow-btn" onclick="showPage('apps');">Create +</button>
                 </div>
     </div>
@@ -698,6 +712,31 @@
 
 
   <script>
+
+    let deferredPrompt;
+
+    function setupInstall() {
+      window.addEventListener('beforeinstallprompt', e => {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch(()=>{});
+      }
+    }
+
+    async function downloadAsApp() {
+      if (!deferredPrompt) {
+        window.location.href = "https://sites.google.com/view/jamesy-creator/download"
+    //    alert('Your device does not meet the requirements to download.');
+        return;
+      }
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+    }
+
+    window.addEventListener('load', setupInstall);
 
      const username_fill = document.querySelectorAll(".username")
      username_fill.forEach(e => e.textContent = localStorage.getItem("username"));
