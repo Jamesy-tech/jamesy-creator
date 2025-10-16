@@ -1,6 +1,6 @@
 {
   "name": "Jamesy Creator",
-  "short_name": "Creator Hub",
+  "short_name": "Jamesy Creator",
   "start_url": "./",
   "display": "standalone",
   "icons": [
