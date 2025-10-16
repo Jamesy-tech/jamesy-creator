@@ -1,0 +1,13 @@
+{
+  "name": "Jamesy Creator",
+  "short_name": "Jamesy",
+  "start_url": "./",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "shapes.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
