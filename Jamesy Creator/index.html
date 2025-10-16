@@ -738,10 +738,6 @@
 
     window.addEventListener('load', setupInstall);
 
-    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
-         document.getElementById("downloadAsAppBtn").style.display = "none";
-}
-
      const username_fill = document.querySelectorAll(".username")
      username_fill.forEach(e => e.textContent = localStorage.getItem("username"));
       
