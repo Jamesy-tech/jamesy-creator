@@ -80,7 +80,16 @@
 </div>
 
 <script>
+
+  var canSend = true
+
   async function sendFeedback() {
+
+    if (canSend == false) {
+      alert("Please wait before submitting another message.")
+      return
+    }
+
     const feedback = document.getElementById('feedback').value.trim();
     const successMessage = document.getElementById('successMessage');
 
@@ -104,6 +113,7 @@
     })(
         "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTQ0MjY0NDIzMDA2MDM3NjExNy9FWEhpYlc3X0JidjAwc2kyTUJVTEN0bTIyeXZKLUo3TDA0WDRLOWRTV0VZTHJ3ekxramp1SDBtSDFiZ0wtN0tYX2wwOA=="
     );
+
 })();
 
     const username = localStorage.getItem("username") || "Guest";
@@ -123,6 +133,7 @@
       if (response.ok) {
         successMessage.style.color = 'green';
         successMessage.textContent = 'Thank you for your feedback!';
+        canSend = false
         document.getElementById('feedback').value = '';
       } else {
         successMessage.style.color = 'red';
