@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Files</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    
+  <style>
+    :root{
+      --bg: #f8fbff;
+      --panel: rgba(30,144,255,0.06);
+      --accent: rgba(30,144,255,0.85);
+      --muted: #6b7280;
+      --white: #ffffff;
+      --glass: rgba(255,255,255,0.7);
+    }
+
+      #upload-notif {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 220px;
+  background: #1e90ff;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  font-family: verdana;
+  font-weight: 600;
+  overflow: hidden;
+  transform: translateY(50px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 9999;
+}
+
+#upload-notif.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#upload-notif .content {
+  padding: 12px 16px;
+}
+
+#upload-notif .bar {
+  height: 4px;
+  width: 0;
+  background: white;
+  transition: width 0.2s linear;
+}
+
+    *{ box-sizing:border-box; font-family: "Mulish"; }
+      
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#eef6ff);color:#0f172a}
+    .app{display:flex;height:100vh;gap:18px;padding:18px}
+
+    .sidebar{width:260px;background:var(--white);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(15,23,42,0.06);backdrop-filter:blur(6px)}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--panel),transparent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent)}
+    h1{font-size:16px;margin:0}
+    .sidebar .controls{margin-top:14px;display:flex;gap:8px}
+   
+      button,s{ transition:0.15s; appearance:none;border:0; background:#005cb2; color:white; padding:8px 10px;border-radius:8px;cursor:pointer}
+
+       button:hover, s:hover { filter: brightness(110%); }
+      
+    button.secondary{ transition:0.15s; background:transparent; color:var(--accent); border:1px solid rgba(30,144,255,0.12)}
+
+      button.secondary:hover { border:solid dodgerblue 1px; border-style: dotted; }
+
+    .main{flex:1;display:flex;flex-direction:column;gap:14px}
+    .toolbar{display:flex;align-items:center;justify-content:space-between;background:var(--white);padding:10px 14px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,42,0.04)}
+    .search{display:flex;align-items:center;gap:10px}
+    .search input{border-radius:8px;border:1px solid rgba(15,23,42,0.06);padding:8px 10px;min-width:280px}
+
+    .dropzone{flex:1;background:linear-gradient(180deg,transparent, var(--panel));border:2px dashed rgba(30,144,255,0.12);border-radius:12px;padding:16px;overflow:auto}
+    .hint{color:var(--muted);font-size:13px}
+
+    .list{width:100%;border-collapse:collapse}
+    .row{display:flex;gap:12px;align-items:center;padding:10px;border-radius:8px}
+    .row:hover{background:rgba(30,144,255,0.03)}
+    .col.name{flex:1;display:flex;align-items:center;gap:12px}
+    .icon{width:36px;height:36px;border-radius:8px;background:var(--glass);display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--accent)}
+    .meta{min-width:180px;text-align:right;font-size:13px;color:var(--muted)}
+
+    .folder-item{border-left:3px solid rgba(30,144,255,0.18);padding-left:8px;border-radius:6px}
+
+    .small{font-size:13px;color:var(--muted)}
+
+    .drag-over{outline:3px dashed rgba(30,144,255,0.16);border-radius:10px}
+
+    @media(max-width:860px){.sidebar{display:none}.app{padding:10px}.main{padding:0}}
+      
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo" id="username_icon"></div>
+        <div>
+          <h1>Files</h1>
+          <div class="small"><span id="username">Guest</span> • 0.0/10GB</div>
+        </div>
+      </div>
+
+      <div class="controls">
+          <button id="newBtn" onclick="createFile()">+</button>
+        <button id="newFolderBtn">New Folder</button>
+        <button class="secondary" id="uploadBtn">Upload</button>
+       <input type="file" id="fileInput" multiple webkitdirectory directory style="display:none">
+      </div>
+
+      <hr style="margin:12px 0;border:0;height:1px;background:linear-gradient(90deg,transparent,#e6f0ff,transparent)">
+      <div id="foldersList" style="display:flex;flex-direction:column;gap:8px"></div>
+    </aside>
+
+    <main class="main">
+      <div class="toolbar">
+        <div class="search">
+          <div class="small hint">Showing: <span id="currentPath">/</span></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+            <button id="selectBtn" title="Select files" style="font-size:18px;">✏️</button>
+<div id="multiActions" style="display:none; gap:8px;">
+  <button id="deleteSelected" class="secondary">Delete</button>
+  <button id="moveSelected" class="secondary">Move</button>
+  <button id="renameSelected" class="secondary">Rename</button>
+</div>
+
+          <div class="small hint">View: List</div>
+          <button style="display:none" id="clearBtn" class="secondary">Clear All</button>
+        </div>
+      </div>
+
+      <div id="dropzone" class="dropzone">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-weight:600">Files & folders</div>
+            <div class="hint">Drag files here to upload. Drag items into folders to move them.</div>
+          </div>
+          <div class="hint">Right-click an item for more.</div>
+        </div>
+
+        <div id="content" style="margin-top:12px;display:flex;flex-direction:column;gap:6px"></div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <template id="rowT">
+    <div class="row" draggable="true">
+      <div class="col name">
+        <div class="icon">F</div>
+        <div>
+          <div class="title" style="font-weight:600"></div>
+          <div class="small description"></div>
+        </div>
+      </div>
+      <div class="meta small">
+        <div class="date"></div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+
+      let selectMode = false;
+const selectedItems = new Set();
+const selectBtn = document.getElementById('selectBtn');
+const multiActions = document.getElementById('multiActions');
+
+async function openFileOptions(id, name, mime) {
+  const blob = await getFileBlob(id);
+  if (!blob) return alert('No file blob stored (maybe this is a folder)');
+
+  const overlay = document.createElement('div');
+  overlay.style.position = 'fixed';
+  overlay.style.left = 0;
+  overlay.style.top = 0;
+  overlay.style.right = 0;
+  overlay.style.bottom = 0;
+  overlay.style.background = 'rgba(0,0,0,0.4)';
+  overlay.style.display = 'flex';
+  overlay.style.alignItems = 'center';
+  overlay.style.justifyContent = 'center';
+  overlay.style.zIndex = '9999';
+
+  const box = document.createElement('div');
+  box.style.background = 'white';
+  box.style.borderRadius = '12px';
+  box.style.padding = '20px';
+  box.style.width = '400px';
+  box.style.maxHeight = '80vh';
+  box.style.overflowY = 'auto';
+  box.style.display = 'flex';
+  box.style.flexDirection = 'column';
+  box.style.gap = '12px';
+
+  const title = document.createElement('div');
+  title.textContent = name;
+  title.style.fontWeight = '700';
+  box.appendChild(title);
+
+  if (mime.startsWith('text/')) {
+    const openTextBtn = document.createElement('button');
+    openTextBtn.textContent = 'Open as plain text';
+    openTextBtn.addEventListener('click', async () => {
+      const text = await blob.text();
+      const newTab = window.open('', '_blank');
+      newTab.document.write('<pre>' + text.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</pre>');
+      newTab.document.title = name;
+      overlay.remove();
+    });
+    box.appendChild(openTextBtn);
+  }
+
+  if (mime === 'text/html') {
+    const previewBtn = document.createElement('button');
+    previewBtn.textContent = 'Preview HTML';
+    previewBtn.addEventListener('click', () => {
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
+      overlay.remove();
+    });
+    box.appendChild(previewBtn);
+  } else if (mime.startsWith('audio/') || mime.startsWith('video/')) {
+    const previewBtn = document.createElement('button');
+    previewBtn.textContent = 'Preview';
+    previewBtn.addEventListener('click', () => {
+      const url = URL.createObjectURL(blob);
+      const newTab = window.open('', '_blank');
+      newTab.document.body.innerHTML = `
+        <${mime.startsWith('audio/') ? 'audio' : 'video'} controls autoplay style="width:100%; max-height:80vh">
+          <source src="${url}" type="${mime}">
+          Your browser does not support the ${mime.startsWith('audio/') ? 'audio' : 'video'} element.
+        </${mime.startsWith('audio/') ? 'audio' : 'video'}>
+      `;
+      newTab.document.title = name;
+      overlay.remove();
+    });
+    box.appendChild(previewBtn);
+  }
+
+  const downloadBtn = document.createElement('button');
+  downloadBtn.textContent = 'Download';
+  downloadBtn.addEventListener('click', () => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    overlay.remove();
+  });
+  box.appendChild(downloadBtn);
+
+  const cancelBtn = document.createElement('button');
+  cancelBtn.textContent = 'Cancel';
+  cancelBtn.className = 'secondary';
+  cancelBtn.addEventListener('click', () => overlay.remove());
+  box.appendChild(cancelBtn);
+
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+}
+
+
+      
+selectBtn.addEventListener('click', () => {
+  selectMode = !selectMode;
+  selectedItems.clear();
+  multiActions.style.display = selectMode ? 'flex' : 'none';
+  render();
+});
+
+function mkRow(item){
+  const t = document.getElementById('rowT').content.cloneNode(true);
+  const row = t.querySelector('.row');
+  row.dataset.id = item.id;
+  row.querySelector('.title').textContent = item.name;
+  row.querySelector('.description').textContent = item.type==='folder'? 'Folder' : (item.mime || 'file');
+  row.querySelector('.date').textContent = new Date(item.createdAt).toLocaleString();
+
+  const icon = row.querySelector('.icon');
+  icon.textContent = selectMode ? '⬜' : (item.type==='folder'? '📁' : '📄');
+
+  row.addEventListener('click', e=>{
+    if(selectMode){
+      if(selectedItems.has(item.id)) {
+        selectedItems.delete(item.id);
+        icon.textContent = '⬜';
+      } else {
+        selectedItems.add(item.id);
+        icon.textContent = '✅';
+      }
+      e.stopPropagation();
+    }
+  });
+
+row.addEventListener('dblclick', ()=>{
+  if(selectMode) return;
+  if(item.type==='folder'){ 
+    enterFolder(item.id,item.name); 
+  } else { 
+    openFileOptions(item.id, item.name, item.mime); 
+  }
+});
+
+
+  row.addEventListener('contextmenu', e=>{
+    if(selectMode) return;
+    e.preventDefault();
+    showContextMenu(e.pageX,e.pageY,item);
+  });
+
+  row.addEventListener('dragstart', ev=>{
+    if(selectMode) ev.preventDefault();
+    else ev.dataTransfer.setData('text/plain', item.id);
+  });
+
+  return row;
+}
+
+document.getElementById('deleteSelected').addEventListener('click', async ()=>{
+  if(selectedItems.size === 0) return;
+  if(!confirm(`Delete ${selectedItems.size} items?`)) return;
+  for(const id of selectedItems) await deleteItem(id);
+  selectedItems.clear();
+  render();
+});
+
+document.getElementById('moveSelected').addEventListener('click', async ()=>{
+  if(selectedItems.size === 0) return;
+  for(const id of selectedItems){
+    const it = await getItem(id);
+    if(it) await openMoveDialog(it);
+  }
+  selectedItems.clear();
+  render();
+});
+
+document.getElementById('renameSelected').addEventListener('click', async ()=>{
+  if(selectedItems.size === 0) return;
+  for(const id of selectedItems){
+    const it = await getItem(id);
+    if(!it) continue;
+    const newName = prompt(`Rename ${it.name}`, it.name);
+    if(newName){ it.name = newName; await putItem(it); }
+  }
+  selectedItems.clear();
+  render();
+});
+
+
+  const DB_NAME = 'cloudfilemgr-v1';
+  const DB_VERSION = 1;
+  let db;
+
+  function openDB(){
+    return new Promise((res, rej)=>{
+      const req = indexedDB.open(DB_NAME, DB_VERSION);
+      req.onupgradeneeded = e => {
+        const idb = e.target.result;
+        if(!idb.objectStoreNames.contains('items')){
+          const store = idb.createObjectStore('items',{keyPath:'id'});
+          store.createIndex('parent','parentId',{unique:false});
+        }
+        if(!idb.objectStoreNames.contains('files')){
+          idb.createObjectStore('files',{keyPath:'id'});
+        }
+      }
+      req.onsuccess = e => { db = e.target.result; res(db); }
+      req.onerror = e => rej(e.target.error);
+    })
+  }
+
+  function id(){return 'id_'+Math.random().toString(36).slice(2,9)}
+
+  async function runTx(storeNames, mode, fn){
+    await openDB();
+    return new Promise((res,rej)=>{
+      const tx = db.transaction(storeNames, mode);
+      const stores = storeNames.reduce((acc,k)=>{acc[k]=tx.objectStore(k);return acc},{})
+      tx.oncomplete = ()=>res(true);
+      tx.onerror = e => rej(e.target.error);
+      fn(stores);
+    })
+  }
+
+      var username = localStorage.getItem("username") || "Guest";
+
+      document.getElementById("username").textContent = username;
+
+      const words = username.trim().split(/\s+/);
+
+let initials = words[0][0];
+
+if (words.length > 1) {
+    initials += words[1][0];
+}
+
+      async function createFile() {
+    const filename = prompt("File name:", "untitled.txt");
+    if (!filename) return;
+
+    const fileId = id();
+    const blob = new Blob([""], { type: "text/plain" });
+
+    const item = {
+        id: fileId,
+        name: filename,
+        type: 'file',
+        parentId: currentFolder === '/' ? ROOT_ID : currentFolder,
+        mime: 'text/plain',
+        createdAt: Date.now()
+    };
+
+    await putItem(item);
+    await putFileBlob(fileId, blob);
+    render();
+}
+
+      async function calculateUsedStorage() {
+    await openDB();
+    return new Promise((res, rej) => {
+        const tx = db.transaction('files');
+        const store = tx.objectStore('files');
+        const req = store.getAll();
+        req.onsuccess = () => {
+            let totalBytes = 0;
+            for (const f of req.result) {
+                if (f.blob) totalBytes += f.blob.size;
+            }
+            res(totalBytes);
+        };
+        req.onerror = e => rej(e.target.error);
+    });
+}
+
+function formatGB(bytes) {
+    return (bytes / (1024 ** 3)).toFixed(2);
+}
+
+async function updateStorageDisplay() {
+    const used = await calculateUsedStorage();
+    const usedGB = formatGB(used);
+    document.querySelector("#username").nextSibling.textContent = ` • ${usedGB}/10GB`;
+}
+
+
+
+document.getElementById("username_icon").textContent = initials.toUpperCase();
+      
+  async function putItem(item){
+    await runTx(['items'], 'readwrite', s=> s.items.put(item));
+  }
+  async function putFileBlob(id, blob){
+    await runTx(['files'],'readwrite', s=> s.files.put({id, blob}));
+  }
+  async function getItem(id){
+    return new Promise((res,rej)=>{
+      openDB().then(()=>{
+        const tx = db.transaction('items').objectStore('items').get(id);
+        tx.onsuccess = e => res(e.target.result);
+        tx.onerror = e => rej(e.target.error);
+      })
+    })
+  }
+  async function getFileBlob(id){
+    return new Promise((res,rej)=>{
+      openDB().then(()=>{
+        const tx = db.transaction('files').objectStore('files').get(id);
+        tx.onsuccess = e => res(e.target.result && e.target.result.blob);
+        tx.onerror = e => rej(e.target.error);
+      })
+    })
+  }
+
+  async function listChildren(parentId){
+    return new Promise((res,rej)=>{
+      openDB().then(()=>{
+        const tx = db.transaction('items').objectStore('items');
+        const idx = tx.index('parent');
+        const req = idx.getAll(IDBKeyRange.only(parentId));
+        req.onsuccess = e => res(e.target.result.sort((a,b)=> (a.type===b.type? a.name.localeCompare(b.name) : (a.type==='folder'?-1:1))));
+        req.onerror = e => rej(e.target.error);
+      })
+    })
+  }
+
+  async function deleteItem(id){
+    const it = await getItem(id);
+    if(!it) return;
+    if(it.type==='folder'){
+      const kids = await listChildren(id);
+      await Promise.all(kids.map(k=>deleteItem(k.id)));
+    }
+    await runTx(['items','files'],'readwrite', s=>{
+      s.items.delete(id);
+      s.files.delete(id);
+    })
+  }
+
+  let currentFolder = '/';
+  const ROOT_ID = 'root';
+
+  async function ensureRoot(){
+    const r = await getItem(ROOT_ID);
+    if(!r) await putItem({id:ROOT_ID, name:'/', type:'folder', parentId:null, createdAt:Date.now()});
+  }
+
+  const content = document.getElementById('content');
+  const foldersList = document.getElementById('foldersList');
+  const currentPathEl = document.getElementById('currentPath');
+
+ 
+
+  async function render(){
+    await ensureRoot();
+    const pid = currentFolder === '/'? ROOT_ID : currentFolder;
+    currentPathEl.textContent = currentFolder === '/'? '/' : (await getItem(pid)).name;
+    const list = await listChildren(pid);
+    content.innerHTML = '';
+    for(const it of list){
+      const row = mkRow(it);
+      if(it.type==='folder') row.classList.add('folder-item');
+      content.appendChild(row);
+    }
+    renderSidebar();
+    await updateStorageDisplay();
+  }
+
+  async function renderSidebar(){
+    foldersList.innerHTML='';
+    const roots = await listChildren(ROOT_ID);
+
+    const elRoot = document.createElement('div');
+    elRoot.className='small row'; elRoot.style.cursor='pointer';
+    elRoot.textContent = '/ (Root)';
+    elRoot.onclick = ()=>{ currentFolder='/'; render(); }
+    foldersList.appendChild(elRoot);
+    for(const f of roots){
+      if(f.type!=='folder') continue;
+      const div = document.createElement('div');
+      div.className='small row'; div.style.cursor='pointer';
+      div.textContent = f.name; div.dataset.id = f.id;
+      div.addEventListener('dragover', ev=>{ ev.preventDefault(); div.classList.add('drag-over'); });
+      div.addEventListener('dragleave', ev=>{ div.classList.remove('drag-over'); });
+      div.addEventListener('drop', async ev=>{
+        ev.preventDefault(); div.classList.remove('drag-over');
+        const itemId = ev.dataTransfer.getData('text/plain');
+        await moveItemTo(itemId,f.id);
+        render();
+      });
+      div.onclick = ()=>{ currentFolder = f.id; render(); }
+      foldersList.appendChild(div);
+    }
+  }
+
+  async function enterFolder(id,name){ currentFolder = id; render(); }
+
+  async function moveItemTo(itemId, targetFolderId){
+    const it = await getItem(itemId);
+    if(!it) return;
+    it.parentId = targetFolderId;
+    await putItem(it);
+  }
+
+  async function downloadItem(id, name){
+    const blob = await getFileBlob(id);
+    if(!blob) return alert('No file blob stored (maybe this is a folder)');
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href=url; a.download = name; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  }
+
+  function showContextMenu(x,y,item){
+    const menu = document.createElement('div');
+    menu.style.position='absolute';menu.style.left=x+'px';menu.style.top=y+'px';menu.style.background='white';menu.style.border='1px solid rgba(15,23,42,0.06)';menu.style.padding='6px';menu.style.borderRadius='8px';menu.style.boxShadow='0 8px 24px rgba(15,23,42,0.08)';
+
+    const actions = [];
+    actions.push({label:'Open', fn:()=>{ if(item.type==='file') openFileOptions(item.id,item.name,item.mime); else alert('Folders cannot be opened'); }});
+    actions.push({label:'Rename', fn:async ()=>{ const n = prompt('New name', item.name); if(n){ item.name = n; await putItem(item); render(); }}});
+    actions.push({label:'Move', fn:()=>{ openMoveDialog(item); }});
+    actions.push({label:'Delete', fn:async ()=>{ if(confirm('Delete '+item.name+'?')){ await deleteItem(item.id); render(); }}});
+
+    for(const a of actions){ const btn = document.createElement('div'); btn.textContent=a.label; btn.style.padding='6px 8px'; btn.style.cursor='pointer'; btn.addEventListener('click', ()=>{ a.fn(); menu.remove(); }); menu.appendChild(btn);}    
+    document.body.appendChild(menu);
+    const closer = ()=>{ menu.remove(); window.removeEventListener('click', closer); }
+    window.addEventListener('click', closer);
+  }
+
+  async function collectFolders(parentId, path){
+    let result = [];
+    const kids = await listChildren(parentId);
+    for(const k of kids){
+      if(k.type === 'folder'){
+        const p = (path === '/') ? '/' + k.name : path + '/' + k.name;
+        result.push({id:k.id, name:k.name, path:p});
+        const sub = await collectFolders(k.id, p);
+        result = result.concat(sub);
+      }
+    }
+    return result;
+  }
+
+  function openMoveDialog(item){
+    const overlay = document.createElement('div');
+    overlay.style.position='fixed'; overlay.style.left=0; overlay.style.top=0; overlay.style.right=0; overlay.style.bottom=0;
+    overlay.style.background='rgba(15,23,42,0.4)'; overlay.style.display='flex'; overlay.style.alignItems='center'; overlay.style.justifyContent='center';
+
+    const box = document.createElement('div');
+    box.style.width='420px'; box.style.maxHeight='70vh'; box.style.overflow='auto'; box.style.background='var(--white)'; box.style.borderRadius='12px'; box.style.padding='14px'; box.style.boxShadow='0 12px 36px rgba(15,23,42,0.12)';
+
+    const title = document.createElement('div'); title.textContent = `Move "${item.name}"`; title.style.fontWeight='700'; title.style.marginBottom='10px';
+    box.appendChild(title);
+
+    const info = document.createElement('div'); info.className='small hint'; info.textContent = 'Select destination folder:'; info.style.marginBottom='10px'; box.appendChild(info);
+
+    const listWrap = document.createElement('div'); listWrap.style.display='flex'; listWrap.style.flexDirection='column'; listWrap.style.gap='6px'; listWrap.style.marginBottom='12px';
+
+    const rootOption = document.createElement('label');
+    rootOption.style.display='block'; rootOption.style.padding='8px'; rootOption.style.border='1px solid rgba(15,23,42,0.04)'; rootOption.style.borderRadius='8px';
+    const rootRadio = document.createElement('input'); rootRadio.type='radio'; rootRadio.name='move_target'; rootRadio.value=ROOT_ID; rootRadio.checked=true; rootRadio.style.marginRight='8px';
+    rootOption.appendChild(rootRadio);
+    const rootText = document.createElement('span'); rootText.textContent = '/ (Root)'; rootOption.appendChild(rootText);
+    listWrap.appendChild(rootOption);
+
+    collectFolders(ROOT_ID, '/').then(folders=>{
+      for(const f of folders){
+        const opt = document.createElement('label');
+        opt.style.display='block'; opt.style.padding='8px'; opt.style.border='1px solid rgba(15,23,42,0.04)'; opt.style.borderRadius='8px';
+        const r = document.createElement('input'); r.type='radio'; r.name='move_target'; r.value=f.id; r.style.marginRight='8px';
+        opt.appendChild(r);
+        const txt = document.createElement('span'); txt.textContent = f.path; opt.appendChild(txt);
+        listWrap.appendChild(opt);
+      }
+    }).catch(err=>{
+      const e = document.createElement('div'); e.textContent = 'Error loading folders'; listWrap.appendChild(e);
+    });
+
+    box.appendChild(listWrap);
+
+    const buttons = document.createElement('div'); buttons.style.display='flex'; buttons.style.justifyContent='flex-end'; buttons.style.gap='8px';
+    const cancel = document.createElement('button'); cancel.textContent='Cancel'; cancel.className='secondary'; cancel.addEventListener('click', ()=>{ overlay.remove(); });
+    const moveBtn = document.createElement('button'); moveBtn.textContent='Move'; moveBtn.addEventListener('click', async ()=>{
+      const sel = box.querySelector('input[name="move_target"]:checked');
+      if(!sel) return alert('Select a destination');
+      const target = sel.value;
+      await moveItemTo(item.id, target);
+      overlay.remove();
+      render();
+    });
+    buttons.appendChild(cancel); buttons.appendChild(moveBtn);
+    box.appendChild(buttons);
+
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+  }
+  const fileInput = document.getElementById('fileInput');
+  document.getElementById('uploadBtn').addEventListener('click', ()=> fileInput.click());
+  fileInput.addEventListener('change', async e=>{
+    await handleFiles(e.target.files);
+    fileInput.value='';
+  });
+
+  const dropzone = document.getElementById('dropzone');
+  dropzone.addEventListener('dragover', e=>{ e.preventDefault(); dropzone.classList.add('drag-over'); });
+  dropzone.addEventListener('dragleave', e=>{ dropzone.classList.remove('drag-over'); });
+  dropzone.addEventListener('drop', async e=>{
+    e.preventDefault(); dropzone.classList.remove('drag-over');
+
+    const files = e.dataTransfer.files;
+
+    if(files && files.length){
+      await handleFiles(files);
+      return;
+    }
+
+    const itemId = e.dataTransfer.getData('text/plain');
+    if(itemId){
+      const it = await getItem(itemId);
+      if(!it) return;
+      openMoveDialog(it);
+    }
+
+  });dropzone.addEventListener('dragleave', e=>{ dropzone.classList.remove('drag-over'); });
+  dropzone.addEventListener('drop', async e=>{
+    e.preventDefault(); dropzone.classList.remove('drag-over');
+    const files = e.dataTransfer.files;
+    if(files && files.length) await handleFiles(files);
+  });
+
+function showUploadingNotification(totalFiles = 1) {
+  const notif = document.createElement('div');
+  notif.id = 'upload-notif';
+
+  const content = document.createElement('div');
+  content.className = 'content';
+  content.textContent = 'Uploading files...';
+  notif.appendChild(content);
+
+  const bar = document.createElement('div');
+  bar.className = 'bar';
+  notif.appendChild(bar);
+
+  document.body.appendChild(notif);
+  requestAnimationFrame(() => notif.classList.add('show'));
+
+  let progress = 0;
+
+  return {
+    update: (doneFiles) => {
+      progress = (doneFiles / totalFiles) * 100;
+      bar.style.width = progress + '%';
+    },
+    close: () => {
+      notif.classList.remove('show');
+      setTimeout(() => notif.remove(), 300);
+    }
+  };
+}
+      async function ensureFolderPath(rootId, path) {
+  const parts = path.split('/');
+  let parent = rootId;
+
+  parts.pop();
+
+  for(const part of parts){
+    if(!part) continue;
+ 
+    const children = await listChildren(parent);
+    let folder = children.find(c => c.name === part && c.type === 'folder');
+    if(!folder){
+      const fid = id();
+      folder = {id: fid, name: part, type:'folder', parentId: parent, createdAt: Date.now()};
+      await putItem(folder);
+    }
+    parent = folder.id;
+  }
+
+  return parent;
+}
+
+
+async function handleFiles(fileList){
+  const pid = currentFolder === '/' ? ROOT_ID : currentFolder;
+  const uploader = showUploadingNotification(fileList.length);
+
+  for(let i = 0; i < fileList.length; i++){
+    const f = fileList[i];
+    const fid = id();
+
+    const relativePath = f.webkitRelativePath || f.name;
+    const parentId = await ensureFolderPath(pid, relativePath);
+
+    await putItem({id: fid, name: f.name, type: 'file', parentId, createdAt: Date.now(), size: f.size, mime: f.type});
+    await putFileBlob(fid, f);
+    uploader.update(i + 1);
+  }
+
+  uploader.close();
+  render();
+}
+
+  document.getElementById('newFolderBtn').addEventListener('click', async ()=>{
+    const name = prompt('Folder name') || 'New folder';
+    const fid = id();
+    const pid = currentFolder === '/'? ROOT_ID : currentFolder;
+    await putItem({id:fid, name, type:'folder', parentId:pid, createdAt:Date.now()});
+    render();
+  });
+
+  document.getElementById('clearBtn').addEventListener('click', async ()=>{
+    if(!confirm('Delete entire database?')) return;
+    openDB().then(()=>{
+      db.close();
+      const req = indexedDB.deleteDatabase(DB_NAME);
+      req.onsuccess = ()=>{ alert('Cleared. Reloading.'); location.reload(); }
+    })
+  });
+
+  content.addEventListener('dragover', e=>{ e.preventDefault(); });
+  content.addEventListener('drop', async e=>{
+    e.preventDefault();
+    const targetRow = e.target.closest('.row');
+    if(!targetRow) return;
+    const targetId = targetRow.dataset.id;
+    const itemId = e.dataTransfer.getData('text/plain');
+    if(!itemId) return;
+    const targetItem = await getItem(targetId);
+    if(targetItem.type==='folder'){
+      await moveItemTo(itemId, targetItem.id);
+      render();
+    }
+  });
+
+  (async ()=>{
+    await openDB(); await ensureRoot();
+
+    const rootKids = await listChildren(ROOT_ID);
+    if(rootKids.length===0){
+      const s1 = id(); await putItem({id:s1,name:'Documents',type:'folder',parentId:ROOT_ID,createdAt:Date.now()});
+      const s2 = id(); await putItem({id:s2,name:'Pictures',type:'folder',parentId:ROOT_ID,createdAt:Date.now()});
+
+      const sample = new Blob(['Hello CloudFiles — this is a sample file.'],{type:'text/plain'});
+      const fid = id(); await putItem({id:fid,name:'welcome.txt',type:'file',parentId:s1,createdAt:Date.now(),size:sample.size,mime:'text/plain'});
+      await putFileBlob(fid, sample);
+    }
+    await render();
+  })();
+
+  </script>
+</body>
+</html>
