@@ -556,6 +556,11 @@
       Feedback
     </button>
 
+        <button onclick="showPage('subscribers')" id="subsBtn">
+      <span class="material-symbols-outlined">youtube_activity</span>
+      Subscribers
+    </button>
+
           <button onclick="toggleMobileNav()" class="close-nav">
       <span class="material-symbols-outlined">arrow_back</span></button>
       
@@ -685,6 +690,14 @@
 
     </div>
 
+
+      <div id="subscribers" class="page">
+      
+        <div class="header" style="display:none;" id="apps_header">Subscribers</div> 
+     <iframe src="https://socialcounts.org/youtube-live-subscriber-count/UCBeRITLbzQs2WLP1U7vJ3SQ" id="apps_iframe" class="fill"></iframe>
+
+    </div>
+
     
 
         <div id="profile" class="page">
@@ -747,6 +760,12 @@
 
 
   <script>
+
+    document.getElementById("subsBtn").style.display = "none";
+
+ if (localStorage.getItem("jamesydeveloper_subs_count") === "true") {
+    document.getElementById("subsBtn").style.display = "";
+}
 
     let deferredPrompt;
 
@@ -820,6 +839,16 @@ function goToSearch() {
 
   const query = searchBar.value.trim();
   const isLikelyLink = /\b(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s]*)?\b/i.test(query);
+
+  if (query === "jamesydeveloper_subs_count_true") {
+      alert('jamesydeveloper_subs_count = true')
+      localStorage.setItem("jamesydeveloper_subs_count", true);
+  }
+
+    if (query === "jamesydeveloper_subs_count_false") {
+      alert('jamesydeveloper_subs_count = false')
+      localStorage.setItem("jamesydeveloper_subs_count", false);
+  }
 
   if (isLikelyLink) {
     window.location.href = `https://${query}`;
