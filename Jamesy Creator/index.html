@@ -51,6 +51,7 @@
       padding: 12px 16px;
       text-align: left;
       border-radius: 8px;
+      transition:0.3s;
       font-size: 16px;
       font-weight:600;
       cursor: pointer;
@@ -72,7 +73,11 @@
     }
 
     aside button.active {
-      background-color: #005cb2;
+
+    /*    background-color:#00b7ff; */
+
+      background-color:dodgerblue; 
+     /*  background-color: #005cb2; */
       color: white;
     }
 
@@ -529,6 +534,7 @@
       <span class="material-symbols-outlined">home</span>
       Home
     </button>
+
   <!--  <button onclick="showPage('apps')">
       <span class="material-symbols-outlined">apps</span>
       Apps & Tools
@@ -549,16 +555,17 @@
       Files
     </button> -->
 
-    <button onclick="showPage('profile')">
+<!--    <button onclick="showPage('profile')">
            <span class="material-symbols-outlined">person</span>
       Profile
-    </button>
+    </button> -->
+
       <button onclick="showPage('settings')">
       <span class="material-symbols-outlined">settings</span>
       Settings
     </button>
 
-       <button onclick="showPage('feedback')">
+       <button onclick="showPage('feedback')" id="feedbackBtn">
       <span class="material-symbols-outlined">chat</span>
       Feedback
     </button>
@@ -774,6 +781,7 @@
  if (localStorage.getItem("jamesydeveloper_subs_count") === "true") {
     document.getElementById("subsBtn").style.display = "";
     document.getElementById("subs_iframe").src = "https://jamesy-tech.github.io/sub-count";
+    document.getElementById("feedbackBtn").style.display = "none";
 }
 
     let deferredPrompt;
