@@ -8,13 +8,12 @@
   <!-- Fonts & Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 
   <link rel="icon" href="images/icon.png" />
 
-  <!-- Styles -->
   <style>
     body {
       margin: 0;
@@ -22,19 +21,32 @@
       background-color: #fff;
       color: #333;
       font-family: "Nunito", sans-serif;
+      padding:15px;
+      margin-bottom:250px;
     }
 
-      * {
-          font-family:"Nunito";
-          font-weight:600;
-              }
-
-    .main {
-      padding: 20px;
+    * {
+      font-weight:600;
+      font-family:"Nunito";
     }
 
-    h1, h2 {
-      color: #333;
+    .avatars img {
+      border-radius:10px;
+      background:white;
+      cursor:pointer;
+      transition:0.3s;
+      padding:10px;
+    }
+
+    .avatars img:hover {
+      background:whitesmoke;
+      transform: scale(1.075);
+    }
+
+    .section-title {
+      font-size: 25px;
+      margin-bottom: 5px;
+      display: inline-block;
     }
 
     .edit {
@@ -82,72 +94,106 @@
       margin: 20px 0;
     }
 
-    .section-title {
-      font-size: 25px;
-      margin-bottom: 5px;
-      display: block;
+    .profile-section-title {
+        display:block;
     }
+
   </style>
 </head>
+
 <body>
-  <div class="main">
 
-  <!--  <span class="title">Account & Settings</span>
-    <hr /> -->
+<!-- ================= PROFILE / AVATARS ================= -->
 
-    <span class="section-title">Username</span>
-    <div>
-      Current username:
-      <span id="usernameDisplay" style="color: darkgreen;">Guest</span>
-      <span class="edit" onclick="changeUsername()">[Edit]</span>
-    </div>
+<hr>
 
-    <div class="changeusername" id="usernamechanger">
-      <input type="text" id="usernameInput" placeholder="Username" />
-      <button class="button9" onclick="saveUsername()">Save</button>
-    </div>
+<h2 class="section-title profile-section-title">Profile</h2>
 
-    <hr />
+<div class="avatars">
+  <img src="avatars/guest.png" alt="Guest" width="100" style="cursor:pointer; margin:5px;" onclick="chooseAvatar(this.src)" />
+  <img src="shapes.png" alt="Shapes" width="100" style="cursor:pointer; margin:5px;" onclick="chooseAvatar(this.src)" />
+  <img src="avatars/code.png" alt="Blocks" width="100" style="cursor:pointer; margin:5px;" onclick="chooseAvatar(this.src)" />
 
-    <span class="section-title">Password</span>
-    <span class="edit" onclick="changePassword()">[Edit]</span>
+  <!-- Custom upload -->
+  <img src="upload.png" alt="Upload" width="100" style="cursor:pointer; margin:5px;" onclick="document.getElementById('customAvatarInput').click()" />
+</div>
 
-    <hr />
+<input type="file" id="customAvatarInput" accept="image/*" style="display:none" onchange="uploadCustomAvatar(event)">
 
- <!--   <button class="button9 right" onclick="window.open('setwallpaper.html')">Change Wallpaper</button> -->
-  </div>
+<hr>
 
-   <!-- <img src="back.png" style="position: fixed; bottom: 20px; left: 20px; width: 30px; height: 30px; cursor: pointer;" onclick="quit()"> -->
+<!-- ================= ACCOUNT SETTINGS ================= -->
 
-  <script>
+<span class="section-title">Username</span>
+<div>
+  Current username:
+  <span id="usernameDisplay" style="color: darkgreen;">Guest</span>
+  <span class="edit" onclick="changeUsername()">[Edit]</span>
+</div>
 
-      function quit() {
+<div class="changeusername" id="usernamechanger">
+  <input type="text" id="usernameInput" placeholder="Username" />
+  <button class="button9" onclick="saveUsername()">Save</button>
+</div>
+
+<hr />
+
+<span class="section-title">Password</span>
+<span class="edit" onclick="changePassword()">[Edit]</span>
+
+<hr />
+
+<img src="back.png" style="position: fixed; bottom: 20px; left: 20px; width: 30px; height: 30px; cursor: pointer;" onclick="quit()">
+
+<!-- ================= SCRIPTS ================= -->
+
+<script>
+  function quit() {
     window.close()
     setTimeout(() => {
-       window.location.href = "https://jamesy-tech.github.io/jamesy-creator/";
+      window.location.href = "https://jamesy-tech.github.io/jamesy-creator/";
     }, 100);
   }
 
+  function chooseAvatar(path) {
+    localStorage.setItem('avatar', path);
+    alert('Avatar saved!');
+  }
+
+  function uploadCustomAvatar(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      localStorage.setItem('avatar', e.target.result);
+      alert('Custom avatar saved!');
+    };
+    reader.readAsDataURL(file);
+  }
+
   let account_username = localStorage.getItem("username");
-  document.getElementById("usernameDisplay").textContent = account_username;
+  if (account_username) {
+    document.getElementById("usernameDisplay").textContent = account_username;
+  }
 
-    function changeUsername() {
-      document.getElementById('usernamechanger').style.display = 'block';
+  function changeUsername() {
+    document.getElementById('usernamechanger').style.display = 'block';
+  }
+
+  function saveUsername() {
+    const username = document.getElementById('usernameInput').value;
+    if (username.trim()) {
+      document.getElementById('usernameDisplay').textContent = username;
+      document.getElementById('usernamechanger').style.display = 'none';
+      localStorage.setItem("username", username);
     }
+  }
 
-    function saveUsername() {
-      const username = document.getElementById('usernameInput').value;
-      if (username.trim()) {
-        document.getElementById('usernameDisplay').textContent = username;
-        document.getElementById('usernamechanger').style.display = 'none';
-        localStorage.setItem("username", username);
-      }
-    }
+  function changePassword() {
+    window.location.href = "login.html?changePassword=true"
+  }
+</script>
 
-    function changePassword() {
-      window.location.href = "login.html?changePassword=true"
-    }
-
-  </script>
 </body>
 </html>
