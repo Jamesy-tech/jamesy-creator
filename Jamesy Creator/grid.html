@@ -93,7 +93,7 @@
 
         .no-results {
             text-align: center;
-            padding: 56px 20px;
+            padding: 20px 20px;
             display: none;
         }
 
@@ -341,7 +341,7 @@
     <div id="deleteOption">Delete</div>
 </div>
 
-    <br><br><br><br><br><br><br><br>
+ <br>  <br><br><br><br><br><br><br><br>
     
 <script>
     const settingsData = [
@@ -432,7 +432,7 @@ function displayResults() {
 
         customGrid.style.display = 'grid';
         customHr.style.display = 'block';
-        googleSearchCard.style.display = 'none';
+       // googleSearchCard.style.display = 'none';
 
        document.querySelectorAll('.google-search-card').forEach(e => e.style.display = 'none');
         
@@ -469,12 +469,12 @@ function displayResults() {
     if (allResults.length === 0 && query.trim()) {
         noResults.style.display = 'block';
         resultsGrid.style.display = 'none';
-        googleSearchCard.style.display = 'flex';
+       // googleSearchCard.style.display = 'flex';
       //  googleSearchText.textContent = `Search "${query}" on Google`;
     } else {
         noResults.style.display = 'none';
         resultsGrid.style.display = 'grid';
-        googleSearchCard.style.display = 'none';
+       // googleSearchCard.style.display = 'none';
 
         allResults.forEach(item => {
             resultsGrid.appendChild(createSettingCard(item, false));
