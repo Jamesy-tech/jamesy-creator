@@ -512,7 +512,7 @@
 
     <div class="top-nav">
         <div class="top-nav-items">
-            <img class="logo" src="shapes.png">
+            <img class="logo" id="main_logo" src="shapesanim1.gif">
             <span class="title">Jamesy Creator</span>
             </div>
         <div id="searchContainer">
@@ -534,9 +534,26 @@
 
   <div class="mobile-overlay" onclick="closeMobileNav()"></div>
 
+<style>
+
+  #selectedhome {
+    display:block;
+  }
+
+  #selectedapps, #selectedsettings, #selectedfeedback, #selectedsubscribers {
+    display:none;
+  }
+
+  #unselectedhome {
+    display:none;
+  }
+
+  </style>
+
   <aside id="nav">
     <button onclick="showPage('home')" class="active">
-      <span class="material-symbols-outlined">home</span>
+      <span class="material-symbols-outlined" id="unselectedhome">home</span> 
+      <img id="selectedhome" src="selected.gif" style="width:20px;"> 
       Home
     </button>
 
@@ -546,7 +563,8 @@
     </button> -->
 
       <button onclick="showPage('apps')">
-      <span class="material-symbols-outlined">add_2</span>
+      <span class="material-symbols-outlined" id="unselectedapps">add_2</span>
+           <img id="selectedapps" src="selected.gif" style="width:20px;"> 
       Create
     </button>
 
@@ -566,17 +584,20 @@
     </button> -->
 
       <button onclick="showPage('settings')">
-      <span class="material-symbols-outlined">settings</span>
+      <span class="material-symbols-outlined" id="unselectedsettings">settings</span>
+           <img id="selectedsettings" src="selected.gif" style="width:20px;"> 
       Settings
     </button>
 
        <button onclick="showPage('feedback')" id="feedbackBtn">
-      <span class="material-symbols-outlined">chat</span>
+      <span class="material-symbols-outlined" id="unselectedfeedback">chat</span>
+           <img id="selectedfeedback" src="selected.gif" style="width:20px;"> 
       Feedback
     </button>
 
         <button onclick="showPage('subscribers')" id="subsBtn">
-      <span class="material-symbols-outlined">youtube_activity</span>
+      <span class="material-symbols-outlined" id="unselectedsubscribers">youtube_activity</span>
+       <img id="selectedsubscribers" src="selected.gif" style="width:20px;"> 
       Subscribers
     </button>
 
@@ -781,6 +802,10 @@
 
   <script>
 
+    setTimeout(() => {
+        document.getElementById("main_logo").src = "shapes.png";
+  }, 1000);
+
     document.getElementById("subsBtn").style.display = "none";
 
  if (localStorage.getItem("jamesydeveloper_subs_count") === "true") {
@@ -822,6 +847,30 @@
        document.getElementById("apps_header").textContent = "Apps & Tools";
 
       document.getElementById("apps_iframe").src = "grid.html"
+
+      document.getElementById("selectedhome").style.display = "none"
+       document.getElementById("selectedapps").style.display = "none"
+        document.getElementById("selectedsettings").style.display = "none"
+         document.getElementById("selectedfeedback").style.display = "none"
+
+          document.getElementById("unselectedhome").style.display = "block"
+       document.getElementById("unselectedapps").style.display = "block"
+        document.getElementById("unselectedsettings").style.display = "block"
+         document.getElementById("unselectedfeedback").style.display = "block"
+
+            document.getElementById("unselectedsubscribers").style.display = "block"
+               document.getElementById("selectedsubscribers").style.display = "none"
+
+      var selectedAnimationId = "selected" + id
+
+      var unselected = "unselected" + id
+
+      document.getElementById(selectedAnimationId).style.display = "block"
+
+      document.getElementById(unselected).style.display = "none"
+
+
+      
 
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById(id).classList.add('active');
@@ -1039,4 +1088,8 @@ if (!localStorage.getItem("userPassword")) {
 </body>
 </html>  </script>
 </body>
+</html></body>
+</html>  </script>
+</body>
+</html>>
 </html>
