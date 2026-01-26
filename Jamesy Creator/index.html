@@ -564,7 +564,7 @@
     display:block;
   }
 
-  #selectedapps, #selectedsettings, #selectedfeedback, #selectedsubscribers {
+  #selectedapps, #selectedsettings, #selectedfeedback, #selectedsubscribers, #selectedfiles, #selectedapps2 {
     display:none;
   }
 
@@ -592,26 +592,35 @@
       Create
     </button>
 
-    <!--  <button onclick="showPage('apps2')">
-      <span class="material-symbols-outlined">apps</span>
-      My Apps
-    </button> -->
+ 
 
-    <!--      <button onclick="showPage('files')">
-      <span class="material-symbols-outlined">folder</span>
-      Files
-    </button> -->
+     <button onclick="showPage('apps2')">
+      <span class="material-symbols-outlined" id="unselectedapps2">apps</span>
+          <img id="selectedapps2" src="selected.gif" style="width:20px;"> 
+      My Apps
+    </button> 
+
 
 <!--    <button onclick="showPage('profile')">
            <span class="material-symbols-outlined">person</span>
       Profile
     </button> -->
 
+
+    <hr>
+
       <button onclick="showPage('settings')">
       <span class="material-symbols-outlined" id="unselectedsettings">settings</span>
            <img id="selectedsettings" src="selected.gif" style="width:20px;"> 
       Settings
     </button>
+
+
+          <button onclick="showPage('files')">
+      <span class="material-symbols-outlined" id="unselectedfiles">folder</span>
+          <img id="selectedfiles" src="selected.gif" style="width:20px;"> 
+      Files
+    </button> 
 
        <button onclick="showPage('feedback')" id="feedbackBtn">
       <span class="material-symbols-outlined" id="unselectedfeedback">chat</span>
@@ -624,6 +633,8 @@
        <img id="selectedsubscribers" src="selected.gif" style="width:20px;"> 
       Subscribers
     </button>
+
+  
 
           <button onclick="toggleMobileNav()" class="close-nav">
       <span class="material-symbols-outlined">arrow_back</span></button>
@@ -902,11 +913,15 @@
        document.getElementById("selectedapps").style.display = "none"
         document.getElementById("selectedsettings").style.display = "none"
          document.getElementById("selectedfeedback").style.display = "none"
+           document.getElementById("selectedfiles").style.display = "none"
+             document.getElementById("selectedapps2").style.display = "none"
 
           document.getElementById("unselectedhome").style.display = "block"
        document.getElementById("unselectedapps").style.display = "block"
         document.getElementById("unselectedsettings").style.display = "block"
          document.getElementById("unselectedfeedback").style.display = "block"
+         document.getElementById("unselectedfiles").style.display = "block"
+           document.getElementById("unselectedapps2").style.display = "block"
 
             document.getElementById("unselectedsubscribers").style.display = "block"
                document.getElementById("selectedsubscribers").style.display = "none"
@@ -1137,4 +1152,3 @@ if (!localStorage.getItem("userPassword")) {
   </script>
 </body>
 </html>
-
