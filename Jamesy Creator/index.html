@@ -250,8 +250,9 @@
       .home-scroll {
           background:transparent;
           padding-bottom:25vh;
-          padding-left:3px;
-          padding-right:3px;
+          padding:0px;
+      /*    padding-left:3px;
+          padding-right:3px; */
           overflow-y:scroll;
           overflow-x:hidden;
           height:100vh;
@@ -771,7 +772,7 @@
     </div>
 
         <div id="settings" class="page">
-          <br>
+      
             <div class="header" style="display:none;">Account & Settings</div>
      <iframe src="account.html?event=window" class="fill"></iframe>
     </div>
@@ -824,6 +825,26 @@
 
 
   <script>
+
+   function loadTitle() {
+  const el = document.getElementById("main_title");
+  const text = "Jamesy Creator";
+  let i = 0;
+
+  el.textContent = "";
+
+  const typing = setInterval(() => {
+    el.textContent += text[i];
+    i++;
+
+    if (i >= text.length) {
+      clearInterval(typing);
+    }
+  }, 100);
+}
+
+
+      loadTitle()
 
 
  document.getElementById("main_logo").src = "shapesanim1.gif";
@@ -1130,4 +1151,4 @@ if (!localStorage.getItem("userPassword")) {
 </body>
 </html>>
 </html>l>>
-</html>html>
+</html>html>tml>
