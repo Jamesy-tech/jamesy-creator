@@ -29,9 +29,13 @@
 
     body {
   min-height: 100vh;
+
   margin: 0;
   
     background-color: #eaf0fb;
+
+      opacity: 0;
+  transition: opacity 1s ease;
 
   /* background-color: #eaf0fb;
 
@@ -43,6 +47,10 @@
   background-size: cover;
   background-position: center;
   background-blend-mode: lighten; */
+}
+
+body.loaded {
+  opacity: 1;
 }
 
 
@@ -79,7 +87,7 @@
       padding-bottom:18px;
       text-align: left;
       border-radius: 30px;
-      transition:0s;
+      transition:0.15s;
       font-size: 16px;
       font-weight:600;
       cursor: pointer;
@@ -107,6 +115,8 @@
      /* background-color:dodgerblue;  */
        background-color: #005cb2; 
       color: white;
+
+      transition: 0s;
     }
 
     aside button.active .material-symbols-outlined {
@@ -227,6 +237,28 @@
           width:40px;
           height:40px;
           }
+
+          .gradient-text {
+  background: linear-gradient(90deg, #7dd3fc, #a5b4fc, #fbcfe8);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 4s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0%; }
+  100% { background-position: 200%; }
+}
+
+
+.char {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.char.visible {
+  opacity: 1;
+}
 
 
             .title {
@@ -657,7 +689,7 @@
 
             <div class="banner"> </div>
             
-      <div class="header">Welcome back, <span class="username"></span>!</div>
+      <div class="header" id="center_title">Welcome back, <span class="username"></span>!</div>
     <!-- <span class="description">Where should we start?</span> -->
 
 
@@ -840,26 +872,24 @@
 
   <script>
 
-   function loadTitle() {
-  const el = document.getElementById("main_title");
-  const text = "Jamesy Creator";
-  let i = 0;
+const todayFormatted = (() => {
+  const date = new Date();
 
-  el.textContent = "";
+  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-  const typing = setInterval(() => {
-    el.textContent += text[i];
-    i++;
+  const dayName = days[date.getDay()];
+  const dayNum = date.getDate();
+  const monthName = months[date.getMonth()];
 
-    if (i >= text.length) {
-      clearInterval(typing);
-    }
-  }, 100);
-}
+  const suffix =
+    dayNum % 10 === 1 && dayNum !== 11 ? "st" :
+    dayNum % 10 === 2 && dayNum !== 12 ? "nd" :
+    dayNum % 10 === 3 && dayNum !== 13 ? "rd" :
+    "th";
 
-
-      loadTitle()
-
+  return `${dayName}, ${dayNum}${suffix} ${monthName}`;
+})();
 
  document.getElementById("main_logo").src = "shapesanim1.gif";
   document.getElementById("main_logo").style.display = "block"
@@ -1150,6 +1180,68 @@ if (!localStorage.getItem("userPassword")) {
       .then(() => console.log("Service Worker registered"))
       .catch(err => console.error("Service Worker registration failed:", err));
   }
+
+
+     function loadTitle() {
+  const el = document.getElementById("main_title");
+  const text = "Jamesy Creator";
+  let i = 0;
+
+  el.textContent = "";
+
+  const typing = setInterval(() => {
+    el.textContent += text[i];
+    i++;
+
+    if (i >= text.length) {
+      clearInterval(typing);
+    }
+  }, 100);
+}
+
+
+      loadTitle()
+
+      
+
+       var originalCenterText = document.getElementById("center_title").textContent;
+
+       document.getElementById("center_title").innerHTML = "&nbsp;" + todayFormatted;
+
+       function loadTitle2() {
+  const el = document.getElementById("center_title");
+  const text = originalCenterText;
+  let i = 0;
+
+  el.innerHTML = "&nbsp;";
+
+  const typing = setInterval(() => {
+    const span = document.createElement("span");
+    span.textContent = text[i];
+    span.className = "char";
+
+    el.appendChild(span);
+
+    requestAnimationFrame(() => {
+      span.classList.add("visible");
+    });
+
+    i++;
+
+    if (i >= text.length) {
+      clearInterval(typing);
+    }
+  }, 30);
+}
+
+setTimeout(loadTitle2, 2000);
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.body.classList.add("loaded");
+  }, 0);
+});
+
 
   </script>
 </body>
