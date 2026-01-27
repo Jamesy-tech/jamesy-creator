@@ -122,13 +122,23 @@ body.loaded {
       padding: 2rem;
     }
 
-    .page {
-      display: none;
-    }
+  .page {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
-    .page.active {
-      display: block;
-    }
+.page.active {
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+}
+
 
     .header {
       font-size: 28px;
@@ -923,65 +933,33 @@ const todayFormatted = (() => {
      const username_fill = document.querySelectorAll(".username")
      username_fill.forEach(e => e.textContent = localStorage.getItem("username"));
       
-    function showPage(id) {
+           var pages = document.querySelectorAll('.page');
 
-       document.getElementById("apps_header").textContent = "Apps & Tools";
+       pages.forEach(el => el.classList.remove("loaded"));
 
-      document.getElementById("apps_iframe").src = "grid.html";
-      document.getElementById("apps2_iframe").src = "grid.html?hide=true";
-      document.getElementById("files_iframe").src = "Files/index.html";
-      document.getElementById("feedback_iframe").src = "feedback.html";
-      document.getElementById("settings_iframe").src = "account.html";
+      pages.forEach(el => el.classList.add("loaded"));
 
-      document.getElementById("selectedhome").style.display = "none"
-       document.getElementById("selectedapps").style.display = "none"
-        document.getElementById("selectedsettings").style.display = "none"
-         document.getElementById("selectedfeedback").style.display = "none"
-           document.getElementById("selectedfiles").style.display = "none"
-             document.getElementById("selectedapps2").style.display = "none"
+   
+      function showPage(id) {
+  pages.forEach(p => p.classList.remove('active')); // hide all pages
+  const page = document.getElementById(id);
+  page.classList.add('active'); // fade in the target page
 
-          document.getElementById("unselectedhome").style.display = "block"
-       document.getElementById("unselectedapps").style.display = "block"
-        document.getElementById("unselectedsettings").style.display = "block"
-         document.getElementById("unselectedfeedback").style.display = "block"
-         document.getElementById("unselectedfiles").style.display = "block"
-           document.getElementById("unselectedapps2").style.display = "block"
+  // Update nav buttons
+  document.querySelectorAll('aside button').forEach(btn => btn.classList.remove('active'));
+  event.target.closest('button').classList.add('active');
 
-            document.getElementById("unselectedsubscribers").style.display = "block"
-               document.getElementById("selectedsubscribers").style.display = "none"
+  // Update selected/unselected icons
+  const allSelected = document.querySelectorAll('[id^="selected"]');
+  allSelected.forEach(el => el.style.display = 'none');
+  const allUnselected = document.querySelectorAll('[id^="unselected"]');
+  allUnselected.forEach(el => el.style.display = 'block');
 
-      var selectedAnimationId = "selected" + id
-
-      var unselected = "unselected" + id
-
-      document.getElementById(selectedAnimationId).style.display = "block"
-
-      document.getElementById(unselected).style.display = "none"
-
-
-      
-
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-
-      document.querySelectorAll('aside button').forEach(btn => btn.classList.remove('active'));
-      event.target.closest('button').classList.add('active');
-      
-      if (window.innerWidth <= 800) {
-        closeMobileNav();
-      }
-
-      document.getElementById("searchBar").value = "";
-
-      if (id == "home") {
-       //   document.getElementById("searchBar").focus();
-      }
-
-      if (id == "apps") {
-    //    document.getElementById("searchBar").focus();
-      }
-
-    }
+  const selectedId = "selected" + id;
+  const unselectedId = "unselected" + id;
+  if (document.getElementById(selectedId)) document.getElementById(selectedId).style.display = 'block';
+  if (document.getElementById(unselectedId)) document.getElementById(unselectedId).style.display = 'none';
+}
 
 
 
