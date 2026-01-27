@@ -70,6 +70,17 @@
 
        button:hover, s:hover { filter: brightness(110%); }
       
+
+
+          body {
+             transition: opacity 0.5s ease;
+            opacity:0;
+        }
+
+        body.loaded {
+  opacity: 1;
+}
+
     button.secondary{ transition:0.15s; background:transparent; color:var(--accent); border:1px solid rgba(30,144,255,0.12)}
 
       button.secondary:hover { border:solid dodgerblue 1px; border-style: dotted; }
@@ -812,12 +823,20 @@ async function handleFiles(fileList){
       const s1 = id(); await putItem({id:s1,name:'Documents',type:'folder',parentId:ROOT_ID,createdAt:Date.now()});
       const s2 = id(); await putItem({id:s2,name:'Pictures',type:'folder',parentId:ROOT_ID,createdAt:Date.now()});
 
-      const sample = new Blob(['Hello CloudFiles — this is a sample file.'],{type:'text/plain'});
+      const sample = new Blob(['Welcome to your Files manager! Easily upload and manage all your files here.'],{type:'text/plain'});
       const fid = id(); await putItem({id:fid,name:'welcome.txt',type:'file',parentId:s1,createdAt:Date.now(),size:sample.size,mime:'text/plain'});
       await putFileBlob(fid, sample);
     }
     await render();
   })();
+
+    window.addEventListener("load", () => {
+  setTimeout(() => {
+
+    document.body.classList.add("loaded");
+
+  }, 0);
+});
 
   </script>
 </body>
