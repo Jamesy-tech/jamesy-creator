@@ -891,13 +891,7 @@ const todayFormatted = (() => {
   return `${dayName}, ${dayNum}${suffix} ${monthName}`;
 })();
 
- document.getElementById("main_logo").src = "shapesanim1.gif";
-  document.getElementById("main_logo").style.display = "block"
-  document.getElementById("main_title").style.display = "block"
 
-    setTimeout(() => {
-        document.getElementById("main_logo").src = "shapes.png";
-  }, 2000);
 
     document.getElementById("subsBtn").style.display = "none";
 
@@ -1199,11 +1193,6 @@ if (!localStorage.getItem("userPassword")) {
   }, 100);
 }
 
-
-      loadTitle()
-
-      
-
        var originalCenterText = document.getElementById("center_title").textContent;
 
        document.getElementById("center_title").innerHTML = "&nbsp;" + todayFormatted;
@@ -1231,14 +1220,26 @@ if (!localStorage.getItem("userPassword")) {
     if (i >= text.length) {
       clearInterval(typing);
     }
-  }, 30);
+  }, 38);
 }
 
 setTimeout(loadTitle2, 2000);
 
 window.addEventListener("load", () => {
   setTimeout(() => {
+
     document.body.classList.add("loaded");
+
+    loadTitle()
+
+     document.getElementById("main_logo").src = "shapesanim1.gif";
+  document.getElementById("main_logo").style.display = "block"
+  document.getElementById("main_title").style.display = "block"
+
+    setTimeout(() => {
+        document.getElementById("main_logo").src = "shapes.png";
+  }, 2000);
+
   }, 0);
 });
 
