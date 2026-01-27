@@ -781,14 +781,14 @@ body.loaded {
      <div id="apps2" class="page">
       
         <div class="header" style="display:none;" id="apps_header">Apps & tools</div> 
-     <iframe src="grid.html?hide=true" id="apps_iframe" class="fill"></iframe>
+     <iframe src="grid.html?hide=true" id="apps2_iframe" class="fill"></iframe>
 
     </div>
 
           <div id="files" class="page">
       
         <div class="header" style="display:none;" id="apps_header">Files</div> 
-     <iframe src="Files/index.html" id="apps_iframe" class="fill"></iframe>
+     <iframe src="Files/index.html" id="files_iframe" class="fill"></iframe>
 
     </div>
 
@@ -796,7 +796,7 @@ body.loaded {
         <div id="feedback" class="page">
       
         <div class="header" style="display:none;" id="apps_header">Feedback</div> 
-     <iframe src="feedback.html" id="apps_iframe" class="fill"></iframe>
+     <iframe src="feedback.html" id="feedback_iframe" class="fill"></iframe>
 
     </div>
 
@@ -805,7 +805,7 @@ body.loaded {
       
         <div class="header" style="display:none;" id="apps_header">Subscribers</div> 
         <iframe src="" id="subs_iframe" class="fill"></iframe>
-         <iframe src="https://socialcounts.org/youtube-live-subscriber-count/UCBeRITLbzQs2WLP1U7vJ3SQ" id="apps_iframe" class="fill"></iframe> 
+         <iframe src="https://socialcounts.org/youtube-live-subscriber-count/UCBeRITLbzQs2WLP1U7vJ3SQ" id="subs_iframe2" class="fill"></iframe> 
 
     </div>
 
@@ -814,13 +814,13 @@ body.loaded {
         <div id="profile" class="page">
           <br>
 <div class="header" style="display:none;">Profile</div>
-     <iframe src="profile.html?event=window" class="fill"></iframe>
+     <iframe src="profile.html?event=window" id="profile_iframe" class="fill"></iframe>
     </div>
 
         <div id="settings" class="page">
       
             <div class="header" style="display:none;">Account & Settings</div>
-     <iframe src="account.html?event=window" class="fill"></iframe>
+     <iframe src="account.html?event=window" id="settings_iframe" class="fill"></iframe>
     </div>
 
   </main>
@@ -933,7 +933,11 @@ const todayFormatted = (() => {
 
        document.getElementById("apps_header").textContent = "Apps & Tools";
 
-      document.getElementById("apps_iframe").src = "grid.html"
+      document.getElementById("apps_iframe").src = "grid.html";
+      document.getElementById("apps2_iframe").src = "grid.html?hide=true";
+      document.getElementById("files_iframe").src = "Files/index.html";
+      document.getElementById("feedback_iframe").src = "feedback.html";
+      document.getElementById("settings_iframe").src = "account.html";
 
       document.getElementById("selectedhome").style.display = "none"
        document.getElementById("selectedapps").style.display = "none"
