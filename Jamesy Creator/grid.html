@@ -24,6 +24,15 @@
             min-height: 100vh;
         }
 
+        body {
+             transition: opacity 0.5s ease;
+            opacity:0;
+        }
+
+        body.loaded {
+  opacity: 1;
+}
+
         .content-header {
             padding: 24px 32px;
             border-bottom: 1px solid #e5e5e5;
@@ -604,6 +613,15 @@ function displayResults() {
         searchInput.addEventListener('input', onInput);
         window.addEventListener('popstate', displayResults);
     })();
+
+    window.addEventListener("load", () => {
+  setTimeout(() => {
+
+    document.body.classList.add("loaded");
+
+  }, 0);
+});
+
 </script>
 </body>
 </html>
