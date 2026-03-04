@@ -295,13 +295,17 @@ body {
         <img src="avatars/guest.png" id="userAvatar" class="avatar-img">
         <div class="user-info">
             <span class="name username-target">Guest</span>
-            <span class="points">0 points · Level 1</span>
+            <span class="points">0 points</span>
         </div>
     </div>
-    <div style="color: #9ca3af; font-weight: 600; font-size: 14px;">Jamesy Creator v4.0</div>
+    <div style="color: #9ca3af; font-weight: 600; font-size: 14px;" id="jamesyCreatorVersion">Jamesy Creator v?</div>
 </div>
 
 <script>
+
+    const version = "302";
+    document.getElementById("jamesyCreatorVersion").textContent = "Jamesy Creator V" + version;
+
     const searchBar = document.getElementById("searchBar");
     const cards = document.querySelectorAll('.card');
 
