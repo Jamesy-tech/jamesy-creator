@@ -74,6 +74,12 @@ body {
     width: 350px;
 }
 
+.search-box:focus-within {
+    outline: 3px solid white;
+    outline-offset: -6px;
+    box-shadow: 0 0 0 1.5px #1865f2;
+}
+
 .top-right {
     display: flex;
     align-items: center;
@@ -336,7 +342,7 @@ updateVersion();
     // Focus on load
     window.onload = () => {
         loadUserData();
-        searchBar.focus();
+     //   searchBar.focus();
     };
 
     function goToSearch() {
