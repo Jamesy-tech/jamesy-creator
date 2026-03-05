@@ -327,6 +327,8 @@
         
     </div>
 
+    <!--
+
      <div class="google-search-card" onclick="searchYT()">
     
          <span class="google-search-text">Search on YouTube</span>
@@ -344,7 +346,7 @@
          <span class="google-search-text">Ask ChatGPT</span>
         
      </div>
-    
+    -->
 
 <div id="contextMenu">
     <div id="deleteOption">Delete</div>
@@ -366,7 +368,8 @@
          { title: "BookUI+", category: "Featured Apps", description: "", link: "https://jamesy-tech.github.io/BookUI", icon: "bookui.png" },
         { title: "Quiz Creator", category: "Featured Apps", description: "", link: "https://jamesy-tech.github.io/JQuizzi3", icon: "jquizzi3.png" },
          { title: "Editable", category: "Featured Apps", description: "", link: "https://jamesy-tech.github.io/Editable", icon: "editable.png" },
-        { title: "Chrome Extension", category: "Browser Tool", description: "", link: "https://drive.google.com/drive/folders/1pnG02tlIRZdsHOZvhbLiVHfDQQDKhsbv", icon: "open_in_new.png" }
+         { title: "ZacLabs", category: "More Resources", description: "More Resources by Jamesy Creator on ZacLabs", link: "https://jamesy-tech.github.io/ZacLabs", icon: "zaclabs2.png" },
+        //{ title: "Chrome Extension", category: "Browser Tool", description: "", link: "https://drive.google.com/drive/folders/1pnG02tlIRZdsHOZvhbLiVHfDQQDKhsbv", icon: "open_in_new.png" }
     ];
 
     function getQueryParam(param) {
@@ -449,6 +452,7 @@ function displayResults() {
        document.querySelectorAll('.google-search-card').forEach(e => e.style.display = 'none');
         
     } else {
+
         pageTitle.textContent = 'Search results';
         breadcrumbLast.textContent = 'Search results';
         searchInfo.style.display = 'block';
@@ -486,7 +490,7 @@ function displayResults() {
     } else {
         noResults.style.display = 'none';
         resultsGrid.style.display = 'grid';
-       // googleSearchCard.style.display = 'none';
+        googleSearchCard.style.display = 'none';
 
         allResults.forEach(item => {
             resultsGrid.appendChild(createSettingCard(item, false));
