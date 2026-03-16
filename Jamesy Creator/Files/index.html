@@ -181,8 +181,17 @@
     </div>
   </template>
 
+  <img src="../back.png" class="window" style="position: fixed; bottom: 25px; left: 27px; width: 30px; height: 30px; cursor: pointer;" onclick="quit()">
+
   <script>
 
+  function quit() {
+//    window.close()
+  //  setTimeout(() => {
+       window.top.location.href = "https://jamesy-tech.github.io/jamesy-creator/";
+ //   }, 100);
+  }
+  
       let selectMode = false;
 const selectedItems = new Set();
 const selectBtn = document.getElementById('selectBtn');
