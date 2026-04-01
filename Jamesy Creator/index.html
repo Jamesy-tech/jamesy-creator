@@ -31,6 +31,17 @@ body {
     overflow: hidden; 
 }
 
+
+        body {
+             transition: opacity 0.5s ease;
+            opacity:0;
+        }
+
+        body.loaded {
+  opacity: 1;
+}
+
+
 /* ===== Header ===== */
 .topbar {
     display: flex;
@@ -425,6 +436,15 @@ updateVersion();
         document.querySelectorAll(".username-target").forEach(el => el.textContent = savedName);
         document.getElementById("userAvatar").src = savedAvatar;
     }
+
+        window.addEventListener("load", () => {
+  setTimeout(() => {
+
+    document.body.classList.add("loaded");
+
+  }, 0);
+});
+
 </script>
 
 </body>
