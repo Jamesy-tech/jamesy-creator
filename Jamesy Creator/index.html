@@ -231,13 +231,24 @@ body {
 .user-info .name { font-weight: 800; font-size: 18px; display: block; }
 .user-info .points { font-size: 14px; color: #6b7280; font-weight: 600; }
 
+@media (max-width: 1000px) {
+    .sidebar,
+    .search-box {
+        display: none;
+    }
+
+    .content {
+        flex: 1;
+    }
+}
+
 </style>
 </head>
 <body>
 
 <header class="topbar">
     <div class="top-left">
-        <div class="logo-group">
+        <div class="logo-group" style="cursor:pointer;" onclick="window.location.reload()">
             <img src="shapes.png" alt="Logo">
             <span class="brand">Jamesy Creator</span>
         </div>
