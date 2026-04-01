@@ -231,7 +231,7 @@ body {
 .user-info .name { font-weight: 800; font-size: 18px; display: block; }
 .user-info .points { font-size: 14px; color: #6b7280; font-weight: 600; }
 
-@media (max-width: 1000px) {
+@media (max-width: 890px) {
     .sidebar,
     .search-box {
         display: none;
@@ -240,6 +240,15 @@ body {
     .content {
         flex: 1;
     }
+
+}
+
+@media (max-width: 1025px) {
+
+    #downloadBtn {
+        display:none;
+    }
+
 }
 
 </style>
@@ -258,7 +267,7 @@ body {
         </div>
     </div>
     <div class="top-right">
-        <button class="btn" style="background:#e8f0fe; color: #1456d3;" onclick="location.href='https://sites.google.com/view/jamesy-creator/download'">Download</button>
+        <button class="btn" style="background:#e8f0fe; color: #1456d3;" id="downloadBtn" onclick="location.href='https://sites.google.com/view/jamesy-creator/download'">Download</button>
         <button class="btn rainbow-btn" onclick="showPage('create')">Create</button>
     </div>
 </header>
