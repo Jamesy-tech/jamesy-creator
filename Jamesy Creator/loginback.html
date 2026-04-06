@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Stack+Sans+Text:wght@200..700&display=swap" rel="stylesheet">
     <link rel="icon" href="jamesycreator.jpeg">
     <title>Jamesy Creator</title>
     <style>
-     body {
+    
+    body {
   margin: 0;
   height: 100vh;
   background:aliceblue; 
@@ -16,7 +21,11 @@
   display: flex;
   justify-content: center; 
   align-items: center;     
-  font-family: "Verdana";
+  font-family: "Inter";
+}
+
+* {
+  font-family: "Inter";
 }
 
 
@@ -41,18 +50,19 @@ center {
 
 
 #username {
-font-family:verdana;
+
 }
 #password {
   margin-right:0px;
   border-radius:0px;
   transition:0.3s;
   padding:2px;
+  padding-left:9px;
+  padding-right:9px;
   height:25px;
   width:250px;
   border:solid black 1px;
   outline:none;
-  font-family:verdana;
   margin:0;
   background:white;
 }
@@ -98,7 +108,10 @@ font-family:verdana;
 #username {
   font-size:20px;
   color:black;
+  display:inline-block;
+  margin-top:5px;
 }
+
     </style>
 </head>
 <body>
@@ -128,7 +141,7 @@ font-family:verdana;
 
     if (inputPassword === savedPassword) {
       localStorage.setItem('locked', 'false');
-      document.getElementById("password").style.borderColor = "lime";
+      document.getElementById("password").style.borderColor = "dodgerblue";
       document.getElementById("password").value = "";
       document.getElementById("password").placeholder = "Loading...";
       document.getElementById("password").disabled = true;
@@ -172,6 +185,11 @@ font-family:verdana;
      document.getElementById("username").textContent = "Confirm access";
 }
 
+const user = localStorage.getItem("username");
+
+if (!user || user.toLowerCase() === "guest") {
+  window.location.href = "https://jamesy-tech.github.io/jamesy-creator/Jamesy%20Creator/login.html";
+}
 
 </script>
 
