@@ -376,6 +376,12 @@ body {
 
 <script>
 
+    const user = localStorage.getItem("username");
+
+if (!user || user.toLowerCase() === "guest") {
+  window.location.href = "login.html";
+}
+
 async function updateVersion() {
   const owner = 'Jamesy-tech';
   const repo = 'jamesy-creator';
