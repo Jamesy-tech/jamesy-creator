@@ -310,8 +310,13 @@ body {
             <span class="material-symbols-outlined">folder</span> Files
         </a>
         <h4>Account</h4>
+
         <a class="nav-item" id="btn-settings" onclick="showPage('settings', this)">
             <span class="material-symbols-outlined">settings</span> Settings
+        </a>
+
+                <a class="nav-item" id="btn-settings" onclick="lock()">
+            <span class="material-symbols-outlined">lock</span> Lock
         </a>
 
         <a class="nav-item" id="btn-feedback" onclick="showPage('feedback', this)">
@@ -382,9 +387,16 @@ if (!user || user.toLowerCase() === "guest") {
   window.location.href = "login.html";
 }
 
+function lock() {
+    const choice = confirm("Lock account? You can log back in again by using your password.")
+    if (choice) {
+    window.location.href = 'loginback.html?path=lock';
+    }
+}
+
             document.addEventListener('keydown', function(event) {
     if (event.ctrlKey && event.key === 'q') {
-        window.location.href = 'loginback.html?path=lock';
+        lock()
     }
 });
 
