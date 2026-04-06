@@ -23,6 +23,15 @@
     margin: 0;
   }
 
+     body {
+             transition: opacity 0.5s ease;
+            opacity:0;
+        }
+
+        body.loaded {
+  opacity: 1;
+}
+
   .container {
     text-align: center;
     max-width: 500px;
@@ -79,6 +88,7 @@
 <body>
 
 <div class="container">
+  <br><br>
   <h1>Feedback</h1>
   <p>We'd love to hear your thoughts on Jamesy Creator!</p>
   <textarea id="feedback" rows="6" placeholder="Type your feedback here..."></textarea>
@@ -153,6 +163,14 @@
       console.error(error);
     }
   }
+
+   window.addEventListener("load", () => {
+  setTimeout(() => {
+
+    document.body.classList.add("loaded");
+
+  }, 0);
+});
 </script>
 
 </body>
