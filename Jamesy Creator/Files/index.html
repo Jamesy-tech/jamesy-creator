@@ -185,6 +185,34 @@
 
   <script>
 
+        const user = localStorage.getItem("username");
+
+if (!user || user.toLowerCase() === "guest") {
+  window.location.href = "https://jamesy-tech.github.io/jamesy-creator/Jamesy%20Creator/login.html";
+}
+
+function lock() {
+    const choice = confirm("Lock account? You can log back in again by using your password.")
+    if (choice) {
+    window.location.href = 'https://jamesy-tech.github.io/jamesy-creator/Jamesy%20Creator/loginback.html?path=lock';
+    }
+}
+
+            document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.key === 'q') {
+        lock()
+    }
+});
+
+if (localStorage.getItem('locked') === 'true') {
+  window.location.href = 'https://jamesy-tech.github.io/jamesy-creator/Jamesy%20Creator/loginback.html?path=lock';
+}
+
+if (!localStorage.getItem("userPassword")) {
+    window.location.href = "https://jamesy-tech.github.io/jamesy-creator/Jamesy%20Creator/login.html";
+  }
+
+
   function quit() {
 //    window.close()
   //  setTimeout(() => {
