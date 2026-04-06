@@ -132,8 +132,12 @@ center {
   const urlParams = new URLSearchParams(window.location.search);
   const redirectURL = urlParams.get('redirect') || "index.html";
 
- 
+    function loadUserData() {
+        const savedAvatar = localStorage.getItem("avatar") || "avatars/guest.png";
+        document.getElementById("profile").src = savedAvatar;
+    }
 
+    loadUserData()
 
   function checkPassword() {
     const inputPassword = document.getElementById("password").value;
