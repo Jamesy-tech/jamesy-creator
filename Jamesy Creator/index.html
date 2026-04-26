@@ -263,6 +263,14 @@ body {
 
 }
 
+@media (max-width: 500px) {
+
+    #createBtn {
+        display:none;
+    }
+
+}
+
 #bookui {
 
 }
@@ -284,7 +292,7 @@ body {
     </div>
     <div class="top-right">
         <button class="btn" style="background:#e8f0fe; color: #1456d3;" id="downloadBtn" onclick="location.href='https://sites.google.com/view/jamesy-creator/download'">Download</button>
-        <button class="btn rainbow-btn" onclick="showPage('create')">Create</button>
+        <button class="btn rainbow-btn" id="createBtn" onclick="showPage('create')">Create</button>
     </div>
 </header>
 
