@@ -25,13 +25,13 @@
         }
 
         body {
-             transition: opacity 0.5s ease;
+            transition: opacity 0.5s ease;
             opacity:0;
         }
 
         body.loaded {
-  opacity: 1;
-}
+            opacity: 1;
+        }
 
         .content-header {
             padding: 24px 32px;
@@ -219,43 +219,19 @@
             border: 1px solid #e5e5e5;
             border-radius: 8px;
             padding: 12px 16px;
-            padding-top:12px;
             cursor: pointer;
             transition: all 0.16s ease;
             height: 46px;
-            display: block;
         }
 
         .google-search-card:hover {
             border-color:dodgerblue;
         }
 
-        .google-search-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .google-icon {
-            width: 20px;
-            height: 20px;
-            opacity: 0.7;
-        }
-
         .google-search-text {
             font-size: 14px;
             color: black;
             transition:0.3s;
-        }
-
-        .google-search-card:hover .google-search-text {
-
-            }
-
-        .external-link-icon {
-            width: 14px;
-            height: 14px;
-            opacity: 0.5;
         }
 
         #contextMenu {
@@ -287,6 +263,9 @@
             .search-input {
                 max-width: 100%;
             }
+            .google-search-card {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -294,7 +273,7 @@
 <div class="content-header">
     <div class="breadcrumb">
         <a style="cursor:pointer;" onclick="window.top.location.href='https://jamesy-tech.github.io/jamesy-creator/';" class="breadcrumb-link">Home</a>
-        <span class="breadcrumb-separator">&gt;</span>
+        <span class="breadcrumb-separator">></span>
         <span>Search results</span>
     </div>
     <h1 class="page-title">Search results</h1>
@@ -317,36 +296,17 @@
 
     <div class="results-grid" id="resultsGrid"></div>
 
+    <div class="google-search-card" id="articleSearchCard">
+         <span class="google-search-text" id="articleSearchText">Search in Articles</span>
+    </div>
+
     <hr id="customHr" style="margin:24px 0;">
 
     <div class="results-grid" id="customGrid"></div>
 
     <div class="google-search-card" id="googleSearchCard">
-    
          <span class="google-search-text" id="googleSearchText">Search on Google</span>
-        
     </div>
-
-    <!--
-
-     <div class="google-search-card" onclick="searchYT()">
-    
-         <span class="google-search-text">Search on YouTube</span>
-        
-     </div>
-
-         <div class="google-search-card" onclick="searchSpotify()">
-    
-         <span class="google-search-text">Search on Spotify</span>
-        
-     </div>
-
-         <div class="google-search-card" onclick="askChatGPT()">
-    
-         <span class="google-search-text">Ask ChatGPT</span>
-        
-     </div>
-    -->
 
 <div id="contextMenu">
     <div id="deleteOption">Delete</div>
@@ -357,23 +317,21 @@
 <script>
     const settingsData = [
         { title: "Open File", category: "Tools", description: "", link: "open.html", icon: "shapes.png" },
-          { title: "jamesy-creator-main.apk", category: "Tools", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-main.apk", icon: "shapes.png" },
-       //   { title: "More", category: "More Resources", description: "by Jamesy-tech", link: "https://jamesy-tech.github.io", icon: "shapes.png" },
+        { title: "Articles", category: "Resources", description: "", link: "articles.html", icon: "shapes.png" },
+        { title: "jamesy-creator-main.apk", category: "Tools", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-main.apk", icon: "shapes.png" },
         { title: "File Manager", category: "Tools", description: "", link: "Files/index.html", icon: "files.png" },
         { title: "Docs [Alpha]", category: "Editors", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-docs", icon: "docs.png" },
         { title: "Drawings", category: "Creative", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-drawings", icon: "drawings.png" },
-          { title: "Colour Studio", category: "Creative", description: "", link: "https://jamesy-tech.github.io/colour-studio", icon: "colour-studio.png" },
+        { title: "Colour Studio", category: "Creative", description: "", link: "https://jamesy-tech.github.io/colour-studio", icon: "colour-studio.png" },
         { title: "Code", category: "Scripts & Editors", description: "", link: "https://jamesy-tech.github.io/text-editor", icon: "code.png" },
-     //    { title: "Jamscripts", category: "Scripts & Editors", description: "", link: "https://jamesy-tech.github.io/BookUI/dashboard.html?page=scripts_verify", icon: "code.png" },
         { title: "Notes", category: "Note Taking", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-notes", icon: "notes.png" },
         { title: "File Converter", category: "Tools", description: "", link: "https://jamesy-tech.github.io/file-converter", icon: "convert.png" },
         { title: "MD Viewer & Editor", category: "Tools", description: "", link: "https://jamesy-tech.github.io/markdown-editor", icon: "markdown.png" },
-           { title: "Ideas", category: "Creative", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-ideas", icon: "ideas.png" },
+        { title: "Ideas", category: "Creative", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-ideas", icon: "ideas.png" },
         { title: "BookUI+", category: "Featured Apps", description: "", link: "https://jamesy-tech.github.io/BookUI/dashboard.html", icon: "bookui.png" },
         { title: "Quiz Creator", category: "Featured Apps", description: "", link: "https://jamesy-tech.github.io/JQuizzi3", icon: "jquizzi3.png" },
-         { title: "Editable", category: "Featured Apps", description: "", link: "https://jamesy-tech.github.io/Editable", icon: "editable.png" },
-         { title: "ZacLabs", category: "More Resources", description: "", link: "https://jamesy-tech.github.io/ZacLabs", icon: "zaclabs2.png" },
-        //{ title: "Chrome Extension", category: "Browser Tool", description: "", link: "https://drive.google.com/drive/folders/1pnG02tlIRZdsHOZvhbLiVHfDQQDKhsbv", icon: "open_in_new.png" }
+        { title: "Editable", category: "Featured Apps", description: "", link: "https://jamesy-tech.github.io/Editable", icon: "editable.png" },
+        { title: "ZacLabs", category: "More Resources", description: "", link: "https://jamesy-tech.github.io/ZacLabs", icon: "zaclabs2.png" }
     ];
 
     function getQueryParam(param) {
@@ -406,7 +364,7 @@
         `;
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            window.top.location.href = setting.link;
+            window.location.href = setting.link;
         });
         if (allowDelete && index !== null) {
             link.addEventListener("contextmenu", function(e) {
@@ -428,101 +386,92 @@
         return btn;
     }
 
-function displayResults() {
-    const query = getQueryParam('query') || '';
-    const searchInfo = document.getElementById('searchInfo');
-    const noResults = document.getElementById('noResults');
-    const resultsGrid = document.getElementById('resultsGrid');
-    const customGrid = document.getElementById('customGrid');
-    const customHr = document.getElementById('customHr');
-    const googleSearchCard = document.getElementById('googleSearchCard');
-    const googleSearchText = document.getElementById('googleSearchText');
-    const breadcrumbLast = document.querySelector('.breadcrumb span:last-child');
-    const pageTitle = document.querySelector('.page-title');
-    const searchInput = document.getElementById('searchInput');
+    function displayResults() {
+        const query = getQueryParam('query') || '';
+        const searchInfo = document.getElementById('searchInfo');
+        const noResults = document.getElementById('noResults');
+        const resultsGrid = document.getElementById('resultsGrid');
+        const customGrid = document.getElementById('customGrid');
+        const customHr = document.getElementById('customHr');
+        const googleSearchCard = document.getElementById('googleSearchCard');
+        const articleSearchCard = document.getElementById('articleSearchCard');
+        const articleSearchText = document.getElementById('articleSearchText');
+        const breadcrumbLast = document.querySelector('.breadcrumb span:last-child');
+        const pageTitle = document.querySelector('.page-title');
+        const searchInput = document.getElementById('searchInput');
 
-    searchInput.value = query;
+        searchInput.value = query;
 
-    if (!query.trim()) {
-        pageTitle.textContent = 'Apps & Tools';
-        breadcrumbLast.textContent = 'Apps & Tools';
-        searchInfo.style.display = 'block';
-        searchInfo.textContent = "All resources";
+        if (!query.trim()) {
+            pageTitle.textContent = 'Apps & Tools';
+            breadcrumbLast.textContent = 'Apps & Tools';
+            searchInfo.style.display = 'block';
+            searchInfo.textContent = "All resources";
 
-        customGrid.style.display = 'grid';
-        customHr.style.display = 'block';
-       // googleSearchCard.style.display = 'none';
+            customGrid.style.display = 'grid';
+            customHr.style.display = 'block';
+            articleSearchCard.style.display = 'none';
 
-       document.querySelectorAll('.google-search-card').forEach(e => e.style.display = 'none');
-        
-    } else {
+            document.querySelectorAll('.google-search-card').forEach(e => e.style.display = 'none');
+            
+        } else {
+            pageTitle.textContent = 'Search results';
+            breadcrumbLast.textContent = 'Search results';
+            searchInfo.style.display = 'block';
+            searchInfo.textContent = `Search results for "${query}"`;
 
-        pageTitle.textContent = 'Search results';
-        breadcrumbLast.textContent = 'Search results';
-        searchInfo.style.display = 'block';
-        searchInfo.textContent = `Search results for "${query}"`;
+            customGrid.style.display = 'none';
+            customHr.style.display = 'none';
+        }
 
-        customGrid.style.display = 'none';
-        customHr.style.display = 'none';
-    }
+        const filteredSettings = query.trim() ?
+            settingsData.filter(item => {
+                const s = query.toLowerCase();
+                return item.title.toLowerCase().includes(s) ||
+                       item.category.toLowerCase().includes(s) ||
+                       item.description.toLowerCase().includes(s);
+            }) : settingsData.slice();
 
-    const filteredSettings = query.trim() ?
-        settingsData.filter(item => {
-            const s = query.toLowerCase();
-            return item.title.toLowerCase().includes(s) ||
-                   item.category.toLowerCase().includes(s) ||
-                   item.description.toLowerCase().includes(s);
-        }) : settingsData.slice();
+        const customShortcuts = JSON.parse(localStorage.getItem("customShortcuts")) || [];
+        const filteredCustom = query.trim() ?
+            customShortcuts.filter(item => item.title.toLowerCase().includes(query.toLowerCase()))
+            : [];
 
-    const customShortcuts = JSON.parse(localStorage.getItem("customShortcuts")) || [];
-    const filteredCustom = query.trim() ?
-        customShortcuts.filter(item => item.title.toLowerCase().includes(query.toLowerCase()))
-        : [];
+        resultsGrid.innerHTML = '';
 
-    resultsGrid.innerHTML = '';
-
-    let allResults = filteredSettings;
-    if (query.trim()) {
-        allResults = allResults.concat(filteredCustom);
-    }
-
-    if (allResults.length === 0 && query.trim()) {
-        noResults.style.display = 'block';
-        resultsGrid.style.display = 'none';
-       // googleSearchCard.style.display = 'flex';
-      //  googleSearchText.textContent = `Search "${query}" on Google`;
-    } else {
-        noResults.style.display = 'none';
-        resultsGrid.style.display = 'grid';
-        googleSearchCard.style.display = 'none';
-
-        allResults.forEach(item => {
-            resultsGrid.appendChild(createSettingCard(item, false));
-        });
-    }
-
-    googleSearchCard.onclick = () => {
+        let allResults = filteredSettings;
         if (query.trim()) {
-            window.top.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
-        }
-    };
-}
-
-    function askChatGPT() {
-         const query = getQueryParam('query') || '';
-        window.top.location.href = "https://chatgpt.com/?q=" + query;
+            allResults = allResults.concat(filteredCustom);
         }
 
-    function searchYT() {
-       const query = getQueryParam('query') || '';
-        window.top.location.href = "https://www.youtube.com/results?search_query=" + query;
+        if (allResults.length === 0 && query.trim()) {
+            noResults.style.display = 'block';
+            resultsGrid.style.display = 'none';
+            articleSearchCard.style.display = 'flex';
+            articleSearchText.textContent = `Search "${query}" in Articles`;
+        } else {
+            noResults.style.display = 'none';
+            resultsGrid.style.display = 'grid';
+            googleSearchCard.style.display = 'none';
+            articleSearchCard.style.display = 'none';
+
+            allResults.forEach(item => {
+                resultsGrid.appendChild(createSettingCard(item, false));
+            });
         }
 
-    function searchSpotify() {
-         const query = getQueryParam('query') || '';
-        window.top.location.href = "https://open.spotify.com/search/" + query;
-        }
+        articleSearchCard.onclick = () => {
+            if (query.trim()) {
+                window.location.href = 'articles.html?query=' + encodeURIComponent(query);
+            }
+        };
 
+        googleSearchCard.onclick = () => {
+            if (query.trim()) {
+                window.top.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+            }
+        };
+    }
 
     function loadCustomShortcuts() {
         const customGrid = document.getElementById("customGrid");
@@ -542,12 +491,7 @@ function displayResults() {
         if (!link) return;
         if (!/^https?:\/\//i.test(link)) link = "https://" + link;
 
-        let domain;
-        try { domain = new URL(link).hostname; } catch { domain = null; }
-
-   //     const icon = domain ? `https://www.google.com/s2/favicons?sz=64&domain=${domain}` : "open_in_new.png";
-
-        const icon = "shapes.png"
+        const icon = "shapes.png";
 
         const shortcut = { title, category: "", description: "", link, icon };
         const custom = JSON.parse(localStorage.getItem("customShortcuts")) || [];
@@ -587,30 +531,27 @@ function displayResults() {
     }
 
     (function init() {
-
         const searchInput = document.getElementById('searchInput');
         const initial = getQueryParam('query') || '';
         setQueryParam(initial);
         displayResults();
 
-     (function handleHideParam() {
-    const hide = getQueryParam('hide') === 'true';
-    const resultsGrid = document.getElementById('resultsGrid');
-    const customGrid = document.getElementById('customGrid');
-    const customHr = document.getElementById('customHr');
-    const pageTitle = document.querySelector('.page-title');
-    const breadcrumbLast = document.querySelector('.breadcrumb span:last-child');
+        (function handleHideParam() {
+            const hide = getQueryParam('hide') === 'true';
+            const resultsGrid = document.getElementById('resultsGrid');
+            const customGrid = document.getElementById('customGrid');
+            const customHr = document.getElementById('customHr');
+            const pageTitle = document.querySelector('.page-title');
+            const breadcrumbLast = document.querySelector('.breadcrumb span:last-child');
 
-    if (hide) {
-        resultsGrid.style.display = 'none';
-        customGrid.style.display = 'grid';
-        customHr.style.display = 'none';
-        pageTitle.textContent = 'My Apps';
-        breadcrumbLast.textContent = 'My Apps';
-    }
-})();
-
-
+            if (hide) {
+                resultsGrid.style.display = 'none';
+                customGrid.style.display = 'grid';
+                customHr.style.display = 'none';
+                pageTitle.textContent = 'My Apps';
+                breadcrumbLast.textContent = 'My Apps';
+            }
+        })();
 
         loadCustomShortcuts();
         const onInput = debounce(e => {
@@ -623,13 +564,10 @@ function displayResults() {
     })();
 
     window.addEventListener("load", () => {
-  setTimeout(() => {
-
-    document.body.classList.add("loaded");
-
-  }, 0);
-});
-
+        setTimeout(() => {
+            document.body.classList.add("loaded");
+        }, 0);
+    });
 </script>
 </body>
 </html>
