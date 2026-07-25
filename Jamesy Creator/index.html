@@ -306,8 +306,13 @@ body {
         <a class="nav-item active" id="btn-home" onclick="showPage('home', this)">
             <span class="material-symbols-outlined">home</span> Home
         </a>
+
         <a class="nav-item" id="btn-create" onclick="showPage('create', this)">
             <span class="material-symbols-outlined">add_circle</span> Create
+        </a>
+
+         <a class="nav-item" id="btn-create" onclick="showPage('articles', this)">
+            <span class="material-symbols-outlined">article</span> Articles
         </a>
 
           <!--     <a class="nav-item" id="btn-create" onclick="showPage('bookui', this)">
@@ -335,7 +340,7 @@ body {
             <span class="material-symbols-outlined">chat_bubble</span> Feedback
         </a>
 
-         <h4>Jamesy-tech</h4>
+         <h4>Jamesy-tech</h4>   
 
                  <a class="nav-item" id="btn-more" onclick="showPage('more', this)">
             <span class="material-symbols-outlined">shapes</span> More  
@@ -355,7 +360,9 @@ body {
 
                 <div class="cards-grid" id="cardContainer">
 
-                             <a href="open.html" class="card teal" data-name="open file">Open File <span class="material-symbols-outlined">file_open</span></a>
+                           <!--  <a href="open.html" class="card teal" data-name="open file">Open File <span class="material-symbols-outlined">file_open</span></a> -->
+
+                              <a onclick="showPage('articles')" style="cursor:pointer;" class="card teal" data-name="open file">Articles <span class="material-symbols-outlined">article</span></a>
                              
                     <a href="https://jamesy-tech.github.io/jamesy-creator-docs" class="card green" data-name="docs">Docs <span class="material-symbols-outlined">description</span></a>
                     <a href="https://jamesy-tech.github.io/jamesy-creator-drawings" class="card yellow" data-name="drawings">Drawings <span class="material-symbols-outlined">palette</span></a>
@@ -366,6 +373,7 @@ body {
                    <!-- <a href="https://jamesy-tech.github.io/markdown-editor" class="card blue" data-name="markdown editor">MD Editor <span class="material-symbols-outlined">code</span></a> -->
 
                     <a href="#" onclick="showPage('files')" class="card purple" data-name="files local">Local Files <span class="material-symbols-outlined">inventory_2</span></a>
+                    <!-- <a href="#" onclick="showPage('articles')" class="card aliceblue" data-name="settings account">Articles <span class="material-symbols-outlined">article</span></a> -->
                     <a href="#" onclick="showPage('settings')" class="card aliceblue" data-name="settings account">Settings <span class="material-symbols-outlined">manage_accounts</span></a>
                      <a href="#" onclick="window.location.href = 'https://jamesy-tech.github.io/jamesy-creator-main.apk';" class="card aliceblue" data-name="settings download jamesy creator account">jamesy-creator-main.apk <span class="material-symbols-outlined">download</span></a>
                 </div>
@@ -373,6 +381,7 @@ body {
         </div>
 
         <div id="create" class="page"><iframe id="apps_iframe" src="grid.html" class="fill-iframe"></iframe></div>
+         <div id="articles" class="page"><iframe id="apps_iframe" src="articles.html" class="fill-iframe"></iframe></div>
         <div id="bookui" class="page"><iframe id="apps_iframe" src="https://jamesy-tech.github.io/BookUI/dashboard.html" class="fill-iframe"></iframe></div>
                 <div id="jamscripts" class="page"><iframe id="apps_iframe" src="https://jamesy-tech.github.io/scripts" class="fill-iframe"></iframe></div>
         <div id="files" class="page"><iframe src="Files/index.html" class="fill-iframe"></iframe></div>
