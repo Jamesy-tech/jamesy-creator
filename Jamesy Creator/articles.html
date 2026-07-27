@@ -27,6 +27,8 @@ body {
     background: #ffffff;
     color: #1b1b1b;
     padding: 48px 33px;
+    padding-right:34px;
+    padding-left:33px;
     height: 100vh;
     overflow-y: auto;
 }
@@ -93,6 +95,10 @@ body {
 .card.teal { background: #d2f2f0; color: #00796b; }
 .card.blue { background: #c9e1fc; color: #215a99; }
 .card.purple { background: #f3e5f5; color: #6a1b9a; }
+.card.red {
+  background: #f8d7da;
+  color: #b92929;
+}
 
 .card-title-group {
     display: flex;
@@ -207,21 +213,115 @@ body {
 <script>
     
 const articlesData = [
-  {
-    id: "introducing-articles",
-    title: "Introducing Articles",
-    author: "James",
-    description: "Learn about the new Articles feature in Jamesy Creator.",
-    color: "teal",
-    content: `
-      <p>Welcome to the new <strong>Articles</strong> feature! Articles allow people to stay updated and learn new things on Jamesy Creator.</p>
+{
+id: "introducing-articles",
+title: "Introducing Articles",
+author: "James",
+description: "[26/7/26] Learn about the new Articles feature in Jamesy Creator.",
+color: "teal",
+content: `
+Welcome to the new Articles feature! Articles allow people to stay updated and learn new things on Jamesy Creator.
 
-      <h2>How does it work?</h2>
+  <h2>How does it work?</h2>
 
-      <p>While searching for things on Jamesy Creator there is now a "Search in Articles" feature where you can find articles about the topic you are searching for. If you don't want to search, you can browse for them using the Articles page through the left navigation.</p>
-      
-    `
-  },
+  <p>While searching for things on Jamesy Creator there is now a "Search in Articles" feature where you can find articles about the topic you are searching for. If you don't want to search, you can browse for them using the Articles page through the left navigation.</p>
+`
+
+},
+
+{
+id: "how-to-use-bookui",
+title: "How to use BookUI",
+author: "James",
+description: "[28/7/26] Learn how to install and use BookUI+.",
+color: "blue",
+content: `
+BookUI+ is a bookmarklet that opens a command panel inside your browser. You can run JavaScript in it with or without knowing JavaScript. It's made to be simple to use and quick to set up.
+
+<p>If you'd like to view the project, source code, or report an issue, visit the GitHub repository: <a href="https://github.com/Jamesy-tech/BookUI" target="_blank">https://github.com/Jamesy-tech/BookUI</a></p>
+
+<h2>Features</h2>
+
+<ul>
+  <li>Opens a command-style panel on almost any webpage.</li>
+  <li>Lets you run JavaScript instantly.</li>
+  <li>Works for both beginners and experienced coders.</li>
+  <li>No extensions or installs required.</li>
+</ul>
+
+<p><strong>Please note:</strong> BookUI does not work on every website due to browser security restrictions. It should work on sites like Google Search, Wikipedia, Jamesy-tech, and many news websites. It will not work on websites such as Google Docs, Google Classroom, YouTube, Discord, Reddit, Instagram, or Facebook.</p>
+
+<h2>How to get it</h2>
+
+<p><strong>Option 1 (Recommended)</strong></p>
+
+<ol>
+  <li>Open <a href="https://github.com/Jamesy-tech/BookUI/blob/main/bookmarklet-code.js" target="_blank">bookmarklet-code.js</a>.</li>
+  <li>Copy all of the JavaScript.</li>
+  <li>Right-click your bookmarks bar (press <strong>Ctrl + Shift + B</strong> if it's hidden) and choose <strong>Add Page</strong>.</li>
+  <li>Name it <strong>BookUI</strong>.</li>
+  <li>Paste the JavaScript into the URL field and save.</li>
+</ol>
+
+<p><strong>Option 2</strong></p>
+
+<ol>
+  <li>Download <a href="https://github.com/Jamesy-tech/BookUI/blob/main/bookmarklet.html" target="_blank">bookmarklet.html</a>.</li>
+  <li>Open <code>chrome://bookmarks</code> in Chrome.</li>
+  <li>Click the three dots in the top-right corner and select <strong>Import Bookmarks</strong>.</li>
+  <li>Select the downloaded file.</li>
+  <li>Click the BookUI bookmark on almost any website to open the command panel.</li>
+</ol>
+
+<h2>What does it do?</h2>
+
+<p>When you click the bookmark, BookUI+ injects a small command panel onto the current webpage. You can run JavaScript, test ideas, or experiment with how websites work directly in your browser.</p>
+
+<h2>Example uses</h2>
+
+<ul>
+  <li>Try small JavaScript commands.</li>
+  <li>Test code on a webpage.</li>
+  <li>Learn how websites work by experimenting.</li>
+</ul>
+
+<p>BookUI+ is open source and available on GitHub: <a href="https://github.com/Jamesy-tech/BookUI" target="_blank">github.com/Jamesy-tech/BookUI</a>.</p>
+`
+},
+
+{
+id: "raspberry-pi-projects",
+title: "Raspberry Pi Projects",
+author: "James",
+description: "[28/7/26] Explore my Raspberry Pi, Pico, MicroPython & CircuitPython projects.",
+color: "red",
+content: `
+If you like Raspberry Pi projects, you're in the right place! I've created a GitHub repository that I keep on adding new scripts to. It includes projects, examples, and scripts for Raspberry Pi boards and Raspberry Pi Pico microcontrollers.
+
+<p>You can browse the repository here: <a href="https://github.com/Jamesy-tech/raspberry-pi-projects" target="_blank">github.com/Jamesy-tech/raspberry-pi-projects</a>.</p>
+
+<h2>What's there?</h2>
+
+<ul>
+  <li>MicroPython examples.</li>
+  <li>CircuitPython examples.</li>
+  <li>Raspberry Pi Pico & Pico W scripts.</li>
+  <li>Pico Ducky tools.</li>
+  <li>Useful code snippets for your own projects.</li>
+</ul>
+
+<h2>Who is it for?</h2>
+
+<p>Whether you're just getting started with a Raspberry Pi Pico or you've been making projects for years, you'll find a range of scripts that you can learn from, modify, or use in your own projects.</p>
+
+<h2>Keep coming back!</h2>
+
+<p>New projects and scripts are added over time, so make sure to check the repository every now and then for new ideas and updates.</p>
+
+<p>See all of my Raspberry Pi projects on GitHub: <a href="https://github.com/Jamesy-tech/raspberry-pi-projects" target="_blank">github.com/Jamesy-tech/raspberry-pi-projects</a>.</p>
+`
+},
+
 ];
 
     const articlesGrid = document.getElementById('articlesGrid');
