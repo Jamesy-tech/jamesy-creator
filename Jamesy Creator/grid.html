@@ -157,8 +157,8 @@
 
         .setting-card:hover {
             border-color: #0078d4;
-            box-shadow: 0 6px 18px rgba(0, 120, 212, 0.08);
-            transform: translateY(-2px);
+          /*  box-shadow: 0 6px 18px rgba(0, 120, 212, 0.08);
+            transform: translateY(-2px); */
         }
 
         .setting-icon {
@@ -318,16 +318,16 @@
     const settingsData = [
         { title: "Open File", category: "Tools", description: "", link: "open.html", icon: "shapes.png" },
         { title: "Articles", category: "Resources", description: "", link: "articles.html", icon: "shapes.png" },
-        { title: "jamesy-creator-main.apk", category: "Tools", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-main.apk", icon: "shapes.png" },
+        { title: "jamesy-creator-main.apk", category: "Resources", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-main.apk", icon: "shapes.png" },
         { title: "File Manager", category: "Tools", description: "", link: "Files/index.html", icon: "files.png" },
-        { title: "Docs [Alpha]", category: "Editors", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-docs", icon: "docs.png" },
+        { title: "Docs", category: "Editors", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-docs", icon: "docs.png" },
         { title: "Drawings", category: "Creative", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-drawings", icon: "drawings.png" },
         { title: "Colour Studio", category: "Creative", description: "", link: "https://jamesy-tech.github.io/colour-studio", icon: "colour-studio.png" },
-        { title: "Code", category: "Scripts & Editors", description: "", link: "https://jamesy-tech.github.io/text-editor", icon: "code.png" },
+        { title: "Code", category: "Text Editors", description: "", link: "https://jamesy-tech.github.io/text-editor", icon: "code.png" },
         { title: "Notes", category: "Note Taking", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-notes", icon: "notes.png" },
         { title: "File Converter", category: "Tools", description: "", link: "https://jamesy-tech.github.io/file-converter", icon: "convert.png" },
         { title: "MD Viewer & Editor", category: "Tools", description: "", link: "https://jamesy-tech.github.io/markdown-editor", icon: "markdown.png" },
-        { title: "Ideas", category: "Creative", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-ideas", icon: "ideas.png" },
+         { title: "Ideas", category: "Creative", description: "", link: "https://jamesy-tech.github.io/jamesy-creator-ideas", icon: "ideas.png" },
         { title: "BookUI+", category: "Featured Apps", description: "", link: "https://jamesy-tech.github.io/BookUI/dashboard.html", icon: "bookui.png" },
         { title: "Quiz Creator", category: "Featured Apps", description: "", link: "https://jamesy-tech.github.io/JQuizzi3", icon: "jquizzi3.png" },
         { title: "Editable", category: "Featured Apps", description: "", link: "https://jamesy-tech.github.io/Editable", icon: "editable.png" },
@@ -362,10 +362,17 @@
                 </svg>
             </div>
         `;
+
         link.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.location.href = setting.link;
-        });
+    e.preventDefault();
+
+    if (setting.title === "Articles" || setting.title === "File Manager") {
+        window.location.href = setting.link;
+    } else {
+        window.top.location.href = setting.link;
+    }
+});
+       
         if (allowDelete && index !== null) {
             link.addEventListener("contextmenu", function(e) {
                 e.preventDefault();
