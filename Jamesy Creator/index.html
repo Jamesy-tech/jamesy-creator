@@ -175,7 +175,7 @@ body {
     height: 100%;
     width: 100%;
     overflow-y: scroll;
-    padding: 48px 33px;
+    padding: 48px 30px;
 }
 
 .cards-grid {
@@ -307,12 +307,16 @@ body {
             <span class="material-symbols-outlined">home</span> Home
         </a>
 
-        <a class="nav-item" id="btn-create" onclick="showPage('create', this)">
+        <a class="nav-item" id="btn-create" onclick="showPage('create', this); document.getElementById('create_iframe').src='grid.html';">
             <span class="material-symbols-outlined">add_circle</span> Create
         </a>
 
          <a class="nav-item" id="btn-create" onclick="showPage('articles', this)">
             <span class="material-symbols-outlined">article</span> Articles
+        </a>
+
+         <a class="nav-item" id="btn-create" onclick="showPage('apps2', this)">
+            <span class="material-symbols-outlined">apps</span> My Apps
         </a>
 
           <!--     <a class="nav-item" id="btn-create" onclick="showPage('bookui', this)">
@@ -323,9 +327,9 @@ body {
             <span class="material-symbols-outlined">code</span> Jamscripts
         </a> -->
 
-        <a class="nav-item" id="btn-files" onclick="showPage('files', this)">
+       <!--<a class="nav-item" id="btn-files" onclick="showPage('files', this)">
             <span class="material-symbols-outlined">folder</span> Files
-        </a>
+        </a> -->
         <h4>Account</h4>
 
         <a class="nav-item" id="btn-settings" onclick="showPage('settings', this)">
@@ -351,7 +355,7 @@ body {
     <main class="content">
         <div id="home" class="page active">
             <div class="home-scroll-container">
-                <h1 id="welcomeTitle" style="font-size: 32px; font-weight: 800; margin-bottom: 32px;">Welcome back, <span class="username-target">Guest</span></h1>
+                <h1 id="welcomeTitle" style="font-size: 32px; font-weight: 700; margin-bottom: 32px;">Welcome back, <span class="username-target">Guest</span></h1>
 
                 <div id="noResults">
                     <span class="material-symbols-outlined" style="font-size: 48px;">search_off</span>
@@ -380,7 +384,10 @@ body {
             </div>
         </div>
 
-        <div id="create" class="page"><iframe id="apps_iframe" src="grid.html" class="fill-iframe"></iframe></div>
+        <div id="create" class="page"><iframe id="create_iframe" src="grid.html" class="fill-iframe"></iframe></div>
+        
+        <div id="apps2" class="page"><iframe id="apps_iframe" src="grid.html?hide=true" class="fill-iframe"></iframe></div>
+
          <div id="articles" class="page"><iframe id="apps_iframe" src="articles.html" class="fill-iframe"></iframe></div>
         <div id="bookui" class="page"><iframe id="apps_iframe" src="https://jamesy-tech.github.io/BookUI/dashboard.html" class="fill-iframe"></iframe></div>
                 <div id="jamscripts" class="page"><iframe id="apps_iframe" src="https://jamesy-tech.github.io/scripts" class="fill-iframe"></iframe></div>
@@ -469,7 +476,6 @@ updateVersion();
     const searchBar = document.getElementById("searchBar");
     const cards = document.querySelectorAll('.card');
 
-    // Focus on load
     window.onload = () => {
         loadUserData();
      //   searchBar.focus();
@@ -477,7 +483,6 @@ updateVersion();
 
     function goToSearch() {
         const query = searchBar.value.trim();
-        // Regex for likely link detection
         const isLikelyLink = /\b(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s]*)?\b/i.test(query);
 
         if (query === "") {
@@ -486,10 +491,8 @@ updateVersion();
         }
 
         if (isLikelyLink) {
-            // Redirect top window to link
             window.top.location.href = query.startsWith('http') ? query : `https://${query}`;
         } else {
-            // Send search query to the "Create" (grid.html) page
             document.getElementById("apps_iframe").src = `grid.html?query=${encodeURIComponent(query)}`;
             showPage("create", document.getElementById('btn-create'));
             searchBar.blur();
@@ -506,10 +509,13 @@ updateVersion();
     function showPage(pageId, element) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
+        
         if(element) {
             document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
             element.classList.add('active');
         }
+
+
     }
 
     function loadUserData() {
