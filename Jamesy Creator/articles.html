@@ -27,7 +27,7 @@
 body {
     background: #ffffff;
     color: #1b1b1b;
-    padding: 48px 33px;
+    padding: 48px 30px;
     padding-right:34px;
     padding-left:33px;
     height: 100vh;
@@ -49,7 +49,7 @@ body {
 
 .page-header h1 {
     font-size: 32px;
-    font-weight: 800;
+    font-weight:700;
     margin-bottom: 8px;
 }
 
@@ -134,6 +134,17 @@ body {
     box-shadow: 0 0 0 1.5px #1865f2;
 }
 
+.share-btn {
+    background: #daf5dc;
+    color: #1a5e2e;
+}
+
+.share-btn:hover {
+    outline: 3px solid white;
+    outline-offset: -3px;
+    box-shadow: 0 0 0 1.5px #1a5e2e;
+}
+
 .article-meta {
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 16px;
@@ -142,7 +153,7 @@ body {
 
 .article-meta h1 {
     font-size: 32px;
-    font-weight: 800;
+    font-weight: 700;
     margin-bottom: 8px;
 }
 
@@ -152,6 +163,17 @@ body {
     font-size: 14px;
     color: #6b7280;
     font-weight: 600;
+}
+
+.home-btn {
+    background: #f8d7da;
+    color: #b92929;
+}
+
+.home-btn:hover {
+    outline: 3px solid white;
+    outline-offset: -3px;
+    box-shadow: 0 0 0 1.5px #b92929;
 }
 
 .article-body {
@@ -183,7 +205,7 @@ body {
     <div id="listView" class="view active">
         <div class="page-header">
             <h1 style="margin-left:2px;">Articles</h1>
-            <p style="margin-left:2px;">Explore guides, tutorials, and updates.</p>
+            <p style="margin-left:2px;">Explore guides, tutorials, & updates</p>
         </div>
 
         <div id="noResults">
@@ -195,9 +217,26 @@ body {
     </div>
 
     <div id="readView" class="view">
-        <button class="back-btn" onclick="showListView()">
-            <span class="material-symbols-outlined">arrow_back</span> Back to Articles
-        </button>
+      
+      
+
+        <div style="display:flex; gap:12px; margin-bottom:24px;">
+    <button id="backArticlesBtn" class="back-btn" onclick="showListView()">
+        <span class="material-symbols-outlined">arrow_back</span>
+        Back to Articles
+    </button>
+
+    <button id="backHomeBtn" class="back-btn home-btn" onclick="window.top.location.href='index.html'" style="display:none;">
+        <span class="material-symbols-outlined">home</span>
+        Back to Jamesy Creator
+    </button>
+
+    <button class="back-btn share-btn" onclick="shareArticle()">
+        <span class="material-symbols-outlined">share</span>
+        Share
+    </button>
+</div>
+
 
         <div class="article-meta">
             <h1 id="readTitle">Article Title</h1>
@@ -212,6 +251,8 @@ body {
     </div>
 
 <script>
+
+    let currentArticleId = null;
     
 const articlesData = [
 {
@@ -237,7 +278,7 @@ author: "James",
 description: "[28/7/26] Learn how to install and use BookUI+.",
 color: "blue",
 content: `
-BookUI+ is a bookmarklet that opens a command panel inside your browser. You can run JavaScript in it with or without knowing JavaScript. It's made to be simple to use and quick to set up.
+BookUI+ is a bookmarklet that opens a command panel inside your browser. You can run JS code in it with or without knowing JavaScript. It's made to be simple to use and quick to set up.
 
 <p>If you'd like to view the project, source code, or report an issue, visit the GitHub repository: <a href="https://github.com/Jamesy-tech/BookUI" target="_blank">https://github.com/Jamesy-tech/BookUI</a></p>
 
@@ -368,6 +409,17 @@ curl ascii.live/list<br>
 
 ];
 
+window.onload = () => {
+
+    const query = getQueryParam("query") || "";
+    renderArticles(query);
+
+    const articleId = getQueryParam("article");
+    if (articleId) {
+        openArticle(articleId);
+    }
+};
+
     const articlesGrid = document.getElementById('articlesGrid');
     const noResults = document.getElementById('noResults');
 
@@ -421,17 +473,57 @@ curl ascii.live/list<br>
         document.getElementById('listView').classList.remove('active');
         document.getElementById('readView').classList.add('active');
         window.scrollTo(0,0);
+
+        currentArticleId = id;
+
+const url = new URL(window.location);
+url.searchParams.set("article", id);
+window.history.replaceState({}, "", url);
+
     }
 
     function showListView() {
         document.getElementById('readView').classList.remove('active');
         document.getElementById('listView').classList.add('active');
+
+        const url = new URL(window.location);
+url.searchParams.delete("article");
+window.history.replaceState({}, "", url);
+
     }
 
-    window.onload = () => {
-        const query = getQueryParam('query') || "";
-        renderArticles(query);
-    };
+   window.onload = () => {
+    const query = getQueryParam("query") || "";
+    renderArticles(query);
+
+    const articleId = getQueryParam("article");
+    if (articleId) {
+        openArticle(articleId);
+    }
+};
+
+    function shareArticle() {
+    if (!currentArticleId) return;
+
+    const link = window.location.href;
+
+    prompt("Share", link);
+}
+
+function updateBackButton() {
+    const topPath = window.top.location.pathname;
+
+    if (topPath.endsWith("/articles.html") || topPath.endsWith("articles.html")) {
+        document.getElementById("backArticlesBtn").style.display = "none";
+        document.getElementById("backHomeBtn").style.display = "inline-flex";
+    } else {
+        document.getElementById("backArticlesBtn").style.display = "inline-flex";
+        document.getElementById("backHomeBtn").style.display = "none";
+    }
+}
+
+updateBackButton()
+
 </script>
 
 </body>
